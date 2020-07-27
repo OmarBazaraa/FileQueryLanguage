@@ -1,0 +1,15 @@
+# Visual Studio Code
+.vscode/*
+
+# Tools
+tools/*
+!*.md
+
+# Build
+out/*
+*.o
+*.exe
+
+# Data
+data/*
+!*.md
