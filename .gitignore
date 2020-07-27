@@ -5,11 +5,11 @@
 tools/*
 !*.md
 
+# Data
+data/*
+!*.md
+
 # Build
 out/*
 *.o
 *.exe
-
-# Data
-data/*
-!*.md
