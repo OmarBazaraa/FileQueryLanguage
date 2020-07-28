@@ -6,7 +6,15 @@
 //
 // Includes
 //
+#include <iostream>
 #include <cstdio>
+
+#include "../Tree/AST.h"
+#include "../../Common/Enums/DataTypes.h"
+#include "../../Common/Enums/Operators.h"
+
+using namespace std;
+using namespace FQL;
 
 //
 // Function Prototypes
@@ -26,8 +34,20 @@ void yyerror(const char* s);
 //
 
 %union {
-    int                         valint;
-    char                        valchar;
+    FQL::BaseNode*                  val_BaseNode;
+
+    FQL::StatementNode*             val_StatementNode;
+    FQL::CreateDirNode*             val_CreateDirNode;
+    FQL::DropDirNode*               val_DropDirNode;
+
+    FQL::ExpressionNode*            val_ExpressionNode;
+    FQL::ValueNode*                 val_ValueNode;
+    FQL::ColumnNode*                val_ColumnNode;
+    FQL::OperatorNode*              val_OperatorNode;
+    FQL::UnaryOperatorNode*         val_UnaryOperatorNode;
+    FQL::BinaryOperatorNode*        val_BinaryOperatorNode;
+
+    char*                           val_String;
 }
 
 // -------------------------------------------------------------
@@ -110,28 +130,30 @@ void yyerror(const char* s);
 %token LE
 
 // Values
-%token VAL_NULL
-%token VAL_BOOL
-%token VAL_INTEGER
-%token VAL_DOUBLE
-%token VAL_CHAR
-%token VAL_STRING
-%token VAL_IDENTIFIER
+%token <val_String> TOKEN_NULL
+%token <val_String> TOKEN_BOOL
+%token <val_String> TOKEN_INTEGER
+%token <val_String> TOKEN_DOUBLE
+%token <val_String> TOKEN_CHAR
+%token <val_String> TOKEN_STRING
+%token <val_String> TOKEN_IDENTIFIER
 
 // -------------------------------------------------------------
 //
 // Non-Terminal Symbol Types
 //
 
-// -------------------------------------------------------------
-//
-// Destructors
-//
+%type <val_StatementNode>           stmt
+%type <val_CreateDirNode>           create_dir_stmt
+%type <val_DropDirNode>             drop_dir_stmt
+%type <val_ExpressionNode>          expression value column function_call
 
 // -------------------------------------------------------------
 //
 // Destructors
 //
+
+// TODO
 
 // -------------------------------------------------------------
 //
@@ -159,20 +181,24 @@ void yyerror(const char* s);
 // Rules Section
 // =============
 
-program:                /* epsilon */               { printf(">> Empty Program <<"); }
-    |                   stmt_list                   { printf(">> Complete <<"); }
+program:                /* epsilon */                                   { }
+    |                   stmt_list                                       { }
     ;
 
 stmt_list:              stmt ';'
     |                   stmt_list stmt ';'
     ;
 
-stmt:                   select_stmt
-    |                   create_stmt
-    |                   update_stmt
-    |                   insert_stmt
-    |                   delete_stmt
-    |                   drop_stmt
+stmt:                   select_stmt                                     {  }
+    |                   create_stmt                                     {  }
+    |                   update_stmt                                     {  }
+    |                   insert_stmt                                     {  }
+    |                   delete_stmt                                     {  }
+    |                   drop_stmt                                       {  }
+    ;
+    
+// Just for testing. To be removed.
+stmt:                   expression                                      { $1->DumpTree(std::cout); std::cout << endl; delete $1; }
     ;
 
 // -------------------------------------------------------------
@@ -180,68 +206,68 @@ stmt:                   select_stmt
 // SELECT Statement Rules
 //
 
-select_stmt:            SELECT select_opts select_expr_list
+select_stmt:            SELECT select_opts select_expr_list             {  }
     |                   SELECT select_opts select_expr_list
                         FROM dir_references
                         opt_where
                         opt_group_by
                         opt_having
                         opt_order_by
-                        opt_limit
+                        opt_limit                                       {  }
     ;
 
-select_opts:            /* epsilon */
-    |                   DISTINCT
+select_opts:            /* epsilon */                                   {  }
+    |                   DISTINCT                                        {  }
     ;
 
-select_expr_list:       '*'
-    |                   select_expr
-    |                   select_expr_list ',' select_expr
+select_expr_list:       '*'                                             {  }
+    |                   select_expr                                     {  }
+    |                   select_expr_list ',' select_expr                {  }
     ;
 
-select_expr:            expression opt_alias
+select_expr:            expression opt_alias                            {  }
     ;
 
-opt_alias:              /* epsilon */
-    |                   identifier
-    |                   AS identifier
+opt_alias:              /* epsilon */                                   {  }
+    |                   TOKEN_IDENTIFIER                                {  }
+    |                   AS TOKEN_IDENTIFIER                             {  }
     ;
 
 // TODO - extend this to support joins.
 
-dir_references:         dir_ref
+dir_references:         dir_ref                                         {  }
     ;
 
-dir_ref:                VAL_STRING opt_alias
+dir_ref:                TOKEN_STRING opt_alias                          {  }
     ;
 
-opt_where:              /* epsilon */
-    |                   WHERE expression
+opt_where:              /* epsilon */                                   {  }
+    |                   WHERE expression                                {  }
     ;
 
-opt_group_by:           /* epsilon */
-    |                   GROUP BY order_by_list
+opt_group_by:           /* epsilon */                                   {  }
+    |                   GROUP BY order_by_list                          {  }
     ;
 
-opt_having:             /* epsilon */
-    |                   HAVING expression
+opt_having:             /* epsilon */                                   {  }
+    |                   HAVING expression                               {  }
     ;
 
-opt_order_by:           /* epsilon */
-    |                   ORDER BY order_by_list
+opt_order_by:           /* epsilon */                                   {  }
+    |                   ORDER BY order_by_list                          {  }
     ;
 
-order_by_list:          expression opt_asc_desc
-    |                   order_by_list ',' expression opt_asc_desc
+order_by_list:          expression opt_asc_desc                         {  }
+    |                   order_by_list ',' expression opt_asc_desc       {  }
     ;
 
-opt_asc_desc:           /* epsilon */
-    |                   ASC
-    |                   DESC
+opt_asc_desc:           /* epsilon */                                   {  }
+    |                   ASC                                             {  }
+    |                   DESC                                            {  }
     ;
 
-opt_limit:              /* epsilon */
-    |                   LIMIT expression
+opt_limit:              /* epsilon */                                   {  }
+    |                   LIMIT expression                                {  }
     ;
 
 // -------------------------------------------------------------
@@ -249,16 +275,16 @@ opt_limit:              /* epsilon */
 // CREATE Statement Rules
 //
 
-create_stmt:            create_dir_stmt
+create_stmt:            create_dir_stmt                                 {  }
     ;
 
 // TODO - support copying.
 
-create_dir_stmt:        CREATE DIRECTORY opt_if_not_exists dir_ref
+create_dir_stmt:        CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
     ;
 
-opt_if_not_exists:      /* epsilon */
-    |                   IF NOT EXISTS
+opt_if_not_exists:      /* epsilon */                                   {  }
+    |                   IF NOT EXISTS                                   {  }
     ;
 
 // -------------------------------------------------------------
@@ -270,11 +296,11 @@ update_stmt:            UPDATE dir_ref
                         SET update_assign_list
                         opt_where
                         opt_order_by
-                        opt_limit
+                        opt_limit                                       {  }
     ;
 
-update_assign_list:     column '=' expression
-    |                   update_assign_list ',' column '=' expression
+update_assign_list:     column '=' expression                           {  }
+    |                   update_assign_list ',' column '=' expression    {  }
     ;
 
 // -------------------------------------------------------------
@@ -284,7 +310,7 @@ update_assign_list:     column '=' expression
 
 // TODO - support INSERT statements.
 
-insert_stmt:            /* epsilon */
+insert_stmt:            /* epsilon */                                   {  }
     ;
 
 // -------------------------------------------------------------
@@ -296,7 +322,7 @@ delete_stmt:            DELETE
                         FROM dir_ref
                         opt_where
                         opt_order_by
-                        opt_limit
+                        opt_limit                                       {  }
     ;
 
 // -------------------------------------------------------------
@@ -304,14 +330,14 @@ delete_stmt:            DELETE
 // DROP Statement Rules
 //
 
-drop_stmt:              drop_dir_stmt
+drop_stmt:              drop_dir_stmt                                   {  }
     ;
 
-drop_dir_stmt:          DROP DIRECTORY opt_if_exists dir_ref
+drop_dir_stmt:          DROP DIRECTORY opt_if_exists dir_ref            {  }
     ;
 
-opt_if_exists:          /* epsilon */
-    |                   IF EXISTS
+opt_if_exists:          /* epsilon */                                   {  }
+    |                   IF EXISTS                                       {  }
     ;
 
 // -------------------------------------------------------------
@@ -319,43 +345,43 @@ opt_if_exists:          /* epsilon */
 // Expression Rules
 //
 
-expression:             expression '+' expression               {}
-    |                   expression '-' expression               {}
-    |                   expression '*' expression               {}
-    |                   expression '/' expression               {}
-    |                   expression '%' expression               {}
-    |                   '+' expression %prec U_PLUS             {}
-    |                   '-' expression %prec U_MINUS            {}
+expression:             expression '+' expression                       { $$ = new BinaryOperatorNode(OPR_ADD, $1, $3); }
+    |                   expression '-' expression                       { $$ = new BinaryOperatorNode(OPR_SUB, $1, $3); }
+    |                   expression '*' expression                       { $$ = new BinaryOperatorNode(OPR_MUL, $1, $3); }
+    |                   expression '/' expression                       { $$ = new BinaryOperatorNode(OPR_DIV, $1, $3); }
+    |                   expression '%' expression                       { $$ = new BinaryOperatorNode(OPR_MOD, $1, $3); }
+    |                   '+' expression %prec U_PLUS                     { $$ = $2; }
+    |                   '-' expression %prec U_MINUS                    { $$ = new UnaryOperatorNode(OPR_U_MINUS, $2); }
     ;
 
-expression:             expression '&' expression               {}
-    |                   expression '|' expression               {}
-    |                   expression '^' expression               {}
-    |                   expression SHL expression               {}
-    |                   expression SHR expression               {}
-    |                   '~' expression                          {}
+expression:             expression '&' expression                       { $$ = new BinaryOperatorNode(OPR_BIT_AND, $1, $3); }
+    |                   expression '|' expression                       { $$ = new BinaryOperatorNode(OPR_BIT_OR, $1, $3); }
+    |                   expression '^' expression                       { $$ = new BinaryOperatorNode(OPR_BIT_XOR, $1, $3); }
+    |                   expression SHL expression                       { $$ = new BinaryOperatorNode(OPR_BIT_SHL, $1, $3); }
+    |                   expression SHR expression                       { $$ = new BinaryOperatorNode(OPR_BIT_SHR, $1, $3); }
+    |                   '~' expression                                  { $$ = new UnaryOperatorNode(OPR_BIT_NOT, $2); }
     ;
 
-expression:             expression AND expression               {}
-    |                   expression OR  expression               {}
-    |                   NOT expression                          {}
+expression:             expression AND expression                       { $$ = new BinaryOperatorNode(OPR_AND, $1, $3); }
+    |                   expression OR  expression                       { $$ = new BinaryOperatorNode(OPR_OR, $1, $3); }
+    |                   NOT expression                                  { $$ = new UnaryOperatorNode(OPR_NOT, $2); }
     ;
 
 // TODO - support IS operator.
 // TODO - support INTERVAL expressions.
 
-expression:             expression '>' expression               {}
-    |                   expression GE  expression               {}
-    |                   expression '<' expression               {}
-    |                   expression LE  expression               {}
-    |                   expression EQ  expression               {}
-    |                   expression NE  expression               {}
+expression:             expression '>' expression                       { $$ = new BinaryOperatorNode(OPR_GREATER, $1, $3); }
+    |                   expression GE  expression                       { $$ = new BinaryOperatorNode(OPR_GREATER_EQUAL, $1, $3); }
+    |                   expression '<' expression                       { $$ = new BinaryOperatorNode(OPR_LESS, $1, $3); }
+    |                   expression LE  expression                       { $$ = new BinaryOperatorNode(OPR_LESS_EQUAL, $1, $3); }
+    |                   expression EQ  expression                       { $$ = new BinaryOperatorNode(OPR_EQUAL, $1, $3); }
+    |                   expression NE  expression                       { $$ = new BinaryOperatorNode(OPR_NOT_EQUAL, $1, $3); }
     ;
 
-expression:             '(' expression ')'                      {}
-    |                   value                                   {}
-    |                   column                                  {}
-    |                   function_call                           {}
+expression:             '(' expression ')'                              { $$ = $2; }
+    |                   value                                           { $$ = $1; }
+    |                   column                                          { $$ = $1; }
+    |                   function_call                                   { $$ = $1; }
     ;
 
 // ------------------------------------------------------------
@@ -365,16 +391,16 @@ expression:             '(' expression ')'                      {}
 
 // TODO - support specil functions - LIKE, IN, BETWEEN.
 
-function_call:          identifier '(' arg_list ')'             {}
+function_call:          TOKEN_IDENTIFIER '(' arg_list ')'               {}
     ;
 
-arg_list:               /* epsilon */                           {}
-    |                   expression                              {}
-    |                   arg_list_ext ',' expression             {}
+arg_list:               /* epsilon */                                   {}
+    |                   expression                                      {}
+    |                   arg_list_ext ',' expression                     {}
     ;
 
-arg_list_ext:           expression                              {}
-    |                   arg_list_ext ',' expression             {}
+arg_list_ext:           expression                                      {}
+    |                   arg_list_ext ',' expression                     {}
     ;
 
 // ------------------------------------------------------------
@@ -382,19 +408,16 @@ arg_list_ext:           expression                              {}
 // Other Rules
 //
 
-value:                  VAL_NULL                                { printf(">> Null\n"); }
-    |                   VAL_BOOL                                { printf(">> Bool\n"); }
-    |                   VAL_INTEGER                             { printf(">> Integer\n"); }
-    |                   VAL_DOUBLE                              { printf(">> Double\n"); }
-    |                   VAL_CHAR                                { printf(">> Char\n"); }
-    |                   VAL_STRING                              { printf(">> String\n"); }
+value:                  TOKEN_NULL                                      { $$ = new ValueNode(TYPE_NULL, $1); }
+    |                   TOKEN_BOOL                                      { $$ = new ValueNode(TYPE_BOOL, $1); }
+    |                   TOKEN_INTEGER                                   { $$ = new ValueNode(TYPE_INT, $1); }
+    |                   TOKEN_DOUBLE                                    { $$ = new ValueNode(TYPE_DOUBLE, $1); }
+    |                   TOKEN_CHAR                                      { $$ = new ValueNode(TYPE_CHAR, $1); }
+    |                   TOKEN_STRING                                    { $$ = new ValueNode(TYPE_STRING, $1); }
     ;
 
-identifier:             VAL_IDENTIFIER                          { printf(">> Identifier\n"); }
-    ;
-
-column:                 identifier
-    |                   identifier '.' identifier
+column:                 TOKEN_IDENTIFIER                                {  }
+    |                   TOKEN_IDENTIFIER '.' TOKEN_IDENTIFIER           {  }
     ;
 
 %%
