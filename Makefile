@@ -34,13 +34,13 @@ copy:
 	powershell cp $(DirSrc) $(DirOut) -Force -Recurse
 
 gen:
-	$(Lex) -o $(DirOut)/Lexer.cpp $(DirSrc)/Parsers/Rules/Lexer.l
-	$(Yacc) -d -o $(DirOut)/Parser.cpp $(DirSrc)/Parsers/Rules/Parser.y
+	$(Lex) -o $(DirOut)/Parsers/Rules/Lexer.cpp $(DirSrc)/Parsers/Rules/Lexer.l
+	$(Yacc) -d -o $(DirOut)/Parsers/Rules/Parser.cpp $(DirSrc)/Parsers/Rules/Parser.y
 
 compile_parser:
 	@make -s gen
-	g++ -c $(DirOut)/Lexer.cpp -o $(DirOut)/Lexer.o
-	g++ -c $(DirOut)/Parser.cpp -o $(DirOut)/Parser.o
+	g++ -c $(DirOut)/Parsers/Rules/Lexer.cpp -o $(DirOut)/Lexer.o
+	g++ -c $(DirOut)/Parsers/Rules/Parser.cpp -o $(DirOut)/Parser.o
 
 compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
@@ -48,6 +48,7 @@ compile_client:
 			\
 			$(DirOut)/Parsers/Tree/Expressions/ColumnNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/ExpressionNode.cpp \
+			$(DirOut)/Parsers/Tree/Expressions/FunctionNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/OperatorNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/ValueNode.cpp \
 			\

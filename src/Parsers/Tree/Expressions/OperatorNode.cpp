@@ -1,5 +1,7 @@
 #include "OperatorNode.h"
 
+#include "../../../Common/Utils/OperatorUtils.h"
+
 using namespace FQL;
 
 OperatorNode::OperatorNode(Operator opr)
@@ -16,7 +18,6 @@ UnaryOperatorNode::UnaryOperatorNode(Operator opr, ExpressionNode *operand) : Op
 {
     // TODO: ensure not null expression.
     // TODO: add custom exceptions.
-
     this->operand = operand;
     this->constant = operand->IsConstant();
 
@@ -31,13 +32,17 @@ UnaryOperatorNode::~UnaryOperatorNode()
 
 void UnaryOperatorNode::DumpTree(std::ostream &out, int indent) const
 {
+    out << std::string(indent, ' ');
+    out << "(";
+    out << OperatorUtils::ToString(this->opr) << " ";
+    this->operand->DumpTree(out, 0);
+    out << ")";
 }
 
 BinaryOperatorNode::BinaryOperatorNode(Operator opr, ExpressionNode *operand1, ExpressionNode *operand2) : OperatorNode(opr)
 {
     // TODO: ensure not null expression.
     // TODO: add custom exceptions.
-
     this->operand1 = operand1;
     this->operand2 = operand2;
 
@@ -56,4 +61,10 @@ BinaryOperatorNode::~BinaryOperatorNode()
 
 void BinaryOperatorNode::DumpTree(std::ostream &out, int indent) const
 {
+    out << std::string(indent, ' ');
+    out << "(";
+    this->operand1->DumpTree(out, 0);
+    out << " " << OperatorUtils::ToString(this->opr) << " ";
+    this->operand2->DumpTree(out, 0);
+    out << ")";
 }

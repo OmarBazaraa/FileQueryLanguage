@@ -1,12 +1,9 @@
 #ifndef __CREATE_DIR_NODE_H_
 #define __CREATE_DIR_NODE_H_
 
-#include <filesystem>
 #include <string>
 
 #include "StatementNode.h"
-
-namespace fs = std::filesystem;
 
 namespace FQL
 {
@@ -19,8 +16,6 @@ namespace FQL
         bool createIfNotExists = false;
 
     public:
-        CreateDirNode(const char *dir, bool createIfNotExists = false);
-
         CreateDirNode(const std::string &dir, bool createIfNotExists = false);
 
         virtual ~CreateDirNode() = default;

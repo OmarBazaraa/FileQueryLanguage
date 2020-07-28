@@ -6,11 +6,16 @@
 //
 // Includes
 //
+
+// Must be before "Parser.hpp".
+#include "../Tree/AST.h"
+
 #include "Parser.hpp"
 
 //
 // Function Prototypes
 //
+void saveToken();
 
 //
 // Global Variables
@@ -173,13 +178,13 @@ EOL                                 \n
 %{
 // Values
 %}
-<INITIAL>{NULL}                     return VAL_NULL;
-<INITIAL>{BOOL}                     return VAL_BOOL;
-<INITIAL>{INTEGER}                  return VAL_INTEGER;
-<INITIAL>{REAL}                     return VAL_DOUBLE;
-<INITIAL>{CHAR}                     return VAL_CHAR;
-<INITIAL>{STRING}                   return VAL_STRING;
-<INITIAL>{IDENTIFIER}               return VAL_IDENTIFIER;
+<INITIAL>{NULL}                     saveToken(); return TOKEN_NULL;
+<INITIAL>{BOOL}                     saveToken(); return TOKEN_BOOL;
+<INITIAL>{INTEGER}                  saveToken(); return TOKEN_INTEGER;
+<INITIAL>{REAL}                     saveToken(); return TOKEN_DOUBLE;
+<INITIAL>{CHAR}                     saveToken(); return TOKEN_CHAR;
+<INITIAL>{STRING}                   saveToken(); return TOKEN_STRING;
+<INITIAL>{IDENTIFIER}               saveToken(); return TOKEN_IDENTIFIER;
 
 %{
 // Comments
@@ -202,6 +207,13 @@ EOL                                 \n
 // =====================================================================================================
 // User Subroutines Section
 // ========================
+
+/**
+ * Saves the currently identified token for the parser in `yylval`.
+ */
+void saveToken() {
+    yylval.val_String = strdup(yytext);
+}
 
 /**
  * When a lexer encounters an end of file, it optionally calls the routine `yywrap()` to find

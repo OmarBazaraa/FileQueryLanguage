@@ -1,11 +1,11 @@
+#include <filesystem>
+
 #include "CreateDirNode.h"
 #include "../../../Common/Exceptions/DirectoryAlreadyExistsException.h"
 
 using namespace FQL;
 
-CreateDirNode::CreateDirNode(const char *dir, bool createIfNotExists) : CreateDirNode(std::string(dir), createIfNotExists)
-{
-}
+namespace fs = std::filesystem;
 
 CreateDirNode::CreateDirNode(const std::string &dir, bool createIfNotExists)
 {
