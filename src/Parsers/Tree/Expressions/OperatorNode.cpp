@@ -1,5 +1,4 @@
 #include "OperatorNode.h"
-
 #include "../../../Common/Utils/OperatorUtils.h"
 
 using namespace FQL;

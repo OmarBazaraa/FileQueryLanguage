@@ -9,7 +9,7 @@ namespace FQL
 {
     class DirectoryException : public BaseException
     {
-    private:
+    protected:
         std::string path;
 
     public:

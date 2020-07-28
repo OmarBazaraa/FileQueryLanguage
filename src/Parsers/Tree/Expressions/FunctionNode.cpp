@@ -3,19 +3,20 @@
 using namespace FQL;
 
 FunctionNode::FunctionNode(const std::string &name)
-    : name(name)
 {
     this->constant = false;
     this->type = TYPE_UNKNOWN;
+    this->name = name;
 }
 
 FunctionNode::FunctionNode(const std::string &name, const std::vector<ExpressionNode*> &args)
-    : name(name), args(args)
 {
     // TODO: if the function is deterministic and all its arguments are constant
     // TODO: then the whole expression is constant.
     this->constant = false;
     this->type = TYPE_UNKNOWN;
+    this->name = name;
+    this->args = args;
 }
 
 FunctionNode::~FunctionNode()

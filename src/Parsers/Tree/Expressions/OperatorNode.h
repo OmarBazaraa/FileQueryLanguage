@@ -1,8 +1,6 @@
 #ifndef __OPERATOR_NODE_H_
 #define __OPERATOR_NODE_H_
 
-#include <string>
-
 #include "ExpressionNode.h"
 #include "../../../Common/Enums/Operators.h"
 
