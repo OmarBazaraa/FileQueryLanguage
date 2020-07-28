@@ -1,12 +1,9 @@
 #ifndef __CREATE_DIR_NODE_H_
 #define __CREATE_DIR_NODE_H_
 
-#include <filesystem>
 #include <string>
 
 #include "StatementNode.h"
-
-namespace fs = std::filesystem;
 
 namespace FQL
 {

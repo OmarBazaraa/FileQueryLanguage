@@ -1,7 +1,11 @@
+#include <filesystem>
+
 #include "DropDirNode.h"
 #include "../../../Common/Exceptions/DirectoryNotFoundException.h"
 
 using namespace FQL;
+
+namespace fs = std::filesystem;
 
 DropDirNode::DropDirNode(const char *dir, bool dropIfExists) : DropDirNode(std::string(dir), dropIfExists)
 {
