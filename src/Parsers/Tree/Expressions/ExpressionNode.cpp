@@ -2,10 +2,12 @@
 
 using namespace FileManager;
 
-bool ExpressionNode::isConstant() const {
+bool ExpressionNode::IsConstant() const
+{
     return this->constant;
 }
-        
-DataType ExpressionNode::getDataType() const {
+
+DataType ExpressionNode::GetDataType() const
+{
     return this->type;
 }

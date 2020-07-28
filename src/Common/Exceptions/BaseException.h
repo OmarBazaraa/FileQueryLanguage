@@ -1,17 +1,24 @@
 #ifndef __BASE_EXCEPTION_H_
 #define __BASE_EXCEPTION_H_
 
-#include <iostream>
+#include <string>
 
-namespace FileManager {
-
-    class BaseException {
-    public:
-
+namespace FileManager
+{
+    class BaseException
+    {
+    private:
         std::string message;
 
-        BaseException(std::string message) {
+    public:
+        BaseException(std::string message)
+        {
             this->message = message;
+        }
+
+        std::string GetMessage() const
+        {
+            return this->message;
         }
     };
 }

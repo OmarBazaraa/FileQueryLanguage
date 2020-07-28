@@ -8,9 +8,9 @@ using namespace std;
 //
 // Compiler Definitions
 //
-#define LANG_NAME           "File Explorer"
-#define VERSION             "0.0.1"
-#define VERSION_DATE        "July 27, 2020"
+#define LANG_NAME       "File Explorer"
+#define VERSION         "0.0.1"
+#define VERSION_DATE    "July 27, 2020"
 
 //
 // External Functions & Variables
@@ -22,7 +22,7 @@ extern int yyparse();
 //
 void printHelp();
 void printVersion();
-void parseArguments(int argc, char* argv[]);
+void parseArguments(int argc, char *argv[]);
 
 /**
  * Main driver program.
@@ -30,7 +30,8 @@ void parseArguments(int argc, char* argv[]);
  * @param argc the number of arguments sent to the program.
  * @param argv the arguments them self as sent to the program.
  */
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
     yyparse();
 
     return 0;
@@ -40,7 +41,8 @@ int main(int argc, char* argv[]) {
  * Prints the help menu of the compiler into the
  * standard output stream, then terminates the program.
  */
-void printHelp() {
+void printHelp()
+{
     printf("%s version %s, %s\n\n", LANG_NAME, VERSION, VERSION_DATE);
     printf("Usage: %s [switches] <input_file>\n", LANG_NAME);
     printf("    -h, --help                   Print the help menu and exit.\n");
@@ -53,7 +55,8 @@ void printHelp() {
  * Prints the version of the compiler into the
  * standard output stream, then terminates the program.
  */
-void printVersion() {
+void printVersion()
+{
     printf("%s version %s, %s\n\n", LANG_NAME, VERSION, VERSION_DATE);
     exit(0);
 }
@@ -64,18 +67,28 @@ void printVersion() {
  * @param argc the number of arguments sent to the program.
  * @param argv the arguments them self as sent to the program.
  */
-void parseArguments(int argc, char* argv[]) {
+void parseArguments(int argc, char *argv[])
+{
     // Iterate over all sent arguments.
-    while (++argv, --argc) {
-        if (**argv == '-') {
-            if (strcmp(*argv, "-h") == 0 || strcmp(*argv, "--help") == 0) {
+    while (++argv, --argc)
+    {
+        if (**argv == '-')
+        {
+            if (strcmp(*argv, "-h") == 0 || strcmp(*argv, "--help") == 0)
+            {
                 printHelp();
-            } else if (strcmp(*argv, "-v") == 0 || strcmp(*argv, "--version") == 0) {
+            }
+            else if (strcmp(*argv, "-v") == 0 || strcmp(*argv, "--version") == 0)
+            {
                 printVersion();
-            } else {
+            }
+            else
+            {
                 fprintf(stderr, "unknown argument '%s'\n", *argv);
             }
-        } else {
+        }
+        else
+        {
             fprintf(stderr, "warning: too many arguments! '%s' ignored.\n", *argv);
         }
     }

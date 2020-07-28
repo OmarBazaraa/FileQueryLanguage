@@ -1,12 +1,14 @@
 #ifndef __DATA_TYPES_H_
 #define __DATA_TYPES_H_
 
-namespace FileManager {
+namespace FileManager
+{
 
     /**
      * Enum holding all the supported primitive data types.
      */
-    enum DataType {
+    enum DataType
+    {
         TYPE_VOID = 300,
         TYPE_NULL,
         TYPE_BOOL,
