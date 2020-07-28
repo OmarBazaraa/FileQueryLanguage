@@ -9,8 +9,8 @@ DirData = data
 DirTools = tools
 
 # Tools
-Lex = $(DirTools)\\flex.exe
-Yacc = $(DirTools)\\bison.exe
+Lex = $(DirTools)\\win_flex.exe
+Yacc = $(DirTools)\\win_bison.exe
 
 # Output
 OutputName = explorer.exe
