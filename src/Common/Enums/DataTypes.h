@@ -8,6 +8,7 @@ namespace FileManager {
      */
     enum DataType {
         TYPE_VOID = 300,
+        TYPE_NULL,
         TYPE_BOOL,
         TYPE_INT,
         TYPE_DOUBLE,

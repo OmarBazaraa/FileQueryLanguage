@@ -41,8 +41,13 @@ compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(OutputName) \
 			$(DirOut)/Client/Main.cpp \
 			\
-			$(DirOut)/Parsers/Tree/CreateDirNode.cpp \
-			$(DirOut)/Parsers/Tree/DropDirNode.cpp \
+			$(DirOut)/Parsers/Tree/Expressions/ColumnNode.cpp \
+			$(DirOut)/Parsers/Tree/Expressions/ExpressionNode.cpp \
+			$(DirOut)/Parsers/Tree/Expressions/OperatorNode.cpp \
+			$(DirOut)/Parsers/Tree/Expressions/ValueNode.cpp \
+			\
+			$(DirOut)/Parsers/Tree/Statements/CreateDirNode.cpp \
+			$(DirOut)/Parsers/Tree/Statements/DropDirNode.cpp \
 			\
 			$(DirOut)/Lexer.o \
 			$(DirOut)/Parser.o

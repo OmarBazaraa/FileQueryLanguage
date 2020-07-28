@@ -8,7 +8,7 @@
 namespace FileManager {
 
     class DropDirNode : public StatementNode {
-    private:
+    protected:
 
         // TODO: change to custom type.
         std::string dir;
