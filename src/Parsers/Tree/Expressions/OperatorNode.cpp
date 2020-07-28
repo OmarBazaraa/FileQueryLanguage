@@ -2,52 +2,58 @@
 
 using namespace FileManager;
 
-OperatorNode::OperatorNode(Operator opr) {
+OperatorNode::OperatorNode(Operator opr)
+{
     this->opr = opr;
 }
 
-Operator OperatorNode::getOperation() const {
+Operator OperatorNode::GetOperation() const
+{
     return this->opr;
 }
 
-UnaryOperatorNode::UnaryOperatorNode(Operator opr, ExpressionNode* operand) : OperatorNode(opr) {
+UnaryOperatorNode::UnaryOperatorNode(Operator opr, ExpressionNode *operand) : OperatorNode(opr)
+{
     // TODO: ensure not null expression.
     // TODO: add custom exceptions.
 
     this->operand = operand;
-    this->constant = operand->isConstant();
+    this->constant = operand->IsConstant();
 
     // TODO: ensure the data type is compatible with the operator.
-    this->type = operand->getDataType();
+    this->type = operand->GetDataType();
 }
 
-UnaryOperatorNode::~UnaryOperatorNode() {
+UnaryOperatorNode::~UnaryOperatorNode()
+{
     delete this->operand;
 }
 
-void UnaryOperatorNode::dumpTree(std::ostream& out, int indent) const {
-
+void UnaryOperatorNode::DumpTree(std::ostream &out, int indent) const
+{
 }
 
-BinaryOperatorNode::BinaryOperatorNode(Operator opr, ExpressionNode* operand1, ExpressionNode* operand2) : OperatorNode(opr) {
+BinaryOperatorNode::BinaryOperatorNode(Operator opr, ExpressionNode *operand1, ExpressionNode *operand2) : OperatorNode(opr)
+{
     // TODO: ensure not null expression.
     // TODO: add custom exceptions.
 
     this->operand1 = operand1;
     this->operand2 = operand2;
 
-    this->constant = operand1->isConstant() && operand2->isConstant();
+    this->constant = operand1->IsConstant() && operand2->IsConstant();
 
     // TODO: calculate the resulting type correctly.
     // TODO: ensure the data type is compatible with the operator.
-    this->type = operand1->getDataType();
+    this->type = operand1->GetDataType();
 }
 
-BinaryOperatorNode::~BinaryOperatorNode() {
+BinaryOperatorNode::~BinaryOperatorNode()
+{
     delete this->operand1;
     delete this->operand2;
 }
 
-void BinaryOperatorNode::dumpTree(std::ostream& out, int indent) const {
-
+void BinaryOperatorNode::DumpTree(std::ostream &out, int indent) const
+{
 }

@@ -2,16 +2,18 @@
 
 using namespace FileManager;
 
-ValueNode::ValueNode(DataType type, const char* value) {
+ValueNode::ValueNode(DataType type, const char *value)
+{
     this->constant = true;
     this->type = type;
     this->value = value;
 }
 
-std::string ValueNode::getValue() const {
+std::string ValueNode::GetValue() const
+{
     return this->value;
 }
 
-void ValueNode::dumpTree(std::ostream& out, int indent) const {
-
+void ValueNode::DumpTree(std::ostream &out, int indent) const
+{
 }

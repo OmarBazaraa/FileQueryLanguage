@@ -5,23 +5,22 @@
 
 #include "ValueNode.h"
 
-namespace FileManager {
-
-    class ColumnNode : public ExpressionNode {
+namespace FileManager
+{
+    class ColumnNode : public ExpressionNode
+    {
     protected:
-
         // TODO: use custom type to support both cases: `Col1`, `Table1.Col1`.
         std::string name;
-        
-    public:
 
-        ColumnNode(const char* name);
+    public:
+        ColumnNode(const char *name);
 
         virtual ~ColumnNode() = default;
 
-        std::string getName() const;
+        std::string GetName() const;
 
-        virtual void dumpTree(std::ostream& out, int indent = 0) const;
+        virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };
 }
 

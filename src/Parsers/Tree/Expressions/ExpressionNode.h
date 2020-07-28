@@ -4,11 +4,11 @@
 #include "../BaseNode.h"
 #include "../../../Common/Enums/DataTypes.h"
 
-namespace FileManager {
-
-    class ExpressionNode : public BaseNode {
+namespace FileManager
+{
+    class ExpressionNode : public BaseNode
+    {
     protected:
-
         /**
          * Flag that indicates whether the expression is constant or variable.
          */
@@ -20,14 +20,13 @@ namespace FileManager {
         DataType type = TYPE_UNKNOWN;
 
     public:
-
         ExpressionNode() = default;
 
         virtual ~ExpressionNode() = default;
 
-        virtual bool isConstant() const;
-        
-        virtual DataType getDataType() const;
+        virtual bool IsConstant() const;
+
+        virtual DataType GetDataType() const;
     };
 }
 

@@ -1,12 +1,13 @@
 #ifndef __OPERATORS_H_
 #define __OPERATORS_H_
 
-namespace FileManager {
-
+namespace FileManager
+{
     /**
      * Enum holding all the supported operators.
      */
-    enum Operator {
+    enum Operator
+    {
         OPR_ASSIGN = 100,       // a = b
 
         OPR_ADD,                // a + b

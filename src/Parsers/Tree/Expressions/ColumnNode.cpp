@@ -2,7 +2,8 @@
 
 using namespace FileManager;
 
-ColumnNode::ColumnNode(const char* name) {
+ColumnNode::ColumnNode(const char *name)
+{
     this->constant = false;
 
     // TODO: how and when to know the data type?
@@ -12,10 +13,11 @@ ColumnNode::ColumnNode(const char* name) {
     this->name = name;
 }
 
-std::string ColumnNode::getName() const {
+std::string ColumnNode::GetName() const
+{
     return this->name;
 }
 
-void ColumnNode::dumpTree(std::ostream& out, int indent) const {
-
+void ColumnNode::DumpTree(std::ostream &out, int indent) const
+{
 }

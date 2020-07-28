@@ -5,16 +5,16 @@
 
 #include "../BaseNode.h"
 
-namespace FileManager {
-
-    class StatementNode : public BaseNode {
+namespace FileManager
+{
+    class StatementNode : public BaseNode
+    {
     public:
-
         StatementNode() = default;
 
         virtual ~StatementNode() = default;
 
-        virtual bool execute() = 0;
+        virtual bool Execute() = 0;
     };
 }
 
