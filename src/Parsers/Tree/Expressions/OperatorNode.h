@@ -4,7 +4,7 @@
 #include <string>
 
 #include "ExpressionNode.h"
-#include "../../Common/Enums/Operators.h"
+#include "../../../Common/Enums/Operators.h"
 
 namespace FileManager {
 
@@ -31,7 +31,7 @@ namespace FileManager {
 
         UnaryOperatorNode(Operator opr, ExpressionNode* operand);
 
-        virtual ~UnaryOperatorNode() = default;
+        virtual ~UnaryOperatorNode();
 
         virtual void dumpTree(std::ostream& out, int indent = 0) const;
     };
@@ -46,7 +46,7 @@ namespace FileManager {
 
         BinaryOperatorNode(Operator opr, ExpressionNode* operand1, ExpressionNode* operand2);
 
-        virtual ~BinaryOperatorNode() = default;
+        virtual ~BinaryOperatorNode();
 
         virtual void dumpTree(std::ostream& out, int indent = 0) const;
     };

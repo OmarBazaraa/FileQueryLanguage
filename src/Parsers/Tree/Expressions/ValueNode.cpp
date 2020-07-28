@@ -12,6 +12,6 @@ std::string ValueNode::getValue() const {
     return this->value;
 }
 
-void ValueNode::dumpTree(std::ostream& out, int indent = 0) const {
+void ValueNode::dumpTree(std::ostream& out, int indent) const {
 
 }

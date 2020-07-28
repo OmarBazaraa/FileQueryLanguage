@@ -25,7 +25,7 @@ UnaryOperatorNode::~UnaryOperatorNode() {
     delete this->operand;
 }
 
-void UnaryOperatorNode::dumpTree(std::ostream& out, int indent = 0) const {
+void UnaryOperatorNode::dumpTree(std::ostream& out, int indent) const {
 
 }
 
@@ -48,6 +48,6 @@ BinaryOperatorNode::~BinaryOperatorNode() {
     delete this->operand2;
 }
 
-void BinaryOperatorNode::dumpTree(std::ostream& out, int indent = 0) const {
+void BinaryOperatorNode::dumpTree(std::ostream& out, int indent) const {
 
 }

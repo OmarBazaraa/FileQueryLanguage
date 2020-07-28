@@ -16,6 +16,6 @@ std::string ColumnNode::getName() const {
     return this->name;
 }
 
-void ColumnNode::dumpTree(std::ostream& out, int indent = 0) const {
+void ColumnNode::dumpTree(std::ostream& out, int indent) const {
 
 }
