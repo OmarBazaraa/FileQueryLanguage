@@ -1,4 +1,5 @@
 #include "CreateDirNode.h"
+#include "../../../Common/Exceptions/DirectoryExistingException.h"
 
 using namespace FileManager;
 
@@ -12,8 +13,8 @@ CreateDirNode::CreateDirNode(const std::string& dir, bool createIfNotExists) {
 }
 
 bool CreateDirNode::execute() {
-    if (fs::exists(this->dir)) {
-        return this->createIfNotExists;
+    if (!this->createIfNotExists && fs::exists(this->dir)) {
+        throw new DirectoryExistingException(this->dir);
     }
 
     return fs::create_directory(this->dir);
