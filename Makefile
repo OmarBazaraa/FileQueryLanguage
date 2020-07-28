@@ -9,8 +9,8 @@ DirData = data
 DirTools = tools
 
 # Tools
-Lex = $(DirTools)\\flex.exe
-Yacc = $(DirTools)\\bison.exe
+Lex = $(DirTools)\\win_flex.exe
+Yacc = $(DirTools)\\win_bison.exe
 
 # Output
 OutputName = explorer.exe
@@ -19,10 +19,15 @@ OutputName = explorer.exe
 # Commands
 #
 
+all:
+	@make -s build
+	@make -s run
+
 clear:
 	powershell clear
 
 clean:
+	powershell mkdir $(DirOut) -Force
 	powershell rm $(DirOut) -Force -Recurse
 
 copy:
@@ -65,7 +70,3 @@ build:
 run:
 	@make -s clear
 	$(DirOut)\\$(OutputName) < $(DirData)/input.txt
-
-all:
-	@make -s build
-	@make -s run
