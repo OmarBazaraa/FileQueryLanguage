@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "ValueNode.h"
+#include "ExpressionNode.h"
 
 namespace FQL
 {
@@ -19,10 +19,6 @@ namespace FQL
         ColumnNode(const std::string &tableName, const std::string &colName);
 
         virtual ~ColumnNode() = default;
-
-        std::string GetTableName() const;
-
-        std::string GetColName() const;
 
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };

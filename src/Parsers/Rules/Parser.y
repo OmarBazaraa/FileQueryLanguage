@@ -8,6 +8,7 @@
 //
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "../Tree/AST.h"
 #include "../../Common/Enums/DataTypes.h"
@@ -34,18 +35,10 @@ void yyerror(const char* s);
 //
 
 %union {
-    FQL::BaseNode*                  val_BaseNode;
-
     FQL::StatementNode*             val_StatementNode;
-    FQL::CreateDirNode*             val_CreateDirNode;
-    FQL::DropDirNode*               val_DropDirNode;
 
     FQL::ExpressionNode*            val_ExpressionNode;
-    FQL::ValueNode*                 val_ValueNode;
-    FQL::ColumnNode*                val_ColumnNode;
-    FQL::OperatorNode*              val_OperatorNode;
-    FQL::UnaryOperatorNode*         val_UnaryOperatorNode;
-    FQL::BinaryOperatorNode*        val_BinaryOperatorNode;
+    FQL::ExprList*                  val_ExprList;
 
     char*                           val_String;
 }
@@ -55,98 +48,28 @@ void yyerror(const char* s);
 // Token Definition
 //
 
-// SELECT
-%token SELECT
-%token DISTINCT
-%token AS
-%token FROM
-
-// JOIN, UNION
-%token JOIN
-%token LEFT
-%token RIGHT
-%token CROSS
-%token INNER
-%token OUTER
-%token USING
-%token ON
-%token UNION
-
-// WHERE
-%token WHERE
-
-// ORDER BY
-%token ORDER
-%token BY
-%token ASC
-%token DESC
-
-// GROUP BY
-%token GROUP
-%token HAVING
-
-// LIMIT
-%token LIMIT
-
-// CREATE
-%token CREATE
-%token DIRECTORY
-%token IF
-%token EXISTS
-
-// UPDATE
-%token UPDATE
-%token SET
-
-// INSERT
-%token INSERT
-%token INTO
-%token VALUES
-
-// DELETE, DROP
-%token DELETE
-%token DROP
-
-// Other Keywords
-%token USE
-%token OPTIMIZE
-%token WITH
-
-// Special Functions
-%token IN
-%token LIKE
-%token BETWEEN
-
-// Operators
-%token SHL
-%token SHR
-%token AND
-%token OR
-%token NOT
-%token IS
-%token EQ
-%token NE
-%token GE
-%token LE
+// Keywords
+%token SELECT DISTINCT AS FROM
+%token UNION JOIN LEFT RIGHT CROSS INNER OUTER USING ON
+%token WHERE ORDER GROUP BY ASC DESC HAVING LIMIT
+%token CREATE DIRECTORY IF EXISTS
+%token UPDATE SET
+%token INSERT INTO VALUES
+%token DELETE DROP USE OPTIMIZE WITH
+%token IN LIKE BETWEEN
+%token SHL SHR AND OR NOT IS EQ NE GE LE
 
 // Values
-%token <val_String> TOKEN_NULL
-%token <val_String> TOKEN_BOOL
-%token <val_String> TOKEN_INTEGER
-%token <val_String> TOKEN_DOUBLE
-%token <val_String> TOKEN_CHAR
-%token <val_String> TOKEN_STRING
-%token <val_String> TOKEN_IDENTIFIER
+%token <val_String> TOKEN_NULL TOKEN_BOOL TOKEN_INTEGER TOKEN_DOUBLE TOKEN_CHAR TOKEN_STRING TOKEN_IDENTIFIER
 
 // -------------------------------------------------------------
 //
 // Non-Terminal Symbol Types
 //
 
-%type <val_StatementNode>           stmt
-%type <val_CreateDirNode>           create_dir_stmt
-%type <val_DropDirNode>             drop_dir_stmt
+%type <val_StatementNode>           stmt create_dir_stmt drop_dir_stmt
 %type <val_ExpressionNode>          expression value column function_call
+%type <val_ExprList>                arg_list
 
 // -------------------------------------------------------------
 //
@@ -391,16 +314,12 @@ expression:             '(' expression ')'                              { $$ = $
 
 // TODO - support specil functions - LIKE, IN, BETWEEN.
 
-function_call:          TOKEN_IDENTIFIER '(' arg_list ')'               { delete $1; }
+function_call:          TOKEN_IDENTIFIER '(' ')'                        { $$ = new FunctionNode($1); delete $1; }
+    |                   TOKEN_IDENTIFIER '(' arg_list ')'               { $$ = new FunctionNode($1, *$3); delete $1; delete $3; }
     ;
 
-arg_list:               /* epsilon */                                   {  }
-    |                   expression                                      {  }
-    |                   arg_list_ext ',' expression                     {  }
-    ;
-
-arg_list_ext:           expression                                      {  }
-    |                   arg_list_ext ',' expression                     {  }
+arg_list:               expression                                      { $$ = new ExprList(); $$->push_back($1); }
+    |                   arg_list ',' expression                         { $$ = $1; $$->push_back($3); }
     ;
 
 // ------------------------------------------------------------

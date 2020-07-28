@@ -17,16 +17,6 @@ ColumnNode::ColumnNode(const std::string &tableName, const std::string &colName)
     this->colName = colName;
 }
 
-std::string ColumnNode::GetTableName() const
-{
-    return this->tableName;
-}
-
-std::string ColumnNode::GetColName() const
-{
-    return this->colName;
-}
-
 void ColumnNode::DumpTree(std::ostream &out, int indent) const
 {
     out << std::string(indent, ' ');
