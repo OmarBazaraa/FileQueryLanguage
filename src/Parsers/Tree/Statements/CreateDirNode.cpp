@@ -1,5 +1,5 @@
 #include "CreateDirNode.h"
-#include "../../../Common/Exceptions/DirectoryAlreadyExistingException.h"
+#include "../../../Common/Exceptions/DirectoryAlreadyExistsException.h"
 
 using namespace FileManager;
 
