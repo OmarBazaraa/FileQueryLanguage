@@ -11,7 +11,7 @@ DropDirNode::DropDirNode(const std::string& dir, bool dropIfExists) {
     this->dropIfExists = dropIfExists;
 }
 
-bool DropDirNode::execute() const {
+bool DropDirNode::execute() {
     if (fs::exists(this->dir)) {
         return fs::remove(this->dir);
     }

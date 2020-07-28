@@ -11,7 +11,7 @@ CreateDirNode::CreateDirNode(const std::string& dir, bool createIfNotExists) {
     this->createIfNotExists = createIfNotExists;
 }
 
-bool CreateDirNode::execute() const {
+bool CreateDirNode::execute() {
     if (fs::exists(this->dir)) {
         return this->createIfNotExists;
     }
