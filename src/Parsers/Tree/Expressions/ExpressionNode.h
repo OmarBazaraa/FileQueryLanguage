@@ -4,7 +4,7 @@
 #include "../BaseNode.h"
 #include "../../../Common/Enums/DataTypes.h"
 
-namespace FileManager
+namespace FQL
 {
     class ExpressionNode : public BaseNode
     {

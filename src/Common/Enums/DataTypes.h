@@ -1,7 +1,7 @@
 #ifndef __DATA_TYPES_H_
 #define __DATA_TYPES_H_
 
-namespace FileManager
+namespace FQL
 {
     /**
      * Enum holding all the supported primitive data types.

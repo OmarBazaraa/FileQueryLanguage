@@ -5,7 +5,7 @@
 
 #include "ExpressionNode.h"
 
-namespace FileManager
+namespace FQL
 {
     class ValueNode : public ExpressionNode
     {

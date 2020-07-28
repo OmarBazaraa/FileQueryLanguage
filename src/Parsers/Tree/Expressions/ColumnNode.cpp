@@ -1,6 +1,6 @@
 #include "ColumnNode.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 ColumnNode::ColumnNode(const char *name)
 {

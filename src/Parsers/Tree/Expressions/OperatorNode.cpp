@@ -1,6 +1,6 @@
 #include "OperatorNode.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 OperatorNode::OperatorNode(Operator opr)
 {

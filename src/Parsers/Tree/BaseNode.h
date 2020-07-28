@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace FileManager
+namespace FQL
 {
     class BaseNode
     {

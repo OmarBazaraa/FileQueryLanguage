@@ -13,7 +13,7 @@ Lex = $(DirTools)\\flex.exe
 Yacc = $(DirTools)\\bison.exe
 
 # Output
-OutputName = explorer.exe
+ClientName = fql-client.exe
 
 #
 # Commands
@@ -27,7 +27,7 @@ clear:
 	powershell clear
 
 clean:
-	powershell mkdir $(DirOut) -Force
+	powershell mkdir $(DirOut) -Force | powershell Out-Null
 	powershell rm $(DirOut) -Force -Recurse
 
 copy:
@@ -43,7 +43,7 @@ compile_parser:
 	g++ -c $(DirOut)/Parser.cpp -o $(DirOut)/Parser.o
 
 compile_client:
-	g++ -std=c++17 -o $(DirOut)/$(OutputName) \
+	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
 			$(DirOut)/Client/Main.cpp \
 			\
 			$(DirOut)/Parsers/Tree/Expressions/ColumnNode.cpp \
@@ -69,4 +69,4 @@ build:
 
 run:
 	@make -s clear
-	$(DirOut)\\$(OutputName) < $(DirData)/input.txt
+	$(DirOut)\\$(ClientName) < $(DirData)/input.txt

@@ -8,7 +8,7 @@
 
 namespace fs = std::filesystem;
 
-namespace FileManager
+namespace FQL
 {
     class CreateDirNode : public StatementNode
     {

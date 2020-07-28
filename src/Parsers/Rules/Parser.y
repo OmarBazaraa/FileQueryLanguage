@@ -6,14 +6,13 @@
 //
 // Includes
 //
-
 #include <cstdio>
 
 //
 // Function Prototypes
 //
-
 extern int yylex();
+
 void yyerror(const char* s);
 
 //

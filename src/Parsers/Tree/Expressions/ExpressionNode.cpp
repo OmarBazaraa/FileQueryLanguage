@@ -1,6 +1,6 @@
 #include "ExpressionNode.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 bool ExpressionNode::IsConstant() const
 {
