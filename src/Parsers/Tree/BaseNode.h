@@ -2,6 +2,9 @@
 #define __Node_H_
 
 #include <iostream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 namespace FileManager {
 
