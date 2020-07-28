@@ -14,7 +14,7 @@ namespace FileManager {
 
         virtual ~StatementNode() = default;
 
-        virtual bool execute() const = 0;
+        virtual bool execute() = 0;
     };
 }
 

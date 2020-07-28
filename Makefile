@@ -19,6 +19,10 @@ OutputName = explorer.exe
 # Commands
 #
 
+all:
+	@make -s build
+	@make -s run
+
 clear:
 	powershell clear
 
@@ -65,7 +69,3 @@ build:
 run:
 	@make -s clear
 	$(DirOut)\\$(OutputName) < $(DirData)/input.txt
-
-all:
-	@make -s build
-	@make -s run

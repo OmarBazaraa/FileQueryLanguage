@@ -23,7 +23,7 @@ namespace FileManager {
 
         virtual ~DropDirNode() = default;
 
-        virtual bool execute() const;
+        virtual bool execute();
 
         virtual void dumpTree(std::ostream& out, int indent = 0) const;
     };
