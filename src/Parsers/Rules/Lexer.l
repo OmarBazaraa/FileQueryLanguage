@@ -6,7 +6,6 @@
 //
 // Includes
 //
-
 #include "Parser.hpp"
 
 //

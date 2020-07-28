@@ -13,13 +13,10 @@ using namespace std;
 #define VERSION_DATE    "July 27, 2020"
 
 //
-// External Functions & Variables
+// Functions prototypes
 //
 extern int yyparse();
 
-//
-// Functions prototypes
-//
 void printHelp();
 void printVersion();
 void parseArguments(int argc, char *argv[]);
