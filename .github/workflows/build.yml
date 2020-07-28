@@ -14,15 +14,10 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Download Flex & Bison
-      uses: Legion2/download-release-action@v2.1.0
-      with:
-        repository: lexxmark/winflexbison
-        tag: 2.5.22
-        file: win_flex_bison-2.5.22.zip
-        path: tools/flex_bison.zip
+      run: powershell Invoke-WebRequest -Uri "https://github.com/lexxmark/winflexbison/releases/download/v2.5.22/win_flex_bison-2.5.22.zip" -OutFile "tools/flex_bison.zip"
     
     - name: Decompress Flex & Bison
-      run: unzip tools/flex_bison.zip
+      run: powershell Expand-Archive -Path tools/flex_bison.zip -DestinationPath tools/
 
     - name: Make
       run: make
