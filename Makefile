@@ -27,6 +27,7 @@ clear:
 	powershell clear
 
 clean:
+	powershell mkdir $(DirOut) -Force
 	powershell rm $(DirOut) -Force -Recurse
 
 copy:
