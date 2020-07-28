@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "ValueNode.h"
 
 using namespace FQL;
@@ -16,4 +18,5 @@ std::string ValueNode::GetValue() const
 
 void ValueNode::DumpTree(std::ostream &out, int indent) const
 {
+    out << std::string(indent, ' ') << this->value;
 }
