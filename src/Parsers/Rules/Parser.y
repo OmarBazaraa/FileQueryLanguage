@@ -51,7 +51,7 @@ void yyerror(const char* s);
 // Keywords
 %token SELECT DISTINCT AS FROM
 %token UNION JOIN LEFT RIGHT CROSS INNER OUTER USING ON
-%token WHERE ORDER GROUP BY ASC DESC HAVING LIMIT
+%token WHERE ORDER GROUP BY ASC DESC HAVING LIMIT OFFSET
 %token CREATE DIRECTORY IF EXISTS
 %token UPDATE SET
 %token INSERT INTO VALUES
@@ -191,6 +191,7 @@ opt_asc_desc:           /* epsilon */                                   {  }
 
 opt_limit:              /* epsilon */                                   {  }
     |                   LIMIT expression                                {  }
+    |                   LIMIT expression OFFSET expression              {  }
     ;
 
 // -------------------------------------------------------------

@@ -111,7 +111,9 @@ EOL                                 \n
 %{
 // LIMIT
 %}
+<INITIAL>(?i:TAKE)                  return LIMIT;
 <INITIAL>(?i:LIMIT)                 return LIMIT;
+<INITIAL>(?i:OFFSET)                return OFFSET;
 
 %{
 // CREATE
