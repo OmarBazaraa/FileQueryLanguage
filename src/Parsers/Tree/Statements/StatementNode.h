@@ -13,6 +13,8 @@ namespace FileManager {
         StatementNode() = default;
 
         virtual ~StatementNode() = default;
+
+        virtual bool execute() const = 0;
     };
 }
 

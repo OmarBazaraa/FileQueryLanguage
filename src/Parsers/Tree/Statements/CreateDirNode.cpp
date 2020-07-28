@@ -11,6 +11,10 @@ CreateDirNode::CreateDirNode(const std::string& dir, bool createIfNotExists) {
     this->createIfNotExists = createIfNotExists;
 }
 
+bool CreateDirNode::execute() const {
+    return false;
+}
+
 void CreateDirNode::dumpTree(std::ostream& out, int indent) const {
 
 }

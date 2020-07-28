@@ -23,6 +23,8 @@ namespace FileManager {
 
         virtual ~CreateDirNode() = default;
 
+        virtual bool execute() const;
+
         virtual void dumpTree(std::ostream& out, int indent = 0) const;
     };
 }

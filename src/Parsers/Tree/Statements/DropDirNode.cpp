@@ -11,6 +11,10 @@ DropDirNode::DropDirNode(const std::string& dir, bool dropIfExists) {
     this->dropIfExists = dropIfExists;
 }
 
+bool DropDirNode::execute() const {
+    return false;
+}
+
 void DropDirNode::dumpTree(std::ostream& out, int indent) const {
 
 }
