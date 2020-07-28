@@ -4,7 +4,7 @@
 
 using namespace FQL;
 
-ValueNode::ValueNode(DataType type, const char *value)
+ValueNode::ValueNode(DataType type, const std::string &value)
 {
     this->constant = true;
     this->type = type;

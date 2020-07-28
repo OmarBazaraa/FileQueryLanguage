@@ -10,15 +10,19 @@ namespace FQL
     class ColumnNode : public ExpressionNode
     {
     protected:
-        // TODO: use custom type to support both cases: `Col1`, `Table1.Col1`.
-        std::string name;
+        std::string colName;
+        std::string tableName;
 
     public:
-        ColumnNode(const char *name);
+        ColumnNode(const std::string &colName);
+
+        ColumnNode(const std::string &tableName, const std::string &colName);
 
         virtual ~ColumnNode() = default;
 
-        std::string GetName() const;
+        std::string GetTableName() const;
+
+        std::string GetColName() const;
 
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };

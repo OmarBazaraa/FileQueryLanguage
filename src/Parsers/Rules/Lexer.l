@@ -212,7 +212,7 @@ EOL                                 \n
  * Saves the currently identified token for the parser in `yylval`.
  */
 void saveToken() {
-    yylval.val_String = yytext;
+    yylval.val_String = strdup(yytext);
 }
 
 /**

@@ -7,7 +7,7 @@
 // Includes
 //
 #include <iostream>
-#include <cstdio>
+#include <string>
 
 #include "../Tree/AST.h"
 #include "../../Common/Enums/DataTypes.h"
@@ -229,8 +229,8 @@ select_expr:            expression opt_alias                            {  }
     ;
 
 opt_alias:              /* epsilon */                                   {  }
-    |                   TOKEN_IDENTIFIER                                {  }
-    |                   AS TOKEN_IDENTIFIER                             {  }
+    |                   TOKEN_IDENTIFIER                                { delete $1; }
+    |                   AS TOKEN_IDENTIFIER                             { delete $2; }
     ;
 
 // TODO - extend this to support joins.
@@ -238,7 +238,7 @@ opt_alias:              /* epsilon */                                   {  }
 dir_references:         dir_ref                                         {  }
     ;
 
-dir_ref:                TOKEN_STRING opt_alias                          {  }
+dir_ref:                TOKEN_STRING opt_alias                          { delete $1; }
     ;
 
 opt_where:              /* epsilon */                                   {  }
@@ -391,16 +391,16 @@ expression:             '(' expression ')'                              { $$ = $
 
 // TODO - support specil functions - LIKE, IN, BETWEEN.
 
-function_call:          TOKEN_IDENTIFIER '(' arg_list ')'               {}
+function_call:          TOKEN_IDENTIFIER '(' arg_list ')'               { delete $1; }
     ;
 
-arg_list:               /* epsilon */                                   {}
-    |                   expression                                      {}
-    |                   arg_list_ext ',' expression                     {}
+arg_list:               /* epsilon */                                   {  }
+    |                   expression                                      {  }
+    |                   arg_list_ext ',' expression                     {  }
     ;
 
-arg_list_ext:           expression                                      {}
-    |                   arg_list_ext ',' expression                     {}
+arg_list_ext:           expression                                      {  }
+    |                   arg_list_ext ',' expression                     {  }
     ;
 
 // ------------------------------------------------------------
@@ -408,16 +408,16 @@ arg_list_ext:           expression                                      {}
 // Other Rules
 //
 
-value:                  TOKEN_NULL                                      { $$ = new ValueNode(TYPE_NULL, $1); }
-    |                   TOKEN_BOOL                                      { $$ = new ValueNode(TYPE_BOOL, $1); }
-    |                   TOKEN_INTEGER                                   { $$ = new ValueNode(TYPE_INT, $1); }
-    |                   TOKEN_DOUBLE                                    { $$ = new ValueNode(TYPE_DOUBLE, $1); }
-    |                   TOKEN_CHAR                                      { $$ = new ValueNode(TYPE_CHAR, $1); }
-    |                   TOKEN_STRING                                    { $$ = new ValueNode(TYPE_STRING, $1); }
+value:                  TOKEN_NULL                                      { $$ = new ValueNode(TYPE_NULL, $1); delete $1; }
+    |                   TOKEN_BOOL                                      { $$ = new ValueNode(TYPE_BOOL, $1); delete $1; }
+    |                   TOKEN_INTEGER                                   { $$ = new ValueNode(TYPE_INT, $1); delete $1; }
+    |                   TOKEN_DOUBLE                                    { $$ = new ValueNode(TYPE_DOUBLE, $1); delete $1; }
+    |                   TOKEN_CHAR                                      { $$ = new ValueNode(TYPE_CHAR, $1); delete $1; }
+    |                   TOKEN_STRING                                    { $$ = new ValueNode(TYPE_STRING, $1); delete $1; }
     ;
 
-column:                 TOKEN_IDENTIFIER                                {  }
-    |                   TOKEN_IDENTIFIER '.' TOKEN_IDENTIFIER           {  }
+column:                 TOKEN_IDENTIFIER                                { $$ = new ColumnNode($1); delete $1; }
+    |                   TOKEN_IDENTIFIER '.' TOKEN_IDENTIFIER           { $$ = new ColumnNode($1, $3); delete $1; delete $3; }
     ;
 
 %%

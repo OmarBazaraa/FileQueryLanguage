@@ -16,7 +16,7 @@ namespace FQL
         std::string value;
 
     public:
-        ValueNode(DataType type, const char *value);
+        ValueNode(DataType type, const std::string &value);
 
         virtual ~ValueNode() = default;
 
