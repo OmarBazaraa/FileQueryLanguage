@@ -5,10 +5,10 @@
 
 namespace FileManager
 {
-    class DirectoryAlreadyExistingException : public DirectoryException
+    class DirectoryAlreadyExistsException : public DirectoryException
     {
     public:
-        DirectoryAlreadyExistingException(std::string path)
+        DirectoryAlreadyExistsException(std::string path)
             : DirectoryException(path, "Directory " + path + " already exists.")
         {
         }

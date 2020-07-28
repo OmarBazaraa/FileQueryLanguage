@@ -3,7 +3,6 @@
 
 namespace FileManager
 {
-
     /**
      * Enum holding all the supported primitive data types.
      */

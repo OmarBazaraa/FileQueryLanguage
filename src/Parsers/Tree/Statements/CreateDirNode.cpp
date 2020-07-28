@@ -17,7 +17,7 @@ bool CreateDirNode::Execute()
 {
     if (!this->createIfNotExists && fs::exists(this->dir))
     {
-        throw new DirectoryAlreadyExistingException(this->dir);
+        throw new DirectoryAlreadyExistsException(this->dir);
     }
 
     return fs::create_directory(this->dir);
