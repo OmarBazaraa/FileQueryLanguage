@@ -6,7 +6,7 @@
 #include "ExpressionNode.h"
 #include "../../../Common/Enums/Operators.h"
 
-namespace FileManager
+namespace FQL
 {
     class OperatorNode : public ExpressionNode
     {

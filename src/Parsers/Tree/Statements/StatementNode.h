@@ -5,7 +5,7 @@
 
 #include "../BaseNode.h"
 
-namespace FileManager
+namespace FQL
 {
     class StatementNode : public BaseNode
     {

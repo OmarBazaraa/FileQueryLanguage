@@ -3,7 +3,7 @@
 
 #include "DirectoryException.h"
 
-namespace FileManager
+namespace FQL
 {
     class DirectoryNotFoundException : public DirectoryException
     {

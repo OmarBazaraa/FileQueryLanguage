@@ -1,7 +1,7 @@
 #ifndef __OPERATORS_H_
 #define __OPERATORS_H_
 
-namespace FileManager
+namespace FQL
 {
     /**
      * Enum holding all the supported operators.

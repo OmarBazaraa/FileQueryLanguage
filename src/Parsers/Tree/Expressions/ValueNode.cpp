@@ -1,6 +1,6 @@
 #include "ValueNode.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 ValueNode::ValueNode(DataType type, const char *value)
 {
