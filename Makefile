@@ -65,7 +65,7 @@ compile_client:
 			$(DirOut)/Parsers/Tree/Statements/CreateNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/DropNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/SelectNode.cpp \
-			$(DirOut)/Parsers/Tree/Statements/‘حيشفثNode.cpp \
+			$(DirOut)/Parsers/Tree/Statements/UpdateNode.cpp \
 			\
 			$(DirOut)/Parsers/Tree/DirectoryNode.cpp \
 			$(DirOut)/Parsers/Tree/SortRuleNode.cpp \
