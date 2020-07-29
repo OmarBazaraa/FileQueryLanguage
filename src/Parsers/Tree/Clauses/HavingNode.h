@@ -9,7 +9,7 @@ namespace FQL
     class HavingNode : public ClauseNode
     {
     protected:
-        ExpressionNode *cond;
+        ExpressionNode *cond = NULL;
 
     public:
         HavingNode(ExpressionNode *cond);

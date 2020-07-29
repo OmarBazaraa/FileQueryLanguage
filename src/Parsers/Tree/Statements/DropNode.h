@@ -4,19 +4,18 @@
 #include <string>
 
 #include "StatementNode.h"
+#include "../DirectoryNode.h"
 
 namespace FQL
 {
     class DropNode : public StatementNode
     {
     protected:
-        // TODO: change to custom type.
-        const std::string dir;
-
-        const bool dropIfExists = false;
+        bool dropIfExists = false;
+        DirectoryNode *dir = NULL;
 
     public:
-        DropNode(const std::string &dir, bool dropIfExists = false);
+        DropNode(DirectoryNode *dir, bool dropIfExists = false);
 
         virtual ~DropNode() = default;
 

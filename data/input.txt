@@ -17,3 +17,11 @@ limit 10;
 
 delete from "dir1"
 where size < 10;
+
+drop dir if exists "dir1";
+
+drop dir "dir2";
+
+create dir if not exists "dir1";
+
+create dir "dir1";

@@ -13,7 +13,7 @@
 #include "../../Common/Enums/Operators.h"
 #include "../../Common/Enums/SortDirection.h"
 
-#include "Parser.hpp"
+#include "ParserGrammar.hpp"
 
 //
 // Function Prototypes

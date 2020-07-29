@@ -16,7 +16,7 @@ namespace FQL
             this->message = message;
         }
 
-        std::string GetMessage() const
+        const std::string &GetMessage() const
         {
             return this->message;
         }

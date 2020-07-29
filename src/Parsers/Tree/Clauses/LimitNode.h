@@ -9,7 +9,7 @@ namespace FQL
     class LimitNode : public ClauseNode
     {
     protected:
-        ExpressionNode *limitExpr;
+        ExpressionNode *limitExpr = NULL;
         ExpressionNode *offsetExpr = NULL;
 
     public:

@@ -19,7 +19,7 @@ namespace FQL
             this->path = path;
         }
 
-        std::string GetPath() const
+        const std::string &GetPath() const
         {
             return this->path;
         }

@@ -37,6 +37,8 @@ namespace FQL
         OPR_LESS_EQUAL,         // a <= b
         OPR_EQUAL,              // a == b
         OPR_NOT_EQUAL,          // a != b
+
+        OPR_UNKNOWN
     };
 }
 

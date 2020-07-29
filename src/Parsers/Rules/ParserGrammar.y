@@ -28,6 +28,7 @@ void yyerror(const char* s);
 //
 // Global Variables
 //
+StmtList* rootNode = NULL;
 %}
 
 // -------------------------------------------------------------
@@ -46,6 +47,7 @@ void yyerror(const char* s);
     FQL::ValueNode*                 val_ValueNode;
     FQL::ColumnNode*                val_ColumnNode;
 
+    FQL::StmtList*                  val_StmtList;
     FQL::ExprList*                  val_ExprList;
     FQL::SelectExprList*            val_SelectExprList;
     FQL::UpdateAssignList*          val_UpdateAssignList;
@@ -91,6 +93,7 @@ void yyerror(const char* s);
 %type <val_ValueNode>               value
 %type <val_ColumnNode>              column
 
+%type <val_StmtList>                stmt_list
 %type <val_ExprList>                arg_list
 %type <val_SelectExprList>          select_expr_list
 %type <val_UpdateAssignList>        update_assign_list
@@ -136,20 +139,20 @@ void yyerror(const char* s);
 // Rules Section
 // =============
 
-program:                /* epsilon */                                   { }
-    |                   stmt_list                                       { }
+program:                /* epsilon */                                   { rootNode = new StmtList(); }
+    |                   stmt_list                                       { rootNode = $1; }
     ;
 
-stmt_list:              stmt ';'
-    |                   stmt_list stmt ';'
+stmt_list:              stmt ';'                                        { $$ = new StmtList(); $$->push_back($1); }
+    |                   stmt_list stmt ';'                              { $$ = $1; $$->push_back($2); }
     ;
 
-stmt:                   select_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   create_stmt                                     {  }
-    |                   update_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   insert_stmt                                     {  }
-    |                   delete_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   drop_stmt                                       {  }
+stmt:                   select_stmt
+    |                   create_stmt
+    |                   update_stmt
+    |                   insert_stmt
+    |                   delete_stmt
+    |                   drop_stmt
     ;
 
 // -------------------------------------------------------------
@@ -252,7 +255,7 @@ opt_limit:              /* epsilon */                                   { $$ = N
 
 // TODO - support copying.
 
-create_stmt:            CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
+create_stmt:            CREATE DIRECTORY opt_if_not_exists dir_ref      { $$ = new CreateNode($4, $3); }
     ;
 
 opt_if_not_exists:      /* epsilon */                                   { $$ = false; }
@@ -302,7 +305,7 @@ delete_stmt:            DELETE
 // DROP Statement Rules
 //
 
-drop_stmt:              DROP DIRECTORY opt_if_exists dir_ref            {  }
+drop_stmt:              DROP DIRECTORY opt_if_exists dir_ref            { $$ = new DropNode($4, $3); }
     ;
 
 opt_if_exists:          /* epsilon */                                   { $$ = false; }

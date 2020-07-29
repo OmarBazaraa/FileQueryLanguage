@@ -21,6 +21,12 @@ namespace FQL
 
         virtual ~DirectoryNode() = default;
 
+        virtual bool IsRecursive() const;
+
+        virtual const std::string &GetDirectory() const;
+        
+        virtual const std::string &GetAlias() const;
+
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };
 }
