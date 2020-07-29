@@ -38,7 +38,7 @@ bool DeleteNode::Execute()
 void DeleteNode::DumpTree(std::ostream &out, int indent) const
 {
     out << std::string(indent, ' ');
-    out << "DELETE FROM" ;
+    out << "DELETE FROM " ;
 
     this->dir->DumpTree(out, 0);
 
