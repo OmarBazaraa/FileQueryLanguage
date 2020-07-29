@@ -12,12 +12,12 @@ namespace FQL
     {
     protected:
         std::string name;
-        std::vector<ExpressionNode*> args;
+        std::vector<ExpressionNode *> args;
 
     public:
         FunctionNode(const std::string &name);
 
-        FunctionNode(const std::string &name, const std::vector<ExpressionNode*> &args);
+        FunctionNode(const std::string &name, const std::vector<ExpressionNode *> &args);
 
         virtual ~FunctionNode();
 

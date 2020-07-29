@@ -7,11 +7,11 @@ namespace FQL
 {
     class BaseException
     {
-    private:
+    protected:
         std::string message;
 
     public:
-        BaseException(std::string message)
+        BaseException(const std::string &message)
         {
             this->message = message;
         }

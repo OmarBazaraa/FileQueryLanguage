@@ -9,6 +9,9 @@
 
 // Must be before "Parser.hpp".
 #include "../Tree/AST.h"
+#include "../../Common/Enums/DataTypes.h"
+#include "../../Common/Enums/Operators.h"
+#include "../../Common/Enums/SortDirection.h"
 
 #include "Parser.hpp"
 
@@ -75,6 +78,7 @@ EOL                                 \n
 <INITIAL>(?i:DISTINCT)              return DISTINCT;
 <INITIAL>(?i:AS)                    return AS;
 <INITIAL>(?i:FROM)                  return FROM;
+<INITIAL>(?i:RECURSIVE)             return RECURSIVE;
 
 %{
 // JOIN, UNION
@@ -111,7 +115,9 @@ EOL                                 \n
 %{
 // LIMIT
 %}
+<INITIAL>(?i:TAKE)                  return LIMIT;
 <INITIAL>(?i:LIMIT)                 return LIMIT;
+<INITIAL>(?i:OFFSET)                return OFFSET;
 
 %{
 // CREATE

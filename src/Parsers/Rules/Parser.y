@@ -13,6 +13,7 @@
 #include "../Tree/AST.h"
 #include "../../Common/Enums/DataTypes.h"
 #include "../../Common/Enums/Operators.h"
+#include "../../Common/Enums/SortDirection.h"
 
 using namespace std;
 using namespace FQL;
@@ -34,12 +35,22 @@ void yyerror(const char* s);
 // Symbol Type Definition
 //
 
-%union {
+%union
+{
     FQL::StatementNode*             val_StatementNode;
+    FQL::ClauseNode*                val_ClauseNode;
+    FQL::DirectoryNode*             val_DirNode;
+    FQL::SortRuleList*              val_SortRuleList;
+    FQL::SortDirection              val_SortDirection;
 
     FQL::ExpressionNode*            val_ExpressionNode;
     FQL::ExprList*                  val_ExprList;
 
+    FQL::SelectExpressionNode*      val_SelectExprNode;
+    FQL::SelectExprList*            val_SelectExprList;
+
+    bool                            val_Bool;
+    int                             val_Int;
     char*                           val_String;
 }
 
@@ -49,9 +60,9 @@ void yyerror(const char* s);
 //
 
 // Keywords
-%token SELECT DISTINCT AS FROM
+%token SELECT DISTINCT AS FROM RECURSIVE
 %token UNION JOIN LEFT RIGHT CROSS INNER OUTER USING ON
-%token WHERE ORDER GROUP BY ASC DESC HAVING LIMIT
+%token WHERE ORDER GROUP BY ASC DESC HAVING LIMIT OFFSET
 %token CREATE DIRECTORY IF EXISTS
 %token UPDATE SET
 %token INSERT INTO VALUES
@@ -67,9 +78,22 @@ void yyerror(const char* s);
 // Non-Terminal Symbol Types
 //
 
-%type <val_StatementNode>           stmt create_dir_stmt drop_dir_stmt
+%type <val_StatementNode>           stmt select_stmt create_stmt create_dir_stmt update_stmt insert_stmt delete_stmt drop_stmt drop_dir_stmt
+%type <val_ClauseNode>              opt_where opt_group_by opt_having opt_order_by opt_limit
+%type <val_SortRuleList>            order_by_list
+%type <val_SortDirection>           opt_asc_desc
+
 %type <val_ExpressionNode>          expression value column function_call
 %type <val_ExprList>                arg_list
+
+%type <val_SelectExprNode>          select_expr
+%type <val_SelectExprList>          select_expr_list
+
+%type <val_DirNode>                 dir_ref
+
+%type <val_Bool>                    opt_if_exists opt_if_not_exists
+%type <val_Int>                     select_opts;
+%type <val_String>                  opt_alias
 
 // -------------------------------------------------------------
 //
@@ -112,16 +136,12 @@ stmt_list:              stmt ';'
     |                   stmt_list stmt ';'
     ;
 
-stmt:                   select_stmt                                     {  }
+stmt:                   select_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
     |                   create_stmt                                     {  }
     |                   update_stmt                                     {  }
     |                   insert_stmt                                     {  }
     |                   delete_stmt                                     {  }
     |                   drop_stmt                                       {  }
-    ;
-    
-// Just for testing. To be removed.
-stmt:                   expression                                      { $1->DumpTree(std::cout); std::cout << endl; delete $1; }
     ;
 
 // -------------------------------------------------------------
@@ -129,68 +149,92 @@ stmt:                   expression                                      { $1->Du
 // SELECT Statement Rules
 //
 
-select_stmt:            SELECT select_opts select_expr_list             {  }
+select_stmt:            SELECT select_opts select_expr_list             { $$ = new SelectNode(*$3, $2); delete $3; }
     |                   SELECT select_opts select_expr_list
-                        FROM dir_references
+                        FROM dir_ref
                         opt_where
                         opt_group_by
                         opt_having
                         opt_order_by
-                        opt_limit                                       {  }
+                        opt_limit                                       { $$ = new SelectNode($5, *$3, { $6, $7, $8, $9, $10 }, $2); delete $3; }
     ;
 
-select_opts:            /* epsilon */                                   {  }
-    |                   DISTINCT                                        {  }
+select_opts:            /* epsilon */                                   { $$ = SELECT_DEFAULT; }
+    |                   DISTINCT                                        { $$ = SELECT_DISTINCT; }
     ;
 
-select_expr_list:       '*'                                             {  }
-    |                   select_expr                                     {  }
-    |                   select_expr_list ',' select_expr                {  }
+select_expr_list:       '*'                                             { $$ = new SelectExprList(); }
+    |                   select_expr                                     { $$ = new SelectExprList(); $$->push_back($1); }
+    |                   select_expr_list ',' select_expr                { $$->push_back($3); }
     ;
 
-select_expr:            expression opt_alias                            {  }
+select_expr:            expression                                      { $$ = new SelectExpressionNode($1); }
+    |                   expression TOKEN_IDENTIFIER                     { $$ = new SelectExpressionNode($1, $2); delete $2; }
+    |                   expression AS TOKEN_IDENTIFIER                  { $$ = new SelectExpressionNode($1, $3); delete $3; }
+    |                   TOKEN_IDENTIFIER '=' expression                 { $$ = new SelectExpressionNode($3, $1); delete $1; }
     ;
 
-opt_alias:              /* epsilon */                                   {  }
-    |                   TOKEN_IDENTIFIER                                { delete $1; }
-    |                   AS TOKEN_IDENTIFIER                             { delete $2; }
+dir_ref:                TOKEN_STRING opt_alias                          {
+                                                                            if ($2 != NULL)
+                                                                            {
+                                                                                $$ = new DirectoryNode($1, $2);
+                                                                                delete $1;
+                                                                                delete $2;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                $$ = new DirectoryNode($1);
+                                                                                delete $1;
+                                                                            }
+                                                                        }
+    |                   TOKEN_STRING RECURSIVE opt_alias                {
+                                                                            if ($3 != NULL)
+                                                                            {
+                                                                                $$ = new DirectoryNode($1, $3, true);
+                                                                                delete $1;
+                                                                                delete $3;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                $$ = new DirectoryNode($1, true);
+                                                                                delete $1;
+                                                                            }
+                                                                        }
     ;
 
-// TODO - extend this to support joins.
-
-dir_references:         dir_ref                                         {  }
+opt_alias:              /* epsilon */                                   { $$ = NULL; }
+    |                   TOKEN_IDENTIFIER                                { $$ = $1; }
+    |                   AS TOKEN_IDENTIFIER                             { $$ = $2; }
     ;
 
-dir_ref:                TOKEN_STRING opt_alias                          { delete $1; }
+opt_where:              /* epsilon */                                   { $$ = NULL; }
+    |                   WHERE expression                                { $$ = new WhereNode($2); }
     ;
 
-opt_where:              /* epsilon */                                   {  }
-    |                   WHERE expression                                {  }
+opt_group_by:           /* epsilon */                                   { $$ = NULL; }
+    |                   GROUP BY order_by_list                          { $$ = new GroupByNode(*$3); }
     ;
 
-opt_group_by:           /* epsilon */                                   {  }
-    |                   GROUP BY order_by_list                          {  }
+opt_having:             /* epsilon */                                   { $$ = NULL; }
+    |                   HAVING expression                               { $$ = new HavingNode($2); }
     ;
 
-opt_having:             /* epsilon */                                   {  }
-    |                   HAVING expression                               {  }
+opt_order_by:           /* epsilon */                                   { $$ = NULL; }
+    |                   ORDER BY order_by_list                          { $$ = new OrderByNode(*$3); }
     ;
 
-opt_order_by:           /* epsilon */                                   {  }
-    |                   ORDER BY order_by_list                          {  }
+order_by_list:          expression opt_asc_desc                         { $$ = new SortRuleList(); $$->push_back(new SortRuleNode($1, $2)); }
+    |                   order_by_list ',' expression opt_asc_desc       { $$->push_back(new SortRuleNode($3, $4)); }
     ;
 
-order_by_list:          expression opt_asc_desc                         {  }
-    |                   order_by_list ',' expression opt_asc_desc       {  }
+opt_asc_desc:           /* epsilon */                                   { $$ = SORT_ASC; }
+    |                   ASC                                             { $$ = SORT_ASC; }
+    |                   DESC                                            { $$ = SORT_DESC; }
     ;
 
-opt_asc_desc:           /* epsilon */                                   {  }
-    |                   ASC                                             {  }
-    |                   DESC                                            {  }
-    ;
-
-opt_limit:              /* epsilon */                                   {  }
-    |                   LIMIT expression                                {  }
+opt_limit:              /* epsilon */                                   { $$ = NULL; }
+    |                   LIMIT expression                                { $$ = new LimitNode($2); }
+    |                   LIMIT expression OFFSET expression              { $$ = new LimitNode($2, $4); }
     ;
 
 // -------------------------------------------------------------
@@ -206,8 +250,8 @@ create_stmt:            create_dir_stmt                                 {  }
 create_dir_stmt:        CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
     ;
 
-opt_if_not_exists:      /* epsilon */                                   {  }
-    |                   IF NOT EXISTS                                   {  }
+opt_if_not_exists:      /* epsilon */                                   { $$ = false; }
+    |                   IF NOT EXISTS                                   { $$ = true; }
     ;
 
 // -------------------------------------------------------------
@@ -259,8 +303,8 @@ drop_stmt:              drop_dir_stmt                                   {  }
 drop_dir_stmt:          DROP DIRECTORY opt_if_exists dir_ref            {  }
     ;
 
-opt_if_exists:          /* epsilon */                                   {  }
-    |                   IF EXISTS                                       {  }
+opt_if_exists:          /* epsilon */                                   { $$ = false; }
+    |                   IF EXISTS                                       { $$ = true; }
     ;
 
 // -------------------------------------------------------------

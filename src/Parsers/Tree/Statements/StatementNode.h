@@ -1,8 +1,6 @@
 #ifndef __STATEMENT_NODE_H_
 #define __STATEMENT_NODE_H_
 
-#include <string>
-
 #include "../BaseNode.h"
 
 namespace FQL

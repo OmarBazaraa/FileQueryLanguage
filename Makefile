@@ -46,6 +46,12 @@ compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
 			$(DirOut)/Client/Main.cpp \
 			\
+			$(DirOut)/Parsers/Tree/Clauses/GroupByNode.cpp \
+			$(DirOut)/Parsers/Tree/Clauses/HavingNode.cpp \
+			$(DirOut)/Parsers/Tree/Clauses/LimitNode.cpp \
+			$(DirOut)/Parsers/Tree/Clauses/OrderByNode.cpp \
+			$(DirOut)/Parsers/Tree/Clauses/WhereNode.cpp \
+			\
 			$(DirOut)/Parsers/Tree/Expressions/ColumnNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/ExpressionNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/FunctionNode.cpp \
@@ -54,6 +60,10 @@ compile_client:
 			\
 			$(DirOut)/Parsers/Tree/Statements/CreateDirNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/DropDirNode.cpp \
+			$(DirOut)/Parsers/Tree/Statements/SelectNode.cpp \
+			\
+			$(DirOut)/Parsers/Tree/DirectoryNode.cpp \
+			$(DirOut)/Parsers/Tree/SortRuleNode.cpp \
 			\
 			$(DirOut)/Lexer.o \
 			$(DirOut)/Parser.o

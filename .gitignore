@@ -6,10 +6,6 @@
 tools/*
 !*.md
 
-# Data
-data/*
-!*.md
-
 # Build
 out/*
 *.o
