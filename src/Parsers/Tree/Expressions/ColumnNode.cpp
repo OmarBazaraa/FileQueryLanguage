@@ -21,15 +21,6 @@ void ColumnNode::DumpTree(std::ostream &out, int indent) const
 {
     out << std::string(indent, ' ');
     out << "`";
-
-    if (this->tableName.empty())
-    {
-        out << this->colName;
-    }
-    else
-    {
-        out << this->tableName << "." << this->colName;
-    }
-    
+    out << (this->tableName.empty() ? this->tableName + "." : "") << this->colName;
     out << "`";
 }

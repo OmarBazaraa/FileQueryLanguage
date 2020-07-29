@@ -1,13 +1,12 @@
 #ifndef __SORT_RULE_NODE_H_
 #define __SORT_RULE_NODE_H_
 
-#include "ClauseNode.h"
-#include "../Expressions/ExpressionNode.h"
-#include "../../../Common/Enums/SortDirection.h"
+#include "Expressions/ExpressionNode.h"
+#include "../../Common/Enums/SortDirection.h"
 
 namespace FQL
 {
-    class SortRuleNode : public ClauseNode
+    class SortRuleNode : public BaseNode
     {
     protected:
         SortDirection dir = SORT_ASC;

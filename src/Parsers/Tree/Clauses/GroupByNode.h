@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "ClauseNode.h"
-#include "SortRuleNode.h"
+#include "../SortRuleNode.h"
 
 namespace FQL
 {

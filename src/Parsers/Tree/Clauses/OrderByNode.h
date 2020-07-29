@@ -4,19 +4,19 @@
 #include <vector>
 
 #include "ClauseNode.h"
-#include "SortRuleNode.h"
+#include "../SortRuleNode.h"
 
 namespace FQL
 {
-    class OrderBy : public ClauseNode
+    class OrderByNode : public ClauseNode
     {
     protected:
         std::vector<SortRuleNode *> rules;
 
     public:
-        OrderBy(std::vector<SortRuleNode *> &rules);
+        OrderByNode(std::vector<SortRuleNode *> &rules);
 
-        virtual ~OrderBy();
+        virtual ~OrderByNode();
 
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };
