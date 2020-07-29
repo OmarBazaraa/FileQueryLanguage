@@ -21,9 +21,9 @@ FunctionNode::FunctionNode(const std::string &name, const std::vector<Expression
 
 FunctionNode::~FunctionNode()
 {
-    for (int i = 0; i < this->args.size(); ++i)
+    for (auto p : this->args)
     {
-        delete this->args[i];
+        delete p;
     }
 }
 

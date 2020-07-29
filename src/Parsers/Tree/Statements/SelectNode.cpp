@@ -22,17 +22,17 @@ SelectNode::~SelectNode()
         delete this->dir;
     }
 
+    for (auto p : this->expressions)
+    {
+        delete p;
+    }
+
     for (auto p : this->clauses)
     {
         if (p != NULL)
         {
             delete p;
         }
-    }
-
-    for (auto p : this->expressions)
-    {
-        delete p;
     }
 }
 
