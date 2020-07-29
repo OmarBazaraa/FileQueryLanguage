@@ -9,7 +9,7 @@ namespace FQL
     {
     public:
         DirectoryAlreadyExistsException(const std::string &path)
-            : DirectoryException(path, "Directory " + path + " already exists.")
+            : DirectoryException(path, "Directory '" + path + "' already exists.")
         {
         }
     };
