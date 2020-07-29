@@ -4,8 +4,11 @@
 #include <vector>
 
 #include "BaseNode.h"
+#include "DirectoryNode.h"
+#include "SortRuleNode.h"
 
 #include "Statements/StatementNode.h"
+#include "Statements/SelectNode.h"
 #include "Statements/CreateDirNode.h"
 #include "Statements/DropDirNode.h"
 
@@ -15,7 +18,6 @@
 #include "Clauses/HavingNode.h"
 #include "Clauses/OrderByNode.h"
 #include "Clauses/LimitNode.h"
-#include "Clauses/SortRuleNode.h"
 
 #include "Expressions/ExpressionNode.h"
 #include "Expressions/ValueNode.h"
@@ -28,6 +30,7 @@ namespace FQL
     typedef std::vector<BaseNode *> NodeList;
     typedef std::vector<StatementNode *> StmtList;
     typedef std::vector<ExpressionNode *> ExprList;
+    typedef std::vector<SelectExpressionNode *> SelectExprList;
     typedef std::vector<SortRuleNode *> SortRuleList;
 }
 

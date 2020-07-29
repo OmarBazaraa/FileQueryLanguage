@@ -1,0 +1,10 @@
+SELECT 5 + 7 * 6;
+
+select *;
+
+select distinct *;
+
+select 5 + 7, count() as totalCount
+FROM "dir1" recursive
+WHERE extension == 'pdf'
+limit 10 offset 100;
