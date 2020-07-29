@@ -9,8 +9,8 @@
 
 #include "Statements/StatementNode.h"
 #include "Statements/SelectNode.h"
-#include "Statements/CreateDirNode.h"
-#include "Statements/DropDirNode.h"
+#include "Statements/CreateNode.h"
+#include "Statements/DropNode.h"
 
 #include "Clauses/ClauseNode.h"
 #include "Clauses/WhereNode.h"

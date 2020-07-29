@@ -1,19 +1,18 @@
 #include <filesystem>
 
-#include "DropDirNode.h"
+#include "DropNode.h"
 #include "../../../Common/Exceptions/DirectoryNotFoundException.h"
 
 using namespace FQL;
 
 namespace fs = std::filesystem;
 
-DropDirNode::DropDirNode(const std::string &dir, bool dropIfExists)
+DropNode::DropNode(const std::string &dir, bool dropIfExists)
+    : dir(dir), dropIfExists(dropIfExists)
 {
-    this->dir = dir;
-    this->dropIfExists = dropIfExists;
 }
 
-bool DropDirNode::Execute()
+bool DropNode::Execute()
 {
     bool exists = fs::exists(this->dir);
 
@@ -30,6 +29,6 @@ bool DropDirNode::Execute()
     return fs::remove(this->dir);
 }
 
-void DropDirNode::DumpTree(std::ostream &out, int indent) const
+void DropNode::DumpTree(std::ostream &out, int indent) const
 {
 }

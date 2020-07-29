@@ -9,7 +9,7 @@ namespace FQL
     {
     public:
         DirectoryNotFoundException(const std::string &path)
-            : DirectoryException(path, "Directory " + path + " does not exist.")
+            : DirectoryException(path, "Directory '" + path + "' does not exist.")
         {
         }
     };
