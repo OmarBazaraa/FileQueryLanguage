@@ -2,7 +2,7 @@
 
 using namespace FQL;
 
-GroupByNode::GroupByNode(std::vector<SortRuleNode*> &rules)
+GroupByNode::GroupByNode(std::vector<SortRuleNode *> &rules)
 {
     // TODO: ensure not null empty rules.
     // TODO: ensure constant rules.

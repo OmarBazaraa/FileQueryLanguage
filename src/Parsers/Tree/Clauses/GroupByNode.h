@@ -11,10 +11,10 @@ namespace FQL
     class GroupByNode : public ClauseNode
     {
     protected:
-        std::vector<SortRuleNode*> rules;
+        std::vector<SortRuleNode *> rules;
 
     public:
-        GroupByNode(std::vector<SortRuleNode*> &rules);
+        GroupByNode(std::vector<SortRuleNode *> &rules);
 
         virtual ~GroupByNode();
 

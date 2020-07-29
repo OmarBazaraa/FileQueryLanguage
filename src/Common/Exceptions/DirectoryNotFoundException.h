@@ -8,7 +8,7 @@ namespace FQL
     class DirectoryNotFoundException : public DirectoryException
     {
     public:
-        DirectoryNotFoundException(std::string path)
+        DirectoryNotFoundException(const std::string &path)
             : DirectoryException(path, "Directory " + path + " does not exist.")
         {
         }

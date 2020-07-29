@@ -2,7 +2,7 @@
 
 using namespace FQL;
 
-OrderBy::OrderBy(std::vector<SortRuleNode*> &rules)
+OrderBy::OrderBy(std::vector<SortRuleNode *> &rules)
 {
     // TODO: ensure not null empty rules.
     // TODO: ensure constant rules.

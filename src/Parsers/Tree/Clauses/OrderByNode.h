@@ -11,10 +11,10 @@ namespace FQL
     class OrderBy : public ClauseNode
     {
     protected:
-        std::vector<SortRuleNode*> rules;
+        std::vector<SortRuleNode *> rules;
 
     public:
-        OrderBy(std::vector<SortRuleNode*> &rules);
+        OrderBy(std::vector<SortRuleNode *> &rules);
 
         virtual ~OrderBy();
 

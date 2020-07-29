@@ -13,7 +13,7 @@ namespace FQL
         std::string path;
 
     public:
-        DirectoryException(std::string path, std::string message)
+        DirectoryException(const std::string &path, const std::string &message)
             : BaseException(message)
         {
             this->path = path;
