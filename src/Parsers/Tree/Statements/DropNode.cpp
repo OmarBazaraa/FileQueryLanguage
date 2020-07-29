@@ -8,9 +8,10 @@ using namespace FQL;
 namespace fs = std::filesystem;
 
 DropNode::DropNode(DirectoryNode *dir, bool dropIfExists)
-    : dir(dir), dropIfExists(dropIfExists)
 {
     // TODO: ensure not null dir.
+    this->dir = dir;
+    this->dropIfExists = dropIfExists;
 }
 
 bool DropNode::Execute()

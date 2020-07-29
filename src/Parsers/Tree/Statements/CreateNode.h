@@ -11,8 +11,8 @@ namespace FQL
     class CreateNode : public StatementNode
     {
     protected:
-        const bool createIfNotExists = false;
-        const DirectoryNode *dir = NULL;
+        bool createIfNotExists = false;
+        DirectoryNode *dir = NULL;
 
     public:
         CreateNode(DirectoryNode *dir, bool createIfNotExists = false);

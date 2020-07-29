@@ -9,30 +9,30 @@ namespace FQL
 {
     class BadArgumentException : public BaseException
     {
-    private:
+    protected:
         std::string parameter;
         std::string value;
 
     public:
-        BadArgumentException(const std::string &paramemer, const std::string &value, const std::string &moreDetails)
+        BadArgumentException(const std::string &parameter, const std::string &value, const std::string &moreDetails)
             : BaseException("Parameter '" + parameter + "' value '" + value + "'  is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
             this->value = value;
         }
 
-        BadArgumentException(const std::string &paramemer, const std::string &moreDetails)
+        BadArgumentException(const std::string &parameter, const std::string &moreDetails)
             : BaseException("Parameter " + parameter + " value is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
         }
 
-        std::string GetParameter() const
+        const std::string &GetParameter() const
         {
             return this->parameter;
         }
 
-        std::string GetValue() const
+        const std::string &GetValue() const
         {
             return this->value;
         }

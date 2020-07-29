@@ -11,8 +11,8 @@ namespace FQL
     class DropNode : public StatementNode
     {
     protected:
-        const bool dropIfExists = false;
-        const DirectoryNode *dir = NULL;
+        bool dropIfExists = false;
+        DirectoryNode *dir = NULL;
 
     public:
         DropNode(DirectoryNode *dir, bool dropIfExists = false);

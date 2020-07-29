@@ -11,7 +11,7 @@ namespace FQL
     {
     public:
         FieldNotFilterableException(const std::string &field)
-            : FieldException(field, "Field '" + field + "' cannot be used in the where statemet.")
+            : FieldException(field, "Field '" + field + "' cannot is not filterable.")
         {
         }
     };

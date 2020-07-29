@@ -8,9 +8,10 @@ using namespace FQL;
 namespace fs = std::filesystem;
 
 CreateNode::CreateNode(DirectoryNode *dir, bool createIfNotExists)
-    : dir(dir), createIfNotExists(createIfNotExists)
 {
     // TODO: ensure not null directory.
+    this->dir = dir;
+    this->createIfNotExists = createIfNotExists;
 }
 
 bool CreateNode::Execute()

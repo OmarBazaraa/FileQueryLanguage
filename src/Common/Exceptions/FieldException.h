@@ -27,12 +27,12 @@ namespace FQL
             this->value = value;
         }
 
-        std::string GetField() const
+        const std::string &GetField() const
         {
             return this->field;
         }
 
-        std::string GetValue() const
+        const std::string &GetValue() const
         {
             return this->value;
         }

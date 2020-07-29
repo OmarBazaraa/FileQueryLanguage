@@ -11,7 +11,7 @@ namespace FQL
     {
     public:
         FieldNotSortableException(const std::string &field)
-            : FieldException(field, "Field '" + field + "' cannot be used in the order by statemet.")
+            : FieldException(field, "Field '" + field + "' is not sortable.")
         {
         }
     };
