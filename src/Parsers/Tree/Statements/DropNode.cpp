@@ -7,14 +7,15 @@ using namespace FQL;
 
 namespace fs = std::filesystem;
 
-DropNode::DropNode(const std::string &dir, bool dropIfExists)
+DropNode::DropNode(DirectoryNode *dir, bool dropIfExists)
     : dir(dir), dropIfExists(dropIfExists)
 {
+    // TODO: ensure not null dir.
 }
 
 bool DropNode::Execute()
 {
-    bool exists = fs::exists(this->dir);
+    bool exists = fs::exists(this->dir->GetDirectory());
 
     if (!exists && this->dropIfExists)
     {
@@ -23,12 +24,15 @@ bool DropNode::Execute()
 
     if (!exists && !this->dropIfExists)
     {
-        throw new DirectoryNotFoundException(this->dir);
+        throw new DirectoryNotFoundException(this->dir->GetDirectory());
     }
 
-    return fs::remove(this->dir);
+    return fs::remove(this->dir->GetDirectory());
 }
 
 void DropNode::DumpTree(std::ostream &out, int indent) const
 {
+    out << std::string(indent, ' ');
+    out << "DROP DIRECTORY " << (this->dropIfExists ? "IF EXISTS " : "");
+    this->dir->DumpTree(out, 0);
 }

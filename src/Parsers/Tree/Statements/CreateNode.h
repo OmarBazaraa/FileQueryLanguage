@@ -4,19 +4,18 @@
 #include <string>
 
 #include "StatementNode.h"
+#include "../DirectoryNode.h"
 
 namespace FQL
 {
     class CreateNode : public StatementNode
     {
     protected:
-        // TODO: change to custom type.
-        const std::string dir;
-
         const bool createIfNotExists = false;
+        const DirectoryNode *dir = NULL;
 
     public:
-        CreateNode(const std::string &dir, bool createIfNotExists = false);
+        CreateNode(DirectoryNode *dir, bool createIfNotExists = false);
 
         virtual ~CreateNode() = default;
 
