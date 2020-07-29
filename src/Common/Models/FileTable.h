@@ -9,7 +9,7 @@
 #include "FileTableColumn.h"
 #include "FileTableRow.h"
 
-namespace FileManager
+namespace FQL
 {
     class FileTable
     {

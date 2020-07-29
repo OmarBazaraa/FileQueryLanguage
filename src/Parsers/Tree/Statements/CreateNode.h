@@ -5,7 +5,7 @@
 
 #include "StatementNode.h"
 
-namespace FileManager
+namespace FQL
 {
     class CreateNode : public StatementNode
     {

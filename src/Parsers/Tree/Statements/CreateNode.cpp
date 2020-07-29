@@ -3,7 +3,7 @@
 #include "CreateNode.h"
 #include "../../../Common/Exceptions/DirectoryAlreadyExistsException.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 namespace fs = std::filesystem;
 

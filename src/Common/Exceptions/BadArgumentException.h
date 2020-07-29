@@ -5,7 +5,7 @@
 
 #include "BaseException.h"
 
-namespace FileManager
+namespace FQL
 {
     class BadArgumentException : public BaseException
     {

@@ -4,7 +4,7 @@
 
 namespace fs = std::filesystem;
 
-using namespace FileManager;
+using namespace FQL;
 
 FileTable *FileTableLoader::Load(const std::string &dir)
 {

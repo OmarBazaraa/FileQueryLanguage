@@ -7,7 +7,7 @@
 #include "../../../Common/Exceptions/FieldNotSortableException.h"
 #include "../../../Common/Exceptions/FieldNotSupportedException.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 namespace fs = std::filesystem;
 

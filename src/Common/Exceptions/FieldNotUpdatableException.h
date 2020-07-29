@@ -5,7 +5,7 @@
 
 #include "FieldException.h"
 
-namespace FileManager
+namespace FQL
 {
     class FieldNotUpdatableException : public FieldException
     {

@@ -2,7 +2,7 @@
 
 #include "FileTable.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 struct CompareRows
 {

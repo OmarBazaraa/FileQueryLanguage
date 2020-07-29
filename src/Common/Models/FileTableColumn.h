@@ -5,7 +5,7 @@
 
 #include "../Enums/DataTypes.h"
 
-namespace FileManager
+namespace FQL
 {
     class FileTableColumn
     {

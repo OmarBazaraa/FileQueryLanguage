@@ -1,6 +1,6 @@
 #include "FileTableColumn.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 FileTableColumn::FileTableColumn(std::string name, DataType type)
     : name(name), type(type)

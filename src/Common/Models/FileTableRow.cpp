@@ -1,6 +1,6 @@
 #include "FileTableRow.h"
 
-using namespace FileManager;
+using namespace FQL;
 
 FileTableRow::FileTableRow()
     :values()

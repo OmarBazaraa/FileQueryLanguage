@@ -4,7 +4,7 @@
 #include "Loader.h"
 #include "../Common/Models/FileTable.h"
 
-namespace FileManager
+namespace FQL
 {
     class FileTableLoader : public Loader
     {

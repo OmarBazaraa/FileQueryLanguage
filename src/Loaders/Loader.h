@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace FileManager
+namespace FQL
 {
     class Loader
     {
