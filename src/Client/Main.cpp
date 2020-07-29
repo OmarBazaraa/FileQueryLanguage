@@ -1,22 +1,22 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-#include <filesystem>
+
+#include "../Parsers/Parser.h"
 
 using namespace std;
+using namespace FQL;
 
 //
 // Compiler Definitions
 //
 #define LANG_NAME       "File Explorer"
-#define VERSION         "0.0.1"
-#define VERSION_DATE    "July 27, 2020"
+#define VERSION         "0.1.0"
+#define VERSION_DATE    "July 29, 2020"
 
 //
 // Functions prototypes
 //
-extern int yyparse();
-
 void printHelp();
 void printVersion();
 void parseArguments(int argc, char *argv[]);
@@ -29,7 +29,15 @@ void parseArguments(int argc, char *argv[]);
  */
 int main(int argc, char *argv[])
 {
-    yyparse();
+    auto statements = Parser::Parse();
+
+    for (auto p : statements)
+    {
+        p->DumpTree(cout, 0);
+
+        cout << endl;
+        cout << "----------------------------------" << endl;
+    }
 
     return 0;
 }

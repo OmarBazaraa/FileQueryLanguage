@@ -28,6 +28,7 @@ void yyerror(const char* s);
 //
 // Global Variables
 //
+StmtList* rootNode = NULL;
 %}
 
 // -------------------------------------------------------------
@@ -46,6 +47,7 @@ void yyerror(const char* s);
     FQL::ValueNode*                 val_ValueNode;
     FQL::ColumnNode*                val_ColumnNode;
 
+    FQL::StmtList*                  val_StmtList;
     FQL::ExprList*                  val_ExprList;
     FQL::SelectExprList*            val_SelectExprList;
     FQL::UpdateAssignList*          val_UpdateAssignList;
@@ -91,6 +93,7 @@ void yyerror(const char* s);
 %type <val_ValueNode>               value
 %type <val_ColumnNode>              column
 
+%type <val_StmtList>                stmt_list
 %type <val_ExprList>                arg_list
 %type <val_SelectExprList>          select_expr_list
 %type <val_UpdateAssignList>        update_assign_list
@@ -136,12 +139,12 @@ void yyerror(const char* s);
 // Rules Section
 // =============
 
-program:                /* epsilon */                                   { }
-    |                   stmt_list                                       { }
+program:                /* epsilon */                                   { rootNode = new StmtList(); }
+    |                   stmt_list                                       { rootNode = $1; }
     ;
 
-stmt_list:              stmt ';'                                        { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   stmt_list stmt ';'                              { $2->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $2; }
+stmt_list:              stmt ';'                                        { $$ = new StmtList(); $$->push_back($1); }
+    |                   stmt_list stmt ';'                              { $$ = $1; $$->push_back($2); }
     ;
 
 stmt:                   select_stmt

@@ -71,6 +71,8 @@ compile_client:
 			$(DirOut)/Parsers/Tree/DirectoryNode.cpp \
 			$(DirOut)/Parsers/Tree/SortRuleNode.cpp \
 			\
+			$(DirOut)/Parsers/Parser.cpp \
+			\
 			$(DirOut)/LexerSpecs.o \
 			$(DirOut)/ParserGrammar.o
 
