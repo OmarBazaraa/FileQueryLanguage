@@ -14,14 +14,14 @@ namespace FQL
         std::string value;
 
     public:
-        BadArgumentException(std::string paramemer, std::string value, std::string moreDetails)
+        BadArgumentException(const std::string &paramemer, const std::string &value, const std::string &moreDetails)
             : BaseException("Parameter '" + parameter + "' value '" + value + "'  is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
             this->value = value;
         }
 
-        BadArgumentException(std::string paramemer, std::string moreDetails)
+        BadArgumentException(const std::string &paramemer, const std::string &moreDetails)
             : BaseException("Parameter " + parameter + " value is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
@@ -38,5 +38,4 @@ namespace FQL
         }
     };
 }
-
 #endif

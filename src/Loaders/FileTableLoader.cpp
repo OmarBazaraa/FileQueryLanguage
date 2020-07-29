@@ -6,25 +6,25 @@ namespace fs = std::filesystem;
 
 using namespace FQL;
 
-FileTable *FileTableLoader::Load(const std::string &dir)
+Table *FileTableLoader::Load(const std::string &dir)
 {
     // Create table.
-    auto schema = std::map<std::string, FileTableColumn*>();
+    auto schema = std::map<std::string, TableColumn*>();
 
-    schema[BASE_NAME] = new FileTableColumn(BASE_NAME, TYPE_STRING);
-    schema[EXTENSION] = new FileTableColumn(EXTENSION, TYPE_STRING);
-    schema[NAME] = new FileTableColumn(NAME, TYPE_STRING);
-    schema[SIZE] = new FileTableColumn(SIZE, TYPE_INT);
-    schema[LAST_MODIFIED] = new FileTableColumn(LAST_MODIFIED, TYPE_STRING);
+    schema[BASE_NAME] = new TableColumn(BASE_NAME, TYPE_STRING);
+    schema[EXTENSION] = new TableColumn(EXTENSION, TYPE_STRING);
+    schema[NAME] = new TableColumn(NAME, TYPE_STRING);
+    schema[SIZE] = new TableColumn(SIZE, TYPE_INT);
+    schema[LAST_MODIFIED] = new TableColumn(LAST_MODIFIED, TYPE_STRING);
 
-    auto table = new FileTable(schema, {NAME});
+    auto table = new Table(schema, {NAME});
 
     // Fill table rows.
-    auto rows = std::vector<FileTableRow *>();
+    auto rows = std::vector<TableRow *>();
 
     for (const auto &entry : fs::directory_iterator(this->dir))
     {
-        auto row = new FileTableRow();
+        auto row = new TableRow();
 
         row->UpdateValue(BASE_NAME, entry.path().filename().string());
         row->UpdateValue(EXTENSION, entry.path().extension().string());

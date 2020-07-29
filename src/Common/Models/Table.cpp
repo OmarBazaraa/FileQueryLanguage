@@ -1,20 +1,20 @@
 #include <algorithm>
 
-#include "FileTable.h"
+#include "Table.h"
 
 using namespace FQL;
 
 struct CompareRows
 {
-    const FileTable *table;
+    const Table *table;
     const std::vector<std::pair<std::string, bool>> &columns;
 
-    CompareRows(const FileTable* table, const std::vector<std::pair<std::string, bool>> &columns)
+    CompareRows(const Table *table, const std::vector<std::pair<std::string, bool>> &columns)
         : table(table), columns(columns)
     {
     }
 
-    inline bool operator()(const FileTableRow *row1, const FileTableRow *row2)
+    inline bool operator()(const TableRow *row1, const TableRow *row2)
     {
         for (auto c : this->columns)
         {
@@ -38,17 +38,17 @@ struct CompareRows
     }
 };
 
-FileTable::FileTable(const std::map<std::string, FileTableColumn *> &schema, std::set<std::string> updatableColumns)
+Table::Table(const std::unordered_map<std::string, TableColumn *> &schema, std::set<std::string> updatableColumns)
     : schema(schema), updatableColumns(updatableColumns)
 {
 }
 
-FileTableColumn* FileTable::GetColumn(std::string key) const
+TableColumn *Table::GetColumn(std::string key) const
 {
     return schema.at(key);
 }
 
-void FileTable::AddRows(const std::vector<FileTableRow *> &rows)
+void Table::AddRows(const std::vector<TableRow *> &rows)
 {
     for (auto r : rows)
     {
@@ -56,15 +56,15 @@ void FileTable::AddRows(const std::vector<FileTableRow *> &rows)
     }
 }
 
-void FileTable::SortRows(const std::vector<std::pair<std::string, bool>> &columns)
+void Table::SortRows(const std::vector<std::pair<std::string, bool>> &columns)
 {
     std::sort(this->rows.begin(), this->rows.end(), CompareRows(this, columns));
 }
 
 template <typename Filter>
-void FileTable::FilterRows(Filter &&filter)
+void Table::FilterRows(Filter &&filter)
 {
-    std::vector<FileTableRow *>::iterator iter;
+    std::vector<TableRow *>::iterator iter;
 
     for (iter = this->rows.begin(); iter != this->rows.end();)
     {
@@ -79,7 +79,7 @@ void FileTable::FilterRows(Filter &&filter)
     }
 }
 
-void FileTable::LimitRows(const int limit)
+void Table::LimitRows(const int limit)
 {
     this->rows.resize(std::min((int)this->rows.size(), limit));
 }

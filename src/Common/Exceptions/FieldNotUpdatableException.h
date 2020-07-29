@@ -10,7 +10,7 @@ namespace FQL
     class FieldNotUpdatableException : public FieldException
     {
     public:
-        FieldNotUpdatableException(std::string field)
+        FieldNotUpdatableException(const std::string &field)
             : FieldException(field, "Field '" + field + "' cannot be updated.")
         {
         }

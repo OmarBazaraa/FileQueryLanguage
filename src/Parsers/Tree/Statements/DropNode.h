@@ -16,8 +16,6 @@ namespace FQL
         const bool dropIfExists = false;
 
     public:
-        DropNode(const char *dir, bool dropIfExists = false);
-
         DropNode(const std::string &dir, bool dropIfExists = false);
 
         virtual ~DropNode() = default;

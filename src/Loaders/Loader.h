@@ -11,13 +11,11 @@ namespace FQL
         std::string dir;
 
     public:
-        Loader(const char *dir);
-
         Loader(const std::string &dir);
 
         virtual ~Loader() = default;
 
-        virtual FileTable *Load();
+        virtual Table *Load();
     };
 }
 

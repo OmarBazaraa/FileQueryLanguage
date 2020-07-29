@@ -1,5 +1,5 @@
-#ifndef __FILE_TABLE_COLUMN_H_
-#define __FILE_TABLE_COLUMN_H_
+#ifndef __TABLE_COLUMN_H_
+#define __TABLE_COLUMN_H_
 
 #include <string>
 
@@ -7,7 +7,7 @@
 
 namespace FQL
 {
-    class FileTableColumn
+    class TableColumn
     {
     private:
         std::string name;
@@ -15,7 +15,7 @@ namespace FQL
         DataType type;
 
     public:
-        FileTableColumn(std::string name, DataType type);
+        TableColumn(const std::string &name, DataType type);
 
         std::string GetName() const;
         DataType GetType() const;

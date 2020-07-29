@@ -34,7 +34,7 @@ namespace FQL
 
         virtual ~FileTableLoader() = default;
 
-        FileTable *Load(const std::string &dir);
+        Table *Load(const std::string &dir);
     };
 }
 

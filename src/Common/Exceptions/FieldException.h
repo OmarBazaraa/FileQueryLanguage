@@ -9,18 +9,18 @@ namespace FQL
 {
     class FieldException : public BaseException
     {
-    private:
+    protected:
         std::string value;
         std::string field;
 
     public:
-        FieldException(std::string field, std::string message)
+        FieldException(const std::string &field, const std::string &message)
             : BaseException(message)
         {
             this->field = field;
         }
 
-        FieldException(std::string field, std::string value, std::string message)
+        FieldException(const std::string &field, const std::string &value, const std::string &message)
             : BaseException(message)
         {
             this->field = field;

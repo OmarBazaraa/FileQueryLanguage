@@ -7,11 +7,6 @@ using namespace FQL;
 
 namespace fs = std::filesystem;
 
-CreateNode::CreateNode(const char *dir, bool createIfNotExists)
-    : CreateNode(std::string(dir), createIfNotExists)
-{
-}
-
 CreateNode::CreateNode(const std::string &dir, bool createIfNotExists)
     : dir(dir), createIfNotExists(createIfNotExists)
 {

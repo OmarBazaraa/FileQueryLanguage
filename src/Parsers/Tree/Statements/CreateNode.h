@@ -16,8 +16,6 @@ namespace FQL
         const bool createIfNotExists = false;
 
     public:
-        CreateNode(const char *dir, bool createIfNotExists = false);
-
         CreateNode(const std::string &dir, bool createIfNotExists = false);
 
         virtual ~CreateNode() = default;

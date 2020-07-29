@@ -10,7 +10,6 @@
 #include "Statements/StatementNode.h"
 #include "Statements/SelectNode.h"
 #include "Statements/CreateNode.h"
-#include "Statements/UpdateNode.h"
 #include "Statements/DropNode.h"
 
 #include "Clauses/ClauseNode.h"

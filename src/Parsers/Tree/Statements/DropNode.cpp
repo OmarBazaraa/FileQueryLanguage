@@ -7,11 +7,6 @@ using namespace FQL;
 
 namespace fs = std::filesystem;
 
-DropNode::DropNode(const char *dir, bool dropIfExists)
-    : DropNode(std::string(dir), dropIfExists)
-{
-}
-
 DropNode::DropNode(const std::string &dir, bool dropIfExists)
     : dir(dir), dropIfExists(dropIfExists)
 {

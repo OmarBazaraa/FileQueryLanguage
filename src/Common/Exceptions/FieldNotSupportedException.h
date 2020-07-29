@@ -10,7 +10,7 @@ namespace FQL
     class FieldNotSupportedException : public FieldException
     {
     public:
-        FieldNotSupportedException(std::string field)
+        FieldNotSupportedException(const std::string &field)
             : FieldException(field, "Field '" + field + "' is not supported.")
         {
         }

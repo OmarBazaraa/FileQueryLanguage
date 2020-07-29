@@ -46,9 +46,9 @@ compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
 			$(DirOut)/Client/Main.cpp \
 			\
-			$(DirOut)/Common/Models/FileTable.cpp \
-			$(DirOut)/Common/Models/FileTableColumn.cpp \
-			$(DirOut)/Common/Models/FileTableRow.cpp \
+			$(DirOut)/Common/Models/Table.cpp \
+			$(DirOut)/Common/Models/TableColumn.cpp \
+			$(DirOut)/Common/Models/TableRow.cpp \
 			\
 			$(DirOut)/Parsers/Tree/Clauses/GroupByNode.cpp \
 			$(DirOut)/Parsers/Tree/Clauses/HavingNode.cpp \
@@ -65,7 +65,6 @@ compile_client:
 			$(DirOut)/Parsers/Tree/Statements/CreateNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/DropNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/SelectNode.cpp \
-			$(DirOut)/Parsers/Tree/Statements/UpdateNode.cpp \
 			\
 			$(DirOut)/Parsers/Tree/DirectoryNode.cpp \
 			$(DirOut)/Parsers/Tree/SortRuleNode.cpp \
