@@ -14,6 +14,21 @@ DirectoryNode::DirectoryNode(const std::string &dir, const std::string &alias, b
     this->alias = alias;
 }
 
+bool DirectoryNode::IsRecursive() const
+{
+    return this->recursive;
+}
+
+const std::string &DirectoryNode::GetDirectory() const
+{
+    return this->directory;
+}
+
+const std::string &DirectoryNode::GetAlias() const
+{
+    return this->alias;
+}
+
 void DirectoryNode::DumpTree(std::ostream &out, int indent) const
 {
     out << std::string(indent, ' ');

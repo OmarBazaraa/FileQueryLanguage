@@ -140,16 +140,16 @@ program:                /* epsilon */                                   { }
     |                   stmt_list                                       { }
     ;
 
-stmt_list:              stmt ';'
-    |                   stmt_list stmt ';'
+stmt_list:              stmt ';'                                        { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
+    |                   stmt_list stmt ';'                              { $2->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $2; }
     ;
 
-stmt:                   select_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   create_stmt                                     {  }
-    |                   update_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   insert_stmt                                     {  }
-    |                   delete_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
-    |                   drop_stmt                                       {  }
+stmt:                   select_stmt
+    |                   create_stmt
+    |                   update_stmt
+    |                   insert_stmt
+    |                   delete_stmt
+    |                   drop_stmt
     ;
 
 // -------------------------------------------------------------
@@ -252,7 +252,7 @@ opt_limit:              /* epsilon */                                   { $$ = N
 
 // TODO - support copying.
 
-create_stmt:            CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
+create_stmt:            CREATE DIRECTORY opt_if_not_exists dir_ref      { $$ = new CreateNode($4, $3); }
     ;
 
 opt_if_not_exists:      /* epsilon */                                   { $$ = false; }
@@ -302,7 +302,7 @@ delete_stmt:            DELETE
 // DROP Statement Rules
 //
 
-drop_stmt:              DROP DIRECTORY opt_if_exists dir_ref            {  }
+drop_stmt:              DROP DIRECTORY opt_if_exists dir_ref            { $$ = new DropNode($4, $3); }
     ;
 
 opt_if_exists:          /* epsilon */                                   { $$ = false; }

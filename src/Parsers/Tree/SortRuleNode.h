@@ -10,14 +10,16 @@ namespace FQL
     {
     protected:
         SortDirection dir = SORT_ASC;
-        ExpressionNode *expr;
+        ExpressionNode *expr = NULL;
 
     public:
-        SortRuleNode(ExpressionNode *expr);
-
-        SortRuleNode(ExpressionNode *expr, SortDirection dir);
+        SortRuleNode(ExpressionNode *expr, SortDirection dir = SORT_ASC);
 
         virtual ~SortRuleNode();
+        
+        virtual SortDirection GetDirection() const;
+
+        virtual const ExpressionNode *GetExpression() const;
 
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };

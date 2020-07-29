@@ -9,7 +9,7 @@ namespace FQL
     class WhereNode : public ClauseNode
     {
     protected:
-        ExpressionNode *cond;
+        ExpressionNode *cond = NULL;
 
     public:
         WhereNode(ExpressionNode *cond);

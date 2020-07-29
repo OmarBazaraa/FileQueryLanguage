@@ -34,13 +34,13 @@ copy:
 	powershell cp $(DirSrc) $(DirOut) -Force -Recurse
 
 gen:
-	$(Lex) -o $(DirOut)/Parsers/Rules/Lexer.cpp $(DirSrc)/Parsers/Rules/Lexer.l
-	$(Yacc) -d -o $(DirOut)/Parsers/Rules/Parser.cpp $(DirSrc)/Parsers/Rules/Parser.y
+	$(Lex) -o $(DirOut)/Parsers/Rules/LexerSpecs.cpp $(DirSrc)/Parsers/Rules/LexerSpecs.l
+	$(Yacc) -d -o $(DirOut)/Parsers/Rules/ParserGrammar.cpp $(DirSrc)/Parsers/Rules/ParserGrammar.y
 
 compile_parser:
 	@make -s gen
-	g++ -c $(DirOut)/Parsers/Rules/Lexer.cpp -o $(DirOut)/Lexer.o
-	g++ -c $(DirOut)/Parsers/Rules/Parser.cpp -o $(DirOut)/Parser.o
+	g++ -c $(DirOut)/Parsers/Rules/LexerSpecs.cpp -o $(DirOut)/LexerSpecs.o
+	g++ -c $(DirOut)/Parsers/Rules/ParserGrammar.cpp -o $(DirOut)/ParserGrammar.o
 
 compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
@@ -71,8 +71,8 @@ compile_client:
 			$(DirOut)/Parsers/Tree/DirectoryNode.cpp \
 			$(DirOut)/Parsers/Tree/SortRuleNode.cpp \
 			\
-			$(DirOut)/Lexer.o \
-			$(DirOut)/Parser.o
+			$(DirOut)/LexerSpecs.o \
+			$(DirOut)/ParserGrammar.o
 
 compile_all:
 	@make -s compile_parser

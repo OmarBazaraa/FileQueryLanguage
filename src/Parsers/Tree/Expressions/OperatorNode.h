@@ -9,7 +9,7 @@ namespace FQL
     class OperatorNode : public ExpressionNode
     {
     protected:
-        Operator opr;
+        Operator opr = OPR_UNKNOWN;
 
     public:
         OperatorNode(Operator opr);
@@ -22,7 +22,7 @@ namespace FQL
     class UnaryOperatorNode : public OperatorNode
     {
     protected:
-        ExpressionNode *operand;
+        ExpressionNode *operand = NULL;
 
     public:
         UnaryOperatorNode(Operator opr, ExpressionNode *operand);
@@ -35,8 +35,8 @@ namespace FQL
     class BinaryOperatorNode : public OperatorNode
     {
     protected:
-        ExpressionNode *operand1;
-        ExpressionNode *operand2;
+        ExpressionNode *operand1 = NULL;
+        ExpressionNode *operand2 = NULL;
 
     public:
         BinaryOperatorNode(Operator opr, ExpressionNode *operand1, ExpressionNode *operand2);
