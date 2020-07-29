@@ -39,15 +39,20 @@ void yyerror(const char* s);
 {
     FQL::StatementNode*             val_StatementNode;
     FQL::ClauseNode*                val_ClauseNode;
+
+    FQL::ExpressionNode*            val_ExpressionNode;
+    FQL::SelectExpressionNode*      val_SelectExprNode;
+    FQL::UpdateAssignmentNode*      val_UpdateAssignNode;
+    FQL::ValueNode*                 val_ValueNode;
+    FQL::ColumnNode*                val_ColumnNode;
+
+    FQL::ExprList*                  val_ExprList;
+    FQL::SelectExprList*            val_SelectExprList;
+    FQL::UpdateAssignList*          val_UpdateAssignList;
+
     FQL::DirectoryNode*             val_DirNode;
     FQL::SortRuleList*              val_SortRuleList;
     FQL::SortDirection              val_SortDirection;
-
-    FQL::ExpressionNode*            val_ExpressionNode;
-    FQL::ExprList*                  val_ExprList;
-
-    FQL::SelectExpressionNode*      val_SelectExprNode;
-    FQL::SelectExprList*            val_SelectExprList;
 
     bool                            val_Bool;
     int                             val_Int;
@@ -78,18 +83,21 @@ void yyerror(const char* s);
 // Non-Terminal Symbol Types
 //
 
-%type <val_StatementNode>           stmt select_stmt create_stmt create_dir_stmt update_stmt insert_stmt delete_stmt drop_stmt drop_dir_stmt
+%type <val_StatementNode>           stmt select_stmt create_stmt update_stmt insert_stmt delete_stmt drop_stmt
 %type <val_ClauseNode>              opt_where opt_group_by opt_having opt_order_by opt_limit
-%type <val_SortRuleList>            order_by_list
-%type <val_SortDirection>           opt_asc_desc
 
-%type <val_ExpressionNode>          expression value column function_call
-%type <val_ExprList>                arg_list
-
+%type <val_ExpressionNode>          expression function_call
 %type <val_SelectExprNode>          select_expr
+%type <val_ValueNode>               value
+%type <val_ColumnNode>              column
+
+%type <val_ExprList>                arg_list
 %type <val_SelectExprList>          select_expr_list
+%type <val_UpdateAssignList>        update_assign_list
 
 %type <val_DirNode>                 dir_ref
+%type <val_SortDirection>           opt_asc_desc
+%type <val_SortRuleList>            order_by_list
 
 %type <val_Bool>                    opt_if_exists opt_if_not_exists
 %type <val_Int>                     select_opts;
@@ -138,9 +146,9 @@ stmt_list:              stmt ';'
 
 stmt:                   select_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
     |                   create_stmt                                     {  }
-    |                   update_stmt                                     {  }
+    |                   update_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
     |                   insert_stmt                                     {  }
-    |                   delete_stmt                                     {  }
+    |                   delete_stmt                                     { $1->DumpTree(std::cout); std::cout << std::endl << "----------------------------------------------" << endl; delete $1; }
     |                   drop_stmt                                       {  }
     ;
 
@@ -165,7 +173,7 @@ select_opts:            /* epsilon */                                   { $$ = S
 
 select_expr_list:       '*'                                             { $$ = new SelectExprList(); }
     |                   select_expr                                     { $$ = new SelectExprList(); $$->push_back($1); }
-    |                   select_expr_list ',' select_expr                { $$->push_back($3); }
+    |                   select_expr_list ',' select_expr                { $$ = $1; $$->push_back($3); }
     ;
 
 select_expr:            expression                                      { $$ = new SelectExpressionNode($1); }
@@ -224,7 +232,7 @@ opt_order_by:           /* epsilon */                                   { $$ = N
     ;
 
 order_by_list:          expression opt_asc_desc                         { $$ = new SortRuleList(); $$->push_back(new SortRuleNode($1, $2)); }
-    |                   order_by_list ',' expression opt_asc_desc       { $$->push_back(new SortRuleNode($3, $4)); }
+    |                   order_by_list ',' expression opt_asc_desc       { $$ = $1; $$->push_back(new SortRuleNode($3, $4)); }
     ;
 
 opt_asc_desc:           /* epsilon */                                   { $$ = SORT_ASC; }
@@ -242,12 +250,9 @@ opt_limit:              /* epsilon */                                   { $$ = N
 // CREATE Statement Rules
 //
 
-create_stmt:            create_dir_stmt                                 {  }
-    ;
-
 // TODO - support copying.
 
-create_dir_stmt:        CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
+create_stmt:            CREATE DIRECTORY opt_if_not_exists dir_ref      {  }
     ;
 
 opt_if_not_exists:      /* epsilon */                                   { $$ = false; }
@@ -263,11 +268,11 @@ update_stmt:            UPDATE dir_ref
                         SET update_assign_list
                         opt_where
                         opt_order_by
-                        opt_limit                                       {  }
+                        opt_limit                                       { $$ = new UpdateNode($2, *$4, { $5, $6, $7 }); delete $4; }
     ;
 
-update_assign_list:     column '=' expression                           {  }
-    |                   update_assign_list ',' column '=' expression    {  }
+update_assign_list:     column '=' expression                           { $$ = new UpdateAssignList(); $$->push_back(new UpdateAssignmentNode($1, $3)); }
+    |                   update_assign_list ',' column '=' expression    { $$ = $1; $$->push_back(new UpdateAssignmentNode($3, $5)); }
     ;
 
 // -------------------------------------------------------------
@@ -289,7 +294,7 @@ delete_stmt:            DELETE
                         FROM dir_ref
                         opt_where
                         opt_order_by
-                        opt_limit                                       {  }
+                        opt_limit                                       { $$ = new DeleteNode($3, { $4, $5, $6 }); }
     ;
 
 // -------------------------------------------------------------
@@ -297,10 +302,7 @@ delete_stmt:            DELETE
 // DROP Statement Rules
 //
 
-drop_stmt:              drop_dir_stmt                                   {  }
-    ;
-
-drop_dir_stmt:          DROP DIRECTORY opt_if_exists dir_ref            {  }
+drop_stmt:              DROP DIRECTORY opt_if_exists dir_ref            {  }
     ;
 
 opt_if_exists:          /* epsilon */                                   { $$ = false; }

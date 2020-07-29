@@ -11,9 +11,9 @@ OrderByNode::OrderByNode(std::vector<SortRuleNode *> &rules)
 
 OrderByNode::~OrderByNode()
 {
-    for (int i = 0; i < this->rules.size(); ++i)
+    for (auto p : this->rules)
     {
-        delete this->rules[i];
+        delete p;
     }
 }
 

@@ -7,4 +7,13 @@ select distinct *;
 select 5 + 7, count() as totalCount
 FROM "dir1" recursive
 WHERE extension == 'pdf'
+ORDER BY size desc, name
 limit 10 offset 100;
+
+update "dir1" recursive
+set name = name + row_num()
+where size > 50
+limit 10;
+
+delete from "dir1"
+where size < 10;

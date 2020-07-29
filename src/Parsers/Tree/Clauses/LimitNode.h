@@ -10,7 +10,7 @@ namespace FQL
     {
     protected:
         ExpressionNode *limitExpr;
-        ExpressionNode *offsetExpr;
+        ExpressionNode *offsetExpr = NULL;
 
     public:
         LimitNode(ExpressionNode *limitExpr);

@@ -10,6 +10,8 @@
 #include "Statements/StatementNode.h"
 #include "Statements/SelectNode.h"
 #include "Statements/CreateNode.h"
+#include "Statements/UpdateNode.h"
+#include "Statements/DeleteNode.h"
 #include "Statements/DropNode.h"
 
 #include "Clauses/ClauseNode.h"
@@ -31,6 +33,7 @@ namespace FQL
     typedef std::vector<StatementNode *> StmtList;
     typedef std::vector<ExpressionNode *> ExprList;
     typedef std::vector<SelectExpressionNode *> SelectExprList;
+    typedef std::vector<UpdateAssignmentNode *> UpdateAssignList;
     typedef std::vector<SortRuleNode *> SortRuleList;
 }
 
