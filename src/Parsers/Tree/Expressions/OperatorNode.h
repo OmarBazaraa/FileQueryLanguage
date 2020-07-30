@@ -19,6 +19,8 @@ namespace FQL
         Operator GetOperation() const;
     };
 
+    // =====================================================================================================
+
     class UnaryOperatorNode : public OperatorNode
     {
     protected:
@@ -31,6 +33,8 @@ namespace FQL
 
         virtual void DumpTree(std::ostream &out, int indent = 0) const;
     };
+
+    // =====================================================================================================
 
     class BinaryOperatorNode : public OperatorNode
     {

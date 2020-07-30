@@ -16,7 +16,7 @@ DropNode::DropNode(DirectoryNode *dir, bool dropIfExists)
 
 bool DropNode::Execute()
 {
-    bool exists = fs::exists(this->dir->GetDirectory());
+    bool exists = fs::exists(this->dir->GetPath());
 
     if (!exists && this->dropIfExists)
     {
@@ -25,10 +25,10 @@ bool DropNode::Execute()
 
     if (!exists && !this->dropIfExists)
     {
-        throw new DirectoryNotFoundException(this->dir->GetDirectory());
+        throw new DirectoryNotFoundException(this->dir->GetPath());
     }
 
-    return fs::remove(this->dir->GetDirectory());
+    return fs::remove(this->dir->GetPath());
 }
 
 void DropNode::DumpTree(std::ostream &out, int indent) const

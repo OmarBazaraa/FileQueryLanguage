@@ -13,6 +13,8 @@ Operator OperatorNode::GetOperation() const
     return this->opr;
 }
 
+// =====================================================================================================
+
 UnaryOperatorNode::UnaryOperatorNode(Operator opr, ExpressionNode *operand) : OperatorNode(opr)
 {
     // TODO: ensure not null expression.
@@ -37,6 +39,8 @@ void UnaryOperatorNode::DumpTree(std::ostream &out, int indent) const
     this->operand->DumpTree(out, 0);
     out << ")";
 }
+
+// =====================================================================================================
 
 BinaryOperatorNode::BinaryOperatorNode(Operator opr, ExpressionNode *operand1, ExpressionNode *operand2) : OperatorNode(opr)
 {

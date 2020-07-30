@@ -17,9 +17,17 @@ namespace FQL
 
         virtual ~ExpressionNode() = default;
 
+        virtual DataType GetDataType() const;
+
         virtual bool IsConstant() const;
 
-        virtual DataType GetDataType() const;
+        // virtual bool GetBool() const = 0;
+
+        // virtual int GetInt() const = 0;
+
+        // virtual double GetDouble() const = 0;
+
+        // virtual std::string GetString() const = 0;
     };
 }
 
