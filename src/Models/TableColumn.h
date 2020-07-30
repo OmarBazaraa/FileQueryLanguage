@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../Enums/DataTypes.h"
+#include "../Common/Enums/DataTypes.h"
 
 namespace FQL
 {

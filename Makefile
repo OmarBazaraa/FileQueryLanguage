@@ -46,9 +46,9 @@ compile_client:
 	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
 			$(DirOut)/Client/Main.cpp \
 			\
-			$(DirOut)/Common/Models/Table.cpp \
-			$(DirOut)/Common/Models/TableColumn.cpp \
-			$(DirOut)/Common/Models/TableRow.cpp \
+			$(DirOut)/Models/Table.cpp \
+			$(DirOut)/Models/TableColumn.cpp \
+			$(DirOut)/Models/TableRow.cpp \
 			\
 			$(DirOut)/Parsers/Tree/Clauses/GroupByNode.cpp \
 			$(DirOut)/Parsers/Tree/Clauses/HavingNode.cpp \
