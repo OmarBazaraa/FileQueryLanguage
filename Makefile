@@ -57,10 +57,8 @@ compile_client:
 			$(DirOut)/Parsers/Tree/Clauses/WhereNode.cpp \
 			\
 			$(DirOut)/Parsers/Tree/Expressions/ColumnNode.cpp \
-			$(DirOut)/Parsers/Tree/Expressions/ExpressionNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/FunctionNode.cpp \
 			$(DirOut)/Parsers/Tree/Expressions/OperatorNode.cpp \
-			$(DirOut)/Parsers/Tree/Expressions/ValueNode.cpp \
 			\
 			$(DirOut)/Parsers/Tree/Statements/CreateNode.cpp \
 			$(DirOut)/Parsers/Tree/Statements/DeleteNode.cpp \

@@ -7,6 +7,8 @@
 // Includes
 //
 
+#include <string.h>
+
 // Must be before "Parser.hpp".
 #include "../Tree/AST.h"
 #include "../../Common/Enums/DataTypes.h"
@@ -18,7 +20,11 @@
 //
 // Function Prototypes
 //
-void saveToken();
+void SaveBool(bool);
+void SaveInt();
+void SaveDouble();
+void SaveString();
+void SaveIdentifier();
 
 //
 // Global Variables
@@ -41,10 +47,6 @@ void saveToken();
 //
 %}
 
-NULL                                ((?i:null))
-
-BOOL                                ((?i:true)|(?i:false))
-
 DIGIT                               [0-9]
 INTEGER                             {DIGIT}+
 
@@ -52,9 +54,8 @@ FLOAT                               ({DIGIT}*\.{DIGIT}+)|({DIGIT}+\.{DIGIT}*)
 EXP                                 ([eE][-+]?{INTEGER})
 REAL                                ({INTEGER}{EXP}|{FLOAT}{EXP}?)
 
-CHAR                                \'[^'\n]\'
-SINGLE_QUOTED_STR                   \'([^'\n]|\'\')*\'
-DOUBLE_QUOTED_STR                   \"([^"\n]|\"\")*\"
+SINGLE_QUOTED_STR                   \'([^'\n])*\'
+DOUBLE_QUOTED_STR                   \"([^"\n])*\"
 STRING                              ({SINGLE_QUOTED_STR}|{DOUBLE_QUOTED_STR})
 
 LETTER                              [a-zA-Z_]
@@ -184,13 +185,13 @@ EOL                                 \n
 %{
 // Values
 %}
-<INITIAL>{NULL}                     saveToken(); return TOKEN_NULL;
-<INITIAL>{BOOL}                     saveToken(); return TOKEN_BOOL;
-<INITIAL>{INTEGER}                  saveToken(); return TOKEN_INTEGER;
-<INITIAL>{REAL}                     saveToken(); return TOKEN_DOUBLE;
-<INITIAL>{CHAR}                     saveToken(); return TOKEN_CHAR;
-<INITIAL>{STRING}                   saveToken(); return TOKEN_STRING;
-<INITIAL>{IDENTIFIER}               saveToken(); return TOKEN_IDENTIFIER;
+<INITIAL>(?i:null)                                      return TOKEN_NULL;
+<INITIAL>(?i:false)                 SaveBool(false);    return TOKEN_BOOL;
+<INITIAL>(?i:true)                  SaveBool(true);     return TOKEN_BOOL;
+<INITIAL>{INTEGER}                  SaveInt();          return TOKEN_INTEGER;
+<INITIAL>{REAL}                     SaveDouble();       return TOKEN_DOUBLE;
+<INITIAL>{STRING}                   SaveString();       return TOKEN_STRING;
+<INITIAL>{IDENTIFIER}               SaveIdentifier();   return TOKEN_IDENTIFIER;
 
 %{
 // Comments
@@ -214,10 +215,29 @@ EOL                                 \n
 // User Subroutines Section
 // ========================
 
-/**
- * Saves the currently identified token for the parser in `yylval`.
- */
-void saveToken() {
+void SaveBool(bool value)
+{
+    yylval.val_Bool = value;
+}
+
+void SaveInt()
+{
+    yylval.val_Int = std::stoi(yytext);
+}
+
+void SaveDouble()
+{
+    yylval.val_Double = std::stod(yytext);
+}
+
+void SaveString()
+{
+    yylval.val_String = strdup(yytext + 1);
+    yylval.val_String[yyleng - 2] = 0;
+}
+
+void SaveIdentifier()
+{
     yylval.val_String = strdup(yytext);
 }
 
@@ -232,6 +252,7 @@ void saveToken() {
  * that there is more input, it needs first to adjust `yyin` to point to a new file, probably
  * using `fopen()`.
  */
-int yywrap() {
+int yywrap()
+{
     return 1;
 }

@@ -22,10 +22,14 @@
 #include "Clauses/LimitNode.h"
 
 #include "Expressions/ExpressionNode.h"
-#include "Expressions/ValueNode.h"
-#include "Expressions/ColumnNode.h"
-#include "Expressions/OperatorNode.h"
 #include "Expressions/FunctionNode.h"
+#include "Expressions/OperatorNode.h"
+#include "Expressions/ColumnNode.h"
+#include "Expressions/Values/ValueNode.h"
+#include "Expressions/Values/BoolNode.h"
+#include "Expressions/Values/IntNode.h"
+#include "Expressions/Values/DoubleNode.h"
+#include "Expressions/Values/StringNode.h"
 
 namespace FQL
 {
