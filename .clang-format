@@ -1,0 +1,120 @@
+#
+# Formatting Styles
+#
+# For more info: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+# TODO:
+# =====
+# 1. Add `while` in new line in `do-while` statement.
+# 2. Allow constructor initializer in the same line.
+# 3. Add trailing comma in containers that were wrapped over multiple lines.
+
+Language: Cpp
+Standard: Cpp11
+
+#
+# Indentation
+#
+
+ColumnLimit: 0
+
+TabWidth: 4
+IndentWidth: 4
+NamespaceIndentation: All
+ConstructorInitializerIndentWidth: 4
+AccessModifierOffset: -4
+IndentCaseLabels: true
+
+#
+# Lines & Breaks
+#
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+CompactNamespaces: false
+AllowShortBlocksOnASingleLine: true
+AllowShortFunctionsOnASingleLine: None
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllArgumentsOnNextLine: true
+AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortCaseLabelsOnASingleLine: true
+AllowAllConstructorInitializersOnNextLine: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterNamespace: true
+  AfterClass: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterControlStatement: true
+  AfterCaseLabel: true
+  AfterExternBlock: true
+  BeforeElse: true
+  BeforeCatch: true
+  SplitEmptyFunction: true
+  SplitEmptyNamespace: true
+
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakBeforeMultilineStrings: false
+
+#
+# Spaces
+#
+
+SpaceAfterTemplateKeyword: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpacesInParentheses: false
+SpaceInEmptyParentheses: false
+SpacesInCStyleCastParentheses: false
+SpacesInAngles: false
+SpacesInSquareBrackets: false
+SpaceAfterLogicalNot: false
+SpacesBeforeTrailingComments: 1
+
+#
+# Alignment
+#
+
+AlignConsecutiveMacros: true
+AlignConsecutiveDeclarations: false
+AlignConsecutiveAssignments: false
+AlignAfterOpenBracket: Align
+AlignOperands: true
+AlignTrailingComments: true
+PointerAlignment: Left
+BinPackArguments: false
+BinPackParameters: false
+
+#
+# Includes
+#
+
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<[a-z_]+>'
+    Priority: 1
+  - Regex: '^<[a-z_]+.h>'
+    Priority: 2
+  - Regex: '^["<][a-z_]+/'
+    Priority: 100
+
+#
+# Others
+#
+
+FixNamespaceComments: false
