@@ -1,23 +1,20 @@
-#ifndef __HAVING_NODE_H_
-#define __HAVING_NODE_H_
+#pragma once
 
-#include "ClauseNode.h"
-#include "../Expressions/ExpressionNode.h"
+#include <Parsers/Tree/Clauses/ClauseNode.h>
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {
     class HavingNode : public ClauseNode
     {
     protected:
-        ExpressionNode *cond = NULL;
+        ExpressionNode* cond = NULL;
 
     public:
-        HavingNode(ExpressionNode *cond);
+        HavingNode(ExpressionNode* cond);
 
         virtual ~HavingNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

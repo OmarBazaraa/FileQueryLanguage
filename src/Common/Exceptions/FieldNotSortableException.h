@@ -1,20 +1,15 @@
-#ifndef __FIELD_NOT_SORTABLE_EXCEPTION_H_
-#define __FIELD_NOT_SORTABLE_EXCEPTION_H_
+#pragma once
 
-#include <string>
-
-#include "FieldException.h"
+#include <Common/Exceptions/FieldException.h>
 
 namespace FQL
 {
     class FieldNotSortableException : public FieldException
     {
     public:
-        FieldNotSortableException(const std::string &field)
+        FieldNotSortableException(const std::string& field)
             : FieldException(field, "Field '" + field + "' is not sortable.")
         {
         }
     };
 }
-
-#endif

@@ -1,8 +1,10 @@
 #include "TableColumn.h"
 
+#include <Models/TableColumn.h>
+
 using namespace FQL;
 
-TableColumn::TableColumn(const std::string &name, DataType type)
+TableColumn::TableColumn(const std::string& name, DataType type)
     : name(name), type(type)
 {
 }

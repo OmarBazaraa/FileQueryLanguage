@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
+
 #include <string.h>
 
-#include "../Parsers/Parser.h"
+#include <Parsers/Parser.h>
 
 using namespace std;
 using namespace FQL;
@@ -10,16 +11,16 @@ using namespace FQL;
 //
 // Compiler Definitions
 //
-#define LANG_NAME       "File Explorer"
-#define VERSION         "0.1.0"
-#define VERSION_DATE    "July 29, 2020"
+#define LANG_NAME    "File Explorer"
+#define VERSION      "0.1.0"
+#define VERSION_DATE "July 29, 2020"
 
 //
 // Functions prototypes
 //
 void printHelp();
 void printVersion();
-void parseArguments(int argc, char *argv[]);
+void parseArguments(int argc, char* argv[]);
 
 /**
  * Main driver program.
@@ -27,7 +28,7 @@ void parseArguments(int argc, char *argv[]);
  * @param argc the number of arguments sent to the program.
  * @param argv the arguments them self as sent to the program.
  */
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     auto statements = Parser::Parse();
 
@@ -72,7 +73,7 @@ void printVersion()
  * @param argc the number of arguments sent to the program.
  * @param argv the arguments them self as sent to the program.
  */
-void parseArguments(int argc, char *argv[])
+void parseArguments(int argc, char* argv[])
 {
     // Iterate over all sent arguments.
     while (++argv, --argc)

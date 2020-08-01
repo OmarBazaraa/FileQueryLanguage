@@ -1,9 +1,8 @@
-#ifndef __COLUMN_NODE_H_
-#define __COLUMN_NODE_H_
+#pragma once
 
 #include <string>
 
-#include "ExpressionNode.h"
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {
@@ -14,14 +13,12 @@ namespace FQL
         std::string tableName;
 
     public:
-        ColumnNode(const std::string &colName);
+        ColumnNode(const std::string& colName);
 
-        ColumnNode(const std::string &tableName, const std::string &colName);
+        ColumnNode(const std::string& tableName, const std::string& colName);
 
         virtual ~ColumnNode() = default;
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

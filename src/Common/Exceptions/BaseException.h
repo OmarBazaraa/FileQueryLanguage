@@ -1,5 +1,4 @@
-#ifndef __BASE_EXCEPTION_H_
-#define __BASE_EXCEPTION_H_
+#pragma once
 
 #include <string>
 
@@ -11,16 +10,14 @@ namespace FQL
         std::string message;
 
     public:
-        BaseException(const std::string &message)
+        BaseException(const std::string& message)
         {
             this->message = message;
         }
 
-        const std::string &GetMessage() const
+        const std::string& GetMessage() const
         {
             return this->message;
         }
     };
 }
-
-#endif

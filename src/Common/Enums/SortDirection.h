@@ -1,5 +1,4 @@
-#ifndef __SORT_DIRECTION_H_
-#define __SORT_DIRECTION_H_
+#pragma once
 
 namespace FQL
 {
@@ -12,5 +11,3 @@ namespace FQL
         SORT_DESC = 1,
     };
 }
-
-#endif

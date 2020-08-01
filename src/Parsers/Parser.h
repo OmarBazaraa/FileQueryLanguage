@@ -1,21 +1,18 @@
-#ifndef __PARSER_H_
-#define __PARSER_H_
+#pragma once
 
 #include <vector>
 
-#include "Tree/Statements/StatementNode.h"
+#include <Parsers/AST.h>
 
 extern int yyparse();
 
-extern std::vector<FQL::StatementNode *> *rootNode;
+extern std::vector<FQL::StatementNode*>* rootNode;
 
 namespace FQL
 {
     struct Parser
     {
         // TODO: pass files and/or streams to parse from.
-        static std::vector<StatementNode *> Parse();
+        static std::vector<StatementNode*> Parse();
     };
 }
-
-#endif

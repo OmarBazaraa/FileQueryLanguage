@@ -1,9 +1,6 @@
-#ifndef __DIRECTORY_EXCEPTION_H_
-#define __DIRECTORY_EXCEPTION_H_
+#pragma once
 
-#include <string>
-
-#include "BaseException.h"
+#include <Common/Exceptions/BaseException.h>
 
 namespace FQL
 {
@@ -13,17 +10,15 @@ namespace FQL
         std::string path;
 
     public:
-        DirectoryException(const std::string &path, const std::string &message)
+        DirectoryException(const std::string& path, const std::string& message)
             : BaseException(message)
         {
             this->path = path;
         }
 
-        const std::string &GetPath() const
+        const std::string& GetPath() const
         {
             return this->path;
         }
     };
 }
-
-#endif

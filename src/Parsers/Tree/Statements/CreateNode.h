@@ -1,10 +1,9 @@
-#ifndef __CREATE_NODE_H_
-#define __CREATE_NODE_H_
+#pragma once
 
 #include <string>
 
-#include "StatementNode.h"
-#include "../DirectoryNode.h"
+#include <Parsers/Tree/DirectoryNode.h>
+#include <Parsers/Tree/Statements/StatementNode.h>
 
 namespace FQL
 {
@@ -12,17 +11,15 @@ namespace FQL
     {
     protected:
         bool createIfNotExists = false;
-        DirectoryNode *dir = NULL;
+        DirectoryNode* dir = NULL;
 
     public:
-        CreateNode(DirectoryNode *dir, bool createIfNotExists = false);
+        CreateNode(DirectoryNode* dir, bool createIfNotExists = false);
 
         virtual ~CreateNode() = default;
 
         virtual bool Execute();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

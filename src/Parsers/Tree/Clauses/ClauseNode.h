@@ -1,7 +1,6 @@
-#ifndef __CLAUSE_NODE_H_
-#define __CLAUSE_NODE_H_
+#pragma once
 
-#include "../BaseNode.h"
+#include <Parsers/Tree/BaseNode.h>
 
 namespace FQL
 {
@@ -13,5 +12,3 @@ namespace FQL
         virtual ~ClauseNode() = default;
     };
 }
-
-#endif

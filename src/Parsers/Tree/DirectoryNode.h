@@ -1,9 +1,8 @@
-#ifndef __DIRECTORY_REFERENCE_H_
-#define __DIRECTORY_REFERENCE_H_
+#pragma once
 
 #include <string>
 
-#include "BaseNode.h"
+#include <Parsers/Tree/BaseNode.h>
 
 namespace FQL
 {
@@ -11,24 +10,22 @@ namespace FQL
     {
     protected:
         bool recursive = false;
-        std::string directory;
+        std::string path;
         std::string alias;
 
     public:
-        DirectoryNode(const std::string &dir, bool recursive = false);
+        DirectoryNode(const std::string& path, bool recursive = false);
 
-        DirectoryNode(const std::string &dir, const std::string &alias, bool recursive = false);
+        DirectoryNode(const std::string& path, const std::string& alias, bool recursive = false);
 
         virtual ~DirectoryNode() = default;
 
         virtual bool IsRecursive() const;
 
-        virtual const std::string &GetDirectory() const;
-        
-        virtual const std::string &GetAlias() const;
+        virtual const std::string& GetPath() const;
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual const std::string& GetAlias() const;
+
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

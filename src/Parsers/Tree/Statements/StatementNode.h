@@ -1,7 +1,6 @@
-#ifndef __STATEMENT_NODE_H_
-#define __STATEMENT_NODE_H_
+#pragma once
 
-#include "../BaseNode.h"
+#include <Parsers/Tree/BaseNode.h>
 
 namespace FQL
 {
@@ -15,5 +14,3 @@ namespace FQL
         virtual bool Execute() = 0;
     };
 }
-
-#endif

@@ -1,10 +1,9 @@
-#ifndef __FUNCTION_NODE_H_
-#define __FUNCTION_NODE_H_
+#pragma once
 
 #include <string>
 #include <vector>
 
-#include "ExpressionNode.h"
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {
@@ -12,17 +11,15 @@ namespace FQL
     {
     protected:
         std::string name;
-        std::vector<ExpressionNode *> args;
+        std::vector<ExpressionNode*> args;
 
     public:
-        FunctionNode(const std::string &name);
+        FunctionNode(const std::string& name);
 
-        FunctionNode(const std::string &name, const std::vector<ExpressionNode *> &args);
+        FunctionNode(const std::string& name, const std::vector<ExpressionNode*>& args);
 
         virtual ~FunctionNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

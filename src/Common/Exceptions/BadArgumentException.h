@@ -1,9 +1,8 @@
-#ifndef __BAD_ARGUMENT_EXCEPTION_H_
-#define __BAD_ARGUMENT_EXCEPTION_H_
+#pragma once
 
 #include <string>
 
-#include "BaseException.h"
+#include <Common/Exceptions/BaseException.h>
 
 namespace FQL
 {
@@ -14,28 +13,27 @@ namespace FQL
         std::string value;
 
     public:
-        BadArgumentException(const std::string &parameter, const std::string &value, const std::string &moreDetails)
+        BadArgumentException(const std::string& parameter, const std::string& value, const std::string& moreDetails)
             : BaseException("Parameter '" + parameter + "' value '" + value + "'  is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
             this->value = value;
         }
 
-        BadArgumentException(const std::string &parameter, const std::string &moreDetails)
+        BadArgumentException(const std::string& parameter, const std::string& moreDetails)
             : BaseException("Parameter " + parameter + " value is invalid. " + moreDetails + ".")
         {
             this->parameter = parameter;
         }
 
-        const std::string &GetParameter() const
+        const std::string& GetParameter() const
         {
             return this->parameter;
         }
 
-        const std::string &GetValue() const
+        const std::string& GetValue() const
         {
             return this->value;
         }
     };
 }
-#endif

@@ -1,13 +1,13 @@
 #include <filesystem>
 
-#include "DropNode.h"
-#include "../../../Common/Exceptions/DirectoryNotFoundException.h"
+#include <Common/Exceptions.h>
+#include <Parsers/Tree/Statements/DropNode.h>
 
 using namespace FQL;
 
 namespace fs = std::filesystem;
 
-DropNode::DropNode(DirectoryNode *dir, bool dropIfExists)
+DropNode::DropNode(DirectoryNode* dir, bool dropIfExists)
 {
     // TODO: ensure not null dir.
     this->dir = dir;
@@ -16,7 +16,7 @@ DropNode::DropNode(DirectoryNode *dir, bool dropIfExists)
 
 bool DropNode::Execute()
 {
-    bool exists = fs::exists(this->dir->GetDirectory());
+    bool exists = fs::exists(this->dir->GetPath());
 
     if (!exists && this->dropIfExists)
     {
@@ -25,13 +25,13 @@ bool DropNode::Execute()
 
     if (!exists && !this->dropIfExists)
     {
-        throw new DirectoryNotFoundException(this->dir->GetDirectory());
+        throw new DirectoryNotFoundException(this->dir->GetPath());
     }
 
-    return fs::remove(this->dir->GetDirectory());
+    return fs::remove(this->dir->GetPath());
 }
 
-void DropNode::DumpTree(std::ostream &out, int indent) const
+void DropNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     out << "DROP DIRECTORY " << (this->dropIfExists ? "IF EXISTS " : "");

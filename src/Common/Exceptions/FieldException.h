@@ -1,9 +1,6 @@
-#ifndef __FIELD_EXCEPTION_H_
-#define __FIELD_EXCEPTION_H_
+#pragma once
 
-#include <string>
-
-#include "BaseException.h"
+#include <Common/Exceptions/BaseException.h>
 
 namespace FQL
 {
@@ -14,29 +11,27 @@ namespace FQL
         std::string field;
 
     public:
-        FieldException(const std::string &field, const std::string &message)
+        FieldException(const std::string& field, const std::string& message)
             : BaseException(message)
         {
             this->field = field;
         }
 
-        FieldException(const std::string &field, const std::string &value, const std::string &message)
+        FieldException(const std::string& field, const std::string& value, const std::string& message)
             : BaseException(message)
         {
             this->field = field;
             this->value = value;
         }
 
-        const std::string &GetField() const
+        const std::string& GetField() const
         {
             return this->field;
         }
 
-        const std::string &GetValue() const
+        const std::string& GetValue() const
         {
             return this->value;
         }
     };
 }
-
-#endif

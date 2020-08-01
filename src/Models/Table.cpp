@@ -1,20 +1,20 @@
 #include <algorithm>
 
-#include "Table.h"
+#include <Models/Table.h>
 
 using namespace FQL;
 
 struct CompareRows
 {
-    const Table *table;
-    const std::vector<std::pair<std::string, bool>> &columns;
+    const Table* table;
+    const std::vector<std::pair<std::string, bool>>& columns;
 
-    CompareRows(const Table *table, const std::vector<std::pair<std::string, bool>> &columns)
+    CompareRows(const Table* table, const std::vector<std::pair<std::string, bool>>& columns)
         : table(table), columns(columns)
     {
     }
 
-    inline bool operator()(const TableRow *row1, const TableRow *row2)
+    inline bool operator()(const TableRow* row1, const TableRow* row2)
     {
         for (auto c : this->columns)
         {
@@ -38,17 +38,17 @@ struct CompareRows
     }
 };
 
-Table::Table(const std::unordered_map<std::string, TableColumn *> &schema, std::set<std::string> updatableColumns)
+Table::Table(const std::unordered_map<std::string, TableColumn*>& schema, std::set<std::string> updatableColumns)
     : schema(schema), updatableColumns(updatableColumns)
 {
 }
 
-TableColumn *Table::GetColumn(std::string key) const
+TableColumn* Table::GetColumn(std::string key) const
 {
     return schema.at(key);
 }
 
-void Table::AddRows(const std::vector<TableRow *> &rows)
+void Table::AddRows(const std::vector<TableRow*>& rows)
 {
     for (auto r : rows)
     {
@@ -56,15 +56,15 @@ void Table::AddRows(const std::vector<TableRow *> &rows)
     }
 }
 
-void Table::SortRows(const std::vector<std::pair<std::string, bool>> &columns)
+void Table::SortRows(const std::vector<std::pair<std::string, bool>>& columns)
 {
     std::sort(this->rows.begin(), this->rows.end(), CompareRows(this, columns));
 }
 
 template <typename Filter>
-void Table::FilterRows(Filter &&filter)
+void Table::FilterRows(Filter&& filter)
 {
-    std::vector<TableRow *>::iterator iter;
+    std::vector<TableRow*>::iterator iter;
 
     for (iter = this->rows.begin(); iter != this->rows.end();)
     {

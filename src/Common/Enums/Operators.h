@@ -1,5 +1,4 @@
-#ifndef __OPERATORS_H_
-#define __OPERATORS_H_
+#pragma once
 
 namespace FQL
 {
@@ -41,5 +40,3 @@ namespace FQL
         OPR_UNKNOWN
     };
 }
-
-#endif

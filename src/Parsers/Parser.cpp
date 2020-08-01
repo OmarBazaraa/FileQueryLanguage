@@ -1,8 +1,8 @@
-#include "Parser.h"
+#include <Parsers/Parser.h>
 
 using namespace FQL;
 
-std::vector<StatementNode *> Parser::Parse()
+std::vector<StatementNode*> Parser::Parse()
 {
     yyparse();
 

@@ -10,10 +10,8 @@
 #include <string>
 #include <vector>
 
-#include "../Tree/AST.h"
-#include "../../Common/Enums/DataTypes.h"
-#include "../../Common/Enums/Operators.h"
-#include "../../Common/Enums/SortDirection.h"
+#include <Common/Enums.h>
+#include <Parsers/AST.h>
 
 using namespace std;
 using namespace FQL;
@@ -58,6 +56,7 @@ StmtList* rootNode = NULL;
 
     bool                            val_Bool;
     int                             val_Int;
+    double                          val_Double;
     char*                           val_String;
 }
 
@@ -78,7 +77,11 @@ StmtList* rootNode = NULL;
 %token SHL SHR AND OR NOT IS EQ NE GE LE
 
 // Values
-%token <val_String> TOKEN_NULL TOKEN_BOOL TOKEN_INTEGER TOKEN_DOUBLE TOKEN_CHAR TOKEN_STRING TOKEN_IDENTIFIER
+%token              TOKEN_NULL
+%token <val_Bool>   TOKEN_BOOL
+%token <val_Int>    TOKEN_INTEGER
+%token <val_Double> TOKEN_DOUBLE
+%token <val_String> TOKEN_STRING TOKEN_IDENTIFIER
 
 // -------------------------------------------------------------
 //
@@ -376,12 +379,10 @@ arg_list:               expression                                      { $$ = n
 // Other Rules
 //
 
-value:                  TOKEN_NULL                                      { $$ = new ValueNode(TYPE_NULL, $1); delete $1; }
-    |                   TOKEN_BOOL                                      { $$ = new ValueNode(TYPE_BOOL, $1); delete $1; }
-    |                   TOKEN_INTEGER                                   { $$ = new ValueNode(TYPE_INT, $1); delete $1; }
-    |                   TOKEN_DOUBLE                                    { $$ = new ValueNode(TYPE_DOUBLE, $1); delete $1; }
-    |                   TOKEN_CHAR                                      { $$ = new ValueNode(TYPE_CHAR, $1); delete $1; }
-    |                   TOKEN_STRING                                    { $$ = new ValueNode(TYPE_STRING, $1); delete $1; }
+value:                  TOKEN_BOOL                                      { $$ = new BoolNode($1); }
+    |                   TOKEN_INTEGER                                   { $$ = new IntNode($1); }
+    |                   TOKEN_DOUBLE                                    { $$ = new DoubleNode($1); }
+    |                   TOKEN_STRING                                    { $$ = new StringNode($1); delete $1; }
     ;
 
 column:                 TOKEN_IDENTIFIER                                { $$ = new ColumnNode($1); delete $1; }

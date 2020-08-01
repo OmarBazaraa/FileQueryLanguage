@@ -1,5 +1,4 @@
-#ifndef __Node_H_
-#define __Node_H_
+#pragma once
 
 #include <iostream>
 
@@ -12,8 +11,6 @@ namespace FQL
 
         virtual ~BaseNode() = default;
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const = 0;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const = 0;
     };
 }
-
-#endif

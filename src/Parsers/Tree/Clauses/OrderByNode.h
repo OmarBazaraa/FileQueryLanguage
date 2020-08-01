@@ -1,25 +1,22 @@
-#ifndef __ORDER_BY_NODE_H_
-#define __ORDER_BY_NODE_H_
+#pragma once
 
 #include <vector>
 
-#include "ClauseNode.h"
-#include "../SortRuleNode.h"
+#include <Parsers/Tree/Clauses/ClauseNode.h>
+#include <Parsers/Tree/SortRuleNode.h>
 
 namespace FQL
 {
     class OrderByNode : public ClauseNode
     {
     protected:
-        std::vector<SortRuleNode *> rules;
+        std::vector<SortRuleNode*> rules;
 
     public:
-        OrderByNode(std::vector<SortRuleNode *> &rules);
+        OrderByNode(std::vector<SortRuleNode*>& rules);
 
         virtual ~OrderByNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif
