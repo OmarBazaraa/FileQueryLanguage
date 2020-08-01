@@ -1,5 +1,4 @@
-#ifndef __TABLE_COLUMN_H_
-#define __TABLE_COLUMN_H_
+#pragma once
 
 #include <string>
 
@@ -22,5 +21,3 @@ namespace FQL
         DataType GetType() const;
     };
 }
-
-#endif

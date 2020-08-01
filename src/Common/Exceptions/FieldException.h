@@ -1,7 +1,4 @@
-#ifndef __FIELD_EXCEPTION_H_
-#define __FIELD_EXCEPTION_H_
-
-#include <string>
+#pragma once
 
 #include <Common/Exceptions/BaseException.h>
 
@@ -38,5 +35,3 @@ namespace FQL
         }
     };
 }
-
-#endif

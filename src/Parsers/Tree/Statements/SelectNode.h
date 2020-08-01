@@ -1,5 +1,4 @@
-#ifndef __SELECT_NODE_H_
-#define __SELECT_NODE_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -59,5 +58,3 @@ namespace FQL
         SELECT_DISTINCT = 1
     };
 }
-
-#endif

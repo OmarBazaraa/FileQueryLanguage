@@ -1,5 +1,4 @@
-#ifndef __OPERATOR_UTILS_H_
-#define __OPERATOR_UTILS_H_
+#pragma once
 
 #include <string>
 
@@ -147,5 +146,3 @@ namespace FQL
         }
     };
 }
-
-#endif

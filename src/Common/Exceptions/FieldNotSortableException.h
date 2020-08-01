@@ -1,7 +1,4 @@
-#ifndef __FIELD_NOT_SORTABLE_EXCEPTION_H_
-#define __FIELD_NOT_SORTABLE_EXCEPTION_H_
-
-#include <string>
+#pragma once
 
 #include <Common/Exceptions/FieldException.h>
 
@@ -16,5 +13,3 @@ namespace FQL
         }
     };
 }
-
-#endif

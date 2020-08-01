@@ -1,7 +1,4 @@
-#ifndef __DIRECTORY_EXCEPTION_H_
-#define __DIRECTORY_EXCEPTION_H_
-
-#include <string>
+#pragma once
 
 #include <Common/Exceptions/BaseException.h>
 
@@ -25,5 +22,3 @@ namespace FQL
         }
     };
 }
-
-#endif

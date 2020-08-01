@@ -1,5 +1,4 @@
-#ifndef __PARSER_H_
-#define __PARSER_H_
+#pragma once
 
 #include <vector>
 
@@ -17,5 +16,3 @@ namespace FQL
         static std::vector<StatementNode*> Parse();
     };
 }
-
-#endif

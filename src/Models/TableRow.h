@@ -1,5 +1,4 @@
-#ifndef __TABLE_ROW_H_
-#define __TABLE_ROW_H_
+#pragma once
 
 #include <map>
 #include <string>
@@ -23,5 +22,3 @@ namespace FQL
         void UpdateValue(const std::string& key, const std::string& value);
     };
 }
-
-#endif

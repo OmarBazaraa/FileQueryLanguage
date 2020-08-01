@@ -1,5 +1,4 @@
-#ifndef __ORDER_BY_NODE_H_
-#define __ORDER_BY_NODE_H_
+#pragma once
 
 #include <vector>
 
@@ -21,5 +20,3 @@ namespace FQL
         virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

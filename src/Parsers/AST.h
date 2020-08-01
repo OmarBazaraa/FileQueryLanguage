@@ -1,5 +1,4 @@
-#ifndef __AST_H_
-#define __AST_H_
+#pragma once
 
 #include <vector>
 
@@ -37,5 +36,3 @@ namespace FQL
     typedef std::vector<UpdateAssignmentNode*> UpdateAssignList;
     typedef std::vector<SortRuleNode*> SortRuleList;
 }
-
-#endif

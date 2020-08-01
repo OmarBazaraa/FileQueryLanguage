@@ -1,5 +1,4 @@
-#ifndef __Node_H_
-#define __Node_H_
+#pragma once
 
 #include <iostream>
 
@@ -15,5 +14,3 @@ namespace FQL
         virtual void DumpTree(std::ostream& out, int indent = 0) const = 0;
     };
 }
-
-#endif

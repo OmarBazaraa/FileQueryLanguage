@@ -1,7 +1,4 @@
-#ifndef __STRING_NODE_H_
-#define __STRING_NODE_H_
-
-#include <string>
+#pragma once
 
 #include <Parsers/Tree/Expressions/Values/ValueNode.h>
 
@@ -48,5 +45,3 @@ namespace FQL
         }
     };
 }
-
-#endif

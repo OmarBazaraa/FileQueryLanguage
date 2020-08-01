@@ -1,5 +1,4 @@
-#ifndef __LOADER_H_
-#define __LOADER_H_
+#pragma once
 
 #include <string>
 
@@ -11,12 +10,10 @@ namespace FQL
         std::string dir;
 
     public:
-        Loader(const std::string &dir);
+        Loader(const std::string& dir);
 
         virtual ~Loader() = default;
 
-        virtual Table *Load();
+        virtual Table* Load();
     };
 }
-
-#endif

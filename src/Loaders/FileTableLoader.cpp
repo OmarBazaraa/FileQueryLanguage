@@ -1,6 +1,6 @@
 #include <filesystem>
 
-#include "FileTableLoader.h"
+#include <Loaders/FileTableLoader.h>
 
 namespace fs = std::filesystem;
 

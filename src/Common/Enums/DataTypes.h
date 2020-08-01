@@ -1,5 +1,4 @@
-#ifndef __DATA_TYPES_H_
-#define __DATA_TYPES_H_
+#pragma once
 
 namespace FQL
 {
@@ -16,5 +15,3 @@ namespace FQL
         TYPE_UNKNOWN
     };
 }
-
-#endif

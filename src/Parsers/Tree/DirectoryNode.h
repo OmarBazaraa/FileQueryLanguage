@@ -1,5 +1,4 @@
-#ifndef __DIRECTORY_REFERENCE_H_
-#define __DIRECTORY_REFERENCE_H_
+#pragma once
 
 #include <string>
 
@@ -30,5 +29,3 @@ namespace FQL
         virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __BASE_EXCEPTION_H_
-#define __BASE_EXCEPTION_H_
+#pragma once
 
 #include <string>
 
@@ -22,5 +21,3 @@ namespace FQL
         }
     };
 }
-
-#endif

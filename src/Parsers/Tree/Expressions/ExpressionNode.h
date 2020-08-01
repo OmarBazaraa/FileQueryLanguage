@@ -1,5 +1,4 @@
-#ifndef __EXPRESSION_NODE_H_
-#define __EXPRESSION_NODE_H_
+#pragma once
 
 #include <Common/Enums.h>
 #include <Parsers/Tree/BaseNode.h>
@@ -30,5 +29,3 @@ namespace FQL
         // virtual std::string GetString() const = 0;
     };
 }
-
-#endif

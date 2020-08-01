@@ -1,7 +1,4 @@
-#ifndef __VALUE_NODE_H_
-#define __VALUE_NODE_H_
-
-#include <string>
+#pragma once
 
 #include <Parsers/Tree/Expressions/ExpressionNode.h>
 
@@ -18,5 +15,3 @@ namespace FQL
         virtual ~ValueNode() = default;
     };
 }
-
-#endif

@@ -1,8 +1,7 @@
-#ifndef __FILE_TABLE_LOADER_H_
-#define __FILE_TABLE_LOADER_H_
+#pragma once
 
-#include "Loader.h"
-#include "../Common/Models/FileTable.h"
+#include <Loaders/Loader.h>
+#include <Models/Table.h>
 
 namespace FQL
 {
@@ -15,27 +14,23 @@ namespace FQL
         const std::string LAST_MODIFIED = "last_modified";
         const std::string SIZE = "size";
 
-        static FileTableLoader *instance;
+        static FileTableLoader* instance;
 
-        FileTableLoader() {}
+        FileTableLoader() = default;
 
     public:
-        static FileTableLoader *GetInstance();
+        static FileTableLoader* GetInstance();
         {
             if (!instance)
             {
-                instance = new FileTableLoader;
+                instance = new FileTableLoader();
             }
 
             return instance;
         }
 
-        FileTableLoader();
-
         virtual ~FileTableLoader() = default;
 
-        Table *Load(const std::string &dir);
+        Table* Load(const std::string& dir);
     };
 }
-
-#endif

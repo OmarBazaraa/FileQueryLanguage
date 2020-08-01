@@ -1,5 +1,4 @@
-#ifndef __TABLE_H_
-#define __TABLE_H_
+#pragma once
 
 #include <set>
 #include <string>
@@ -35,5 +34,3 @@ namespace FQL
         void FilterRows(Filter&& filter);
     };
 }
-
-#endif

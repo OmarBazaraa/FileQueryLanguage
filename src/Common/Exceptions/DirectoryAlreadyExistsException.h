@@ -1,5 +1,4 @@
-#ifndef __DIRECTORY_EXISTING_EXCEPTION_H_
-#define __DIRECTORY_EXISTING_EXCEPTION_H_
+#pragma once
 
 #include <Common/Exceptions/DirectoryException.h>
 
@@ -14,5 +13,3 @@ namespace FQL
         }
     };
 }
-
-#endif

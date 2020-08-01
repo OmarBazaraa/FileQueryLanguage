@@ -1,5 +1,4 @@
-#ifndef __LIMIT_NODE_H_
-#define __LIMIT_NODE_H_
+#pragma once
 
 #include <Parsers/Tree/Clauses/ClauseNode.h>
 #include <Parsers/Tree/Expressions/ExpressionNode.h>
@@ -22,5 +21,3 @@ namespace FQL
         virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __BAD_ARGUMENT_EXCEPTION_H_
-#define __BAD_ARGUMENT_EXCEPTION_H_
+#pragma once
 
 #include <string>
 
@@ -38,4 +37,3 @@ namespace FQL
         }
     };
 }
-#endif

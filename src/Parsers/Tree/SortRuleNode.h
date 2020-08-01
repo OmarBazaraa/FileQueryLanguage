@@ -1,5 +1,4 @@
-#ifndef __SORT_RULE_NODE_H_
-#define __SORT_RULE_NODE_H_
+#pragma once
 
 #include <Common/Enums.h>
 #include <Parsers/Tree/Expressions/ExpressionNode.h>
@@ -24,5 +23,3 @@ namespace FQL
         virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
-
-#endif
