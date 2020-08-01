@@ -3,22 +3,22 @@
 
 #include <vector>
 
-#include "ClauseNode.h"
-#include "../SortRuleNode.h"
+#include <Parsers/Tree/Clauses/ClauseNode.h>
+#include <Parsers/Tree/SortRuleNode.h>
 
 namespace FQL
 {
     class GroupByNode : public ClauseNode
     {
     protected:
-        std::vector<SortRuleNode *> rules;
+        std::vector<SortRuleNode*> rules;
 
     public:
-        GroupByNode(std::vector<SortRuleNode *> &rules);
+        GroupByNode(std::vector<SortRuleNode*>& rules);
 
         virtual ~GroupByNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
 

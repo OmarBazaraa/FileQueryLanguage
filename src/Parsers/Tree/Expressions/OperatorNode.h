@@ -1,8 +1,8 @@
 #ifndef __OPERATOR_NODE_H_
 #define __OPERATOR_NODE_H_
 
-#include "ExpressionNode.h"
-#include "../../../Common/Enums/Operators.h"
+#include <Common/Enums.h>
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {
@@ -24,14 +24,14 @@ namespace FQL
     class UnaryOperatorNode : public OperatorNode
     {
     protected:
-        ExpressionNode *operand = NULL;
+        ExpressionNode* operand = NULL;
 
     public:
-        UnaryOperatorNode(Operator opr, ExpressionNode *operand);
+        UnaryOperatorNode(Operator opr, ExpressionNode* operand);
 
         virtual ~UnaryOperatorNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 
     // =====================================================================================================
@@ -39,15 +39,15 @@ namespace FQL
     class BinaryOperatorNode : public OperatorNode
     {
     protected:
-        ExpressionNode *operand1 = NULL;
-        ExpressionNode *operand2 = NULL;
+        ExpressionNode* operand1 = NULL;
+        ExpressionNode* operand2 = NULL;
 
     public:
-        BinaryOperatorNode(Operator opr, ExpressionNode *operand1, ExpressionNode *operand2);
+        BinaryOperatorNode(Operator opr, ExpressionNode* operand1, ExpressionNode* operand2);
 
         virtual ~BinaryOperatorNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
 

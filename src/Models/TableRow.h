@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include "../Common/Enums/DataTypes.h"
+#include <Common/Enums.h>
 
 namespace FQL
 {
@@ -16,11 +16,11 @@ namespace FQL
     public:
         TableRow();
 
-        TableRow(const std::map<std::string, std::string> &values);
+        TableRow(const std::map<std::string, std::string>& values);
 
-        std::string GetValue(const std::string &key) const;
+        std::string GetValue(const std::string& key) const;
 
-        void UpdateValue(const std::string &key, const std::string &value);
+        void UpdateValue(const std::string& key, const std::string& value);
     };
 }
 

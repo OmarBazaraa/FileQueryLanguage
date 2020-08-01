@@ -4,14 +4,14 @@
 #include <string>
 #include <vector>
 
-#include "StatementNode.h"
-#include "../DirectoryNode.h"
-#include "../Clauses/WhereNode.h"
-#include "../Clauses/GroupByNode.h"
-#include "../Clauses/HavingNode.h"
-#include "../Clauses/OrderByNode.h"
-#include "../Clauses/LimitNode.h"
-#include "../Expressions/ExpressionNode.h"
+#include <Parsers/Tree/Clauses/GroupByNode.h>
+#include <Parsers/Tree/Clauses/HavingNode.h>
+#include <Parsers/Tree/Clauses/LimitNode.h>
+#include <Parsers/Tree/Clauses/OrderByNode.h>
+#include <Parsers/Tree/Clauses/WhereNode.h>
+#include <Parsers/Tree/DirectoryNode.h>
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
+#include <Parsers/Tree/Statements/StatementNode.h>
 
 namespace FQL
 {
@@ -20,37 +20,37 @@ namespace FQL
     class SelectNode : public StatementNode
     {
     protected:
-        DirectoryNode *dir = NULL;
-        std::vector<SelectExpressionNode *> expressions;
-        std::vector<ClauseNode *> clauses;
+        DirectoryNode* dir = NULL;
+        std::vector<SelectExpressionNode*> expressions;
+        std::vector<ClauseNode*> clauses;
         int options = 0;
 
     public:
-        SelectNode(const std::vector<SelectExpressionNode *> &expressions, int options = 0);
+        SelectNode(const std::vector<SelectExpressionNode*>& expressions, int options = 0);
 
-        SelectNode(DirectoryNode *dir, const std::vector<SelectExpressionNode *> &expressions, const std::vector<ClauseNode *> &clauses, int options = 0);
+        SelectNode(DirectoryNode* dir, const std::vector<SelectExpressionNode*>& expressions, const std::vector<ClauseNode*>& clauses, int options = 0);
 
         virtual ~SelectNode();
 
         virtual bool Execute();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 
     class SelectExpressionNode : public BaseNode
     {
     protected:
         std::string alias;
-        ExpressionNode *expr;
+        ExpressionNode* expr;
 
     public:
-        SelectExpressionNode(ExpressionNode *expr);
+        SelectExpressionNode(ExpressionNode* expr);
 
-        SelectExpressionNode(ExpressionNode *expr, const std::string &alias);
+        SelectExpressionNode(ExpressionNode* expr, const std::string& alias);
 
         virtual ~SelectExpressionNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 
     enum SelectOptions

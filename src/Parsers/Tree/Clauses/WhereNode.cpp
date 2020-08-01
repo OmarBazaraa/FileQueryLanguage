@@ -1,8 +1,8 @@
-#include "WhereNode.h"
+#include <Parsers/Tree/Clauses/WhereNode.h>
 
 using namespace FQL;
 
-WhereNode::WhereNode(ExpressionNode *cond)
+WhereNode::WhereNode(ExpressionNode* cond)
 {
     // TODO: ensure not null condition.
     this->cond = cond;
@@ -13,7 +13,7 @@ WhereNode::~WhereNode()
     delete this->cond;
 }
 
-void WhereNode::DumpTree(std::ostream &out, int indent) const
+void WhereNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     out << "WHERE ";

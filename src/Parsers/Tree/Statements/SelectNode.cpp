@@ -1,14 +1,14 @@
-#include "SelectNode.h"
+#include <Parsers/Tree/Statements/SelectNode.h>
 
 using namespace FQL;
 
-SelectNode::SelectNode(const std::vector<SelectExpressionNode *> &expressions, int options)
+SelectNode::SelectNode(const std::vector<SelectExpressionNode*>& expressions, int options)
 {
     this->expressions = expressions;
     this->options = options;
 }
 
-SelectNode::SelectNode(DirectoryNode *dir, const std::vector<SelectExpressionNode *> &expressions, const std::vector<ClauseNode *> &clauses, int options)
+SelectNode::SelectNode(DirectoryNode* dir, const std::vector<SelectExpressionNode*>& expressions, const std::vector<ClauseNode*>& clauses, int options)
     : SelectNode(expressions, options)
 {
     this->dir = dir;
@@ -41,10 +41,10 @@ bool SelectNode::Execute()
     return true;
 }
 
-void SelectNode::DumpTree(std::ostream &out, int indent) const
+void SelectNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
-    out << "SELECT" ;
+    out << "SELECT";
     out << (this->options & SELECT_DISTINCT ? " DISTINCT" : "");
     out << (this->expressions.empty() ? " *" : "");
 
@@ -74,13 +74,13 @@ void SelectNode::DumpTree(std::ostream &out, int indent) const
 
 // =====================================================================================================
 
-SelectExpressionNode::SelectExpressionNode(ExpressionNode *expr)
+SelectExpressionNode::SelectExpressionNode(ExpressionNode* expr)
 {
     // TODO: ensure not null expression.
     this->expr = expr;
 }
 
-SelectExpressionNode::SelectExpressionNode(ExpressionNode *expr, const std::string &alias)
+SelectExpressionNode::SelectExpressionNode(ExpressionNode* expr, const std::string& alias)
     : SelectExpressionNode(expr)
 {
     this->alias = alias;
@@ -91,7 +91,7 @@ SelectExpressionNode::~SelectExpressionNode()
     delete this->expr;
 }
 
-void SelectExpressionNode::DumpTree(std::ostream &out, int indent) const
+void SelectExpressionNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     this->expr->DumpTree(out, 0);

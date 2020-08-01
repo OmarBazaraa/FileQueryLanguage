@@ -1,8 +1,8 @@
 #ifndef __EXPRESSION_NODE_H_
 #define __EXPRESSION_NODE_H_
 
-#include "../BaseNode.h"
-#include "../../../Common/Enums/DataTypes.h"
+#include <Common/Enums.h>
+#include <Parsers/Tree/BaseNode.h>
 
 namespace FQL
 {

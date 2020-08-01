@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "ValueNode.h"
+#include <Parsers/Tree/Expressions/Values/ValueNode.h>
 
 namespace FQL
 {
@@ -18,7 +18,7 @@ namespace FQL
             this->value = value;
             this->type = TYPE_INT;
         }
-        
+
         virtual bool GetBool() const
         {
             return this->value != 0;
@@ -39,7 +39,7 @@ namespace FQL
             return std::to_string(this->value);
         }
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const
+        virtual void DumpTree(std::ostream& out, int indent = 0) const
         {
             out << std::string(indent, ' ') << this->value;
         }

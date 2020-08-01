@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../ExpressionNode.h"
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {

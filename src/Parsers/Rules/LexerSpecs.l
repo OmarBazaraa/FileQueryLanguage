@@ -10,10 +10,8 @@
 #include <string.h>
 
 // Must be before "Parser.hpp".
-#include "../Tree/AST.h"
-#include "../../Common/Enums/DataTypes.h"
-#include "../../Common/Enums/Operators.h"
-#include "../../Common/Enums/SortDirection.h"
+#include <Common/Enums.h>
+#include <Parsers/AST.h>
 
 #include "ParserGrammar.hpp"
 

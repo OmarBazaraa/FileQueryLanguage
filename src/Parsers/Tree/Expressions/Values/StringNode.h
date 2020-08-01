@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "ValueNode.h"
+#include <Parsers/Tree/Expressions/Values/ValueNode.h>
 
 namespace FQL
 {
@@ -13,12 +13,12 @@ namespace FQL
         std::string value;
 
     public:
-        StringNode(const std::string &value)
+        StringNode(const std::string& value)
         {
             this->value = value;
             this->type = TYPE_STRING;
         }
-        
+
         virtual bool GetBool() const
         {
             // TODO: throw exception.
@@ -42,7 +42,7 @@ namespace FQL
             return this->value;
         }
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const
+        virtual void DumpTree(std::ostream& out, int indent = 0) const
         {
             out << std::string(indent, ' ') << "\"" << this->value << "\"";
         }

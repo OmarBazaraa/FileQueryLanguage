@@ -1,7 +1,7 @@
 #ifndef __CLAUSE_NODE_H_
 #define __CLAUSE_NODE_H_
 
-#include "../BaseNode.h"
+#include <Parsers/Tree/BaseNode.h>
 
 namespace FQL
 {

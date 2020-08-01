@@ -1,22 +1,22 @@
 #ifndef __WHERE_NODE_H_
 #define __WHERE_NODE_H_
 
-#include "ClauseNode.h"
-#include "../Expressions/ExpressionNode.h"
+#include <Parsers/Tree/Clauses/ClauseNode.h>
+#include <Parsers/Tree/Expressions/ExpressionNode.h>
 
 namespace FQL
 {
     class WhereNode : public ClauseNode
     {
     protected:
-        ExpressionNode *cond = NULL;
+        ExpressionNode* cond = NULL;
 
     public:
-        WhereNode(ExpressionNode *cond);
+        WhereNode(ExpressionNode* cond);
 
         virtual ~WhereNode();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
 

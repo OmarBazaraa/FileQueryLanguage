@@ -1,8 +1,8 @@
-#include "SortRuleNode.h"
+#include <Parsers/Tree/SortRuleNode.h>
 
 using namespace FQL;
 
-SortRuleNode::SortRuleNode(ExpressionNode *expr, SortDirection dir)
+SortRuleNode::SortRuleNode(ExpressionNode* expr, SortDirection dir)
 {
     // TODO: ensure not null expression.
     // TODO: ensure constant expression.
@@ -20,12 +20,12 @@ SortDirection SortRuleNode::GetDirection() const
     return this->dir;
 }
 
-const ExpressionNode *SortRuleNode::GetExpression() const
+const ExpressionNode* SortRuleNode::GetExpression() const
 {
     return this->expr;
 }
 
-void SortRuleNode::DumpTree(std::ostream &out, int indent) const
+void SortRuleNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     this->expr->DumpTree(out, indent);

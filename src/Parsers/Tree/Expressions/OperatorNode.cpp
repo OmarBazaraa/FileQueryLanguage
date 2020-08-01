@@ -1,5 +1,5 @@
-#include "OperatorNode.h"
-#include "../../../Common/Utils/OperatorUtils.h"
+#include <Common/Utils.h>
+#include <Parsers/Tree/Expressions/OperatorNode.h>
 
 using namespace FQL;
 

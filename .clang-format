@@ -110,8 +110,10 @@ IncludeCategories:
     Priority: 1
   - Regex: '^<[a-z_]+.h>'
     Priority: 2
-  - Regex: '^["<][a-z_]+/'
+  - Regex: '^<[a-z_/]+>'
     Priority: 100
+  - Regex: '^".+"'
+    Priority: 200
 
 #
 # Others

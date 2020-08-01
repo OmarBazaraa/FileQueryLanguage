@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "../Enums/DataTypes.h"
-#include "../Enums/Operators.h"
+#include <Common/Enums/DataTypes.h>
+#include <Common/Enums/Operators.h>
 
 namespace FQL
 {
@@ -24,14 +24,14 @@ namespace FQL
         {
             switch (opr)
             {
-            case OPR_ADD:
-            case OPR_U_PLUS:
-            case OPR_SUB:
-            case OPR_U_MINUS:
-            case OPR_MUL:
-            case OPR_DIV:
-            case OPR_MOD:
-                return true;
+                case OPR_ADD:
+                case OPR_U_PLUS:
+                case OPR_SUB:
+                case OPR_U_MINUS:
+                case OPR_MUL:
+                case OPR_DIV:
+                case OPR_MOD:
+                    return true;
             }
 
             return false;
@@ -48,16 +48,16 @@ namespace FQL
         {
             switch (opr)
             {
-            case OPR_AND:
-            case OPR_OR:
-            case OPR_NOT:
-            case OPR_GREATER:
-            case OPR_GREATER_EQUAL:
-            case OPR_LESS:
-            case OPR_LESS_EQUAL:
-            case OPR_EQUAL:
-            case OPR_NOT_EQUAL:
-                return true;
+                case OPR_AND:
+                case OPR_OR:
+                case OPR_NOT:
+                case OPR_GREATER:
+                case OPR_GREATER_EQUAL:
+                case OPR_LESS:
+                case OPR_LESS_EQUAL:
+                case OPR_EQUAL:
+                case OPR_NOT_EQUAL:
+                    return true;
             }
 
             return false;
@@ -74,13 +74,13 @@ namespace FQL
         {
             switch (opr)
             {
-            case OPR_BIT_AND:
-            case OPR_BIT_OR:
-            case OPR_BIT_XOR:
-            case OPR_BIT_NOT:
-            case OPR_BIT_SHL:
-            case OPR_BIT_SHR:
-                return true;
+                case OPR_BIT_AND:
+                case OPR_BIT_OR:
+                case OPR_BIT_XOR:
+                case OPR_BIT_NOT:
+                case OPR_BIT_SHL:
+                case OPR_BIT_SHR:
+                    return true;
             }
 
             return false;
@@ -97,50 +97,50 @@ namespace FQL
         {
             switch (opr)
             {
-            case OPR_ASSIGN:
-                return "=";
-            case OPR_ADD:
-            case OPR_U_PLUS:
-                return "+";
-            case OPR_SUB:
-            case OPR_U_MINUS:
-                return "-";
-            case OPR_MUL:
-                return "*";
-            case OPR_DIV:
-                return "/";
-            case OPR_MOD:
-                return "%";
-            case OPR_BIT_AND:
-                return "&";
-            case OPR_BIT_OR:
-                return "OR";
-            case OPR_BIT_XOR:
-                return "^";
-            case OPR_BIT_NOT:
-                return "~";
-            case OPR_BIT_SHL:
-                return "<<";
-            case OPR_BIT_SHR:
-                return ">>";
-            case OPR_AND:
-                return "&&";
-            case OPR_OR:
-                return "||";
-            case OPR_NOT:
-                return "!";
-            case OPR_GREATER:
-                return ">";
-            case OPR_GREATER_EQUAL:
-                return ">=";
-            case OPR_LESS:
-                return "<";
-            case OPR_LESS_EQUAL:
-                return "<=";
-            case OPR_EQUAL:
-                return "==";
-            case OPR_NOT_EQUAL:
-                return "!=";
+                case OPR_ASSIGN:
+                    return "=";
+                case OPR_ADD:
+                case OPR_U_PLUS:
+                    return "+";
+                case OPR_SUB:
+                case OPR_U_MINUS:
+                    return "-";
+                case OPR_MUL:
+                    return "*";
+                case OPR_DIV:
+                    return "/";
+                case OPR_MOD:
+                    return "%";
+                case OPR_BIT_AND:
+                    return "&";
+                case OPR_BIT_OR:
+                    return "OR";
+                case OPR_BIT_XOR:
+                    return "^";
+                case OPR_BIT_NOT:
+                    return "~";
+                case OPR_BIT_SHL:
+                    return "<<";
+                case OPR_BIT_SHR:
+                    return ">>";
+                case OPR_AND:
+                    return "&&";
+                case OPR_OR:
+                    return "||";
+                case OPR_NOT:
+                    return "!";
+                case OPR_GREATER:
+                    return ">";
+                case OPR_GREATER_EQUAL:
+                    return ">=";
+                case OPR_LESS:
+                    return "<";
+                case OPR_LESS_EQUAL:
+                    return "<=";
+                case OPR_EQUAL:
+                    return "==";
+                case OPR_NOT_EQUAL:
+                    return "!=";
             }
 
             return "#";

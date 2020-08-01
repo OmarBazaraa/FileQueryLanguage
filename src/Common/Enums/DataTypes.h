@@ -8,13 +8,11 @@ namespace FQL
      */
     enum DataType
     {
-        TYPE_VOID = 300,
-        TYPE_NULL,
-        TYPE_BOOL,
+        TYPE_BOOL = 300,
         TYPE_INT,
         TYPE_DOUBLE,
-        TYPE_CHAR,
         TYPE_STRING,
+        TYPE_INVALID,
         TYPE_UNKNOWN
     };
 }

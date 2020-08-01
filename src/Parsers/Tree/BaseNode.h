@@ -12,7 +12,7 @@ namespace FQL
 
         virtual ~BaseNode() = default;
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const = 0;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const = 0;
     };
 }
 

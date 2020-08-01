@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "StatementNode.h"
-#include "../DirectoryNode.h"
+#include <Parsers/Tree/DirectoryNode.h>
+#include <Parsers/Tree/Statements/StatementNode.h>
 
 namespace FQL
 {
@@ -12,16 +12,16 @@ namespace FQL
     {
     protected:
         bool dropIfExists = false;
-        DirectoryNode *dir = NULL;
+        DirectoryNode* dir = NULL;
 
     public:
-        DropNode(DirectoryNode *dir, bool dropIfExists = false);
+        DropNode(DirectoryNode* dir, bool dropIfExists = false);
 
         virtual ~DropNode() = default;
 
         virtual bool Execute();
 
-        virtual void DumpTree(std::ostream &out, int indent = 0) const;
+        virtual void DumpTree(std::ostream& out, int indent = 0) const;
     };
 }
 

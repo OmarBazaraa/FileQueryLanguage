@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../Common/Enums/DataTypes.h"
+#include <Common/Enums.h>
 
 namespace FQL
 {
@@ -15,9 +15,10 @@ namespace FQL
         DataType type;
 
     public:
-        TableColumn(const std::string &name, DataType type);
+        TableColumn(const std::string& name, DataType type);
 
         std::string GetName() const;
+        
         DataType GetType() const;
     };
 }

@@ -39,11 +39,11 @@ gen:
 
 compile_parser:
 	@make -s gen
-	g++ -c $(DirOut)/Parsers/Rules/LexerSpecs.cpp -o $(DirOut)/LexerSpecs.o
-	g++ -c $(DirOut)/Parsers/Rules/ParserGrammar.cpp -o $(DirOut)/ParserGrammar.o
+	g++ -c $(DirOut)/Parsers/Rules/LexerSpecs.cpp -I $(DirOut) -o $(DirOut)/LexerSpecs.o
+	g++ -c $(DirOut)/Parsers/Rules/ParserGrammar.cpp -I $(DirOut) -o $(DirOut)/ParserGrammar.o
 
 compile_client:
-	g++ -std=c++17 -o $(DirOut)/$(ClientName) \
+	g++ -std=c++17 -I $(DirOut) -o $(DirOut)/$(ClientName) \
 			$(DirOut)/Client/Main.cpp \
 			\
 			$(DirOut)/Models/Table.cpp \

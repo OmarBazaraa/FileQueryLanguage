@@ -1,14 +1,14 @@
-#include "DeleteNode.h"
+#include <Parsers/Tree/Statements/DeleteNode.h>
 
 using namespace FQL;
 
-DeleteNode::DeleteNode(DirectoryNode *dir)
+DeleteNode::DeleteNode(DirectoryNode* dir)
 {
     // TODO: ensure not null directory.
     this->dir = dir;
 }
 
-DeleteNode::DeleteNode(DirectoryNode *dir, const std::vector<ClauseNode *> &clauses)
+DeleteNode::DeleteNode(DirectoryNode* dir, const std::vector<ClauseNode*>& clauses)
     : DeleteNode(dir)
 {
     this->clauses = clauses;
@@ -35,10 +35,10 @@ bool DeleteNode::Execute()
     return true;
 }
 
-void DeleteNode::DumpTree(std::ostream &out, int indent) const
+void DeleteNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
-    out << "DELETE FROM " ;
+    out << "DELETE FROM ";
 
     this->dir->DumpTree(out, 0);
 

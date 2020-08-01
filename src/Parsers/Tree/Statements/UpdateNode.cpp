@@ -1,8 +1,8 @@
-#include "UpdateNode.h"
+#include <Parsers/Tree/Statements/UpdateNode.h>
 
 using namespace FQL;
 
-UpdateNode::UpdateNode(DirectoryNode *dir, const std::vector<UpdateAssignmentNode *> &assignments)
+UpdateNode::UpdateNode(DirectoryNode* dir, const std::vector<UpdateAssignmentNode*>& assignments)
 {
     // TODO: ensure not null directory.
     // TODO: ensure not emtpy assignments.
@@ -10,7 +10,7 @@ UpdateNode::UpdateNode(DirectoryNode *dir, const std::vector<UpdateAssignmentNod
     this->assignments = assignments;
 }
 
-UpdateNode::UpdateNode(DirectoryNode *dir, const std::vector<UpdateAssignmentNode *> &assignments, const std::vector<ClauseNode *> &clauses)
+UpdateNode::UpdateNode(DirectoryNode* dir, const std::vector<UpdateAssignmentNode*>& assignments, const std::vector<ClauseNode*>& clauses)
     : UpdateNode(dir, assignments)
 {
     this->clauses = clauses;
@@ -42,10 +42,10 @@ bool UpdateNode::Execute()
     return true;
 }
 
-void UpdateNode::DumpTree(std::ostream &out, int indent) const
+void UpdateNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
-    out << "UPDATE " ;
+    out << "UPDATE ";
 
     this->dir->DumpTree(out, 0);
 
@@ -71,7 +71,7 @@ void UpdateNode::DumpTree(std::ostream &out, int indent) const
 
 // =====================================================================================================
 
-UpdateAssignmentNode::UpdateAssignmentNode(ColumnNode *col, ExpressionNode *expr)
+UpdateAssignmentNode::UpdateAssignmentNode(ColumnNode* col, ExpressionNode* expr)
 {
     // TODO: ensure not null column.
     // TODO: ensure not null expression.
@@ -85,7 +85,7 @@ UpdateAssignmentNode::~UpdateAssignmentNode()
     delete this->expr;
 }
 
-void UpdateAssignmentNode::DumpTree(std::ostream &out, int indent) const
+void UpdateAssignmentNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     this->col->DumpTree(out, 0);

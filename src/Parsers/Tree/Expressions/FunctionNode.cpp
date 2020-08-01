@@ -1,13 +1,13 @@
-#include "FunctionNode.h"
+#include <Parsers/Tree/Expressions/FunctionNode.h>
 
 using namespace FQL;
 
-FunctionNode::FunctionNode(const std::string &name)
+FunctionNode::FunctionNode(const std::string& name)
 {
     this->name = name;
 }
 
-FunctionNode::FunctionNode(const std::string &name, const std::vector<ExpressionNode *> &args)
+FunctionNode::FunctionNode(const std::string& name, const std::vector<ExpressionNode*>& args)
     : FunctionNode(name)
 {
     // TODO: if the function is deterministic and all its arguments are constant
@@ -23,7 +23,7 @@ FunctionNode::~FunctionNode()
     }
 }
 
-void FunctionNode::DumpTree(std::ostream &out, int indent) const
+void FunctionNode::DumpTree(std::ostream& out, int indent) const
 {
     out << std::string(indent, ' ');
     out << this->name;
@@ -38,6 +38,6 @@ void FunctionNode::DumpTree(std::ostream &out, int indent) const
             out << ", ";
         }
     }
-    
+
     out << " )";
 }
