@@ -29,10 +29,10 @@
 
 namespace FQL
 {
-    typedef std::vector<BaseNode*> NodeList;
-    typedef std::vector<StatementNode*> StmtList;
-    typedef std::vector<ExpressionNode*> ExprList;
-    typedef std::vector<SelectExpressionNode*> SelectExprList;
-    typedef std::vector<UpdateAssignmentNode*> UpdateAssignList;
-    typedef std::vector<SortRuleNode*> SortRuleList;
+    typedef std::vector<BaseNode*> Nodes;
+    typedef std::vector<StatementNode*> Statements;
+    typedef std::vector<ExpressionNode*> Expressions;
+    typedef std::vector<SelectExpressionNode*> SelectExpressions;
+    typedef std::vector<UpdateAssignmentNode*> UpdateAssignments;
+    typedef std::vector<SortRuleNode*> SortRules;
 }

@@ -2,7 +2,7 @@
 
 using namespace FQL;
 
-std::vector<StatementNode*> Parser::Parse()
+Statements Parser::Parse()
 {
     yyparse();
 

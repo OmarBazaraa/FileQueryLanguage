@@ -45,13 +45,13 @@ StmtList* rootNode = NULL;
     FQL::ValueNode*                 val_ValueNode;
     FQL::ColumnNode*                val_ColumnNode;
 
-    FQL::StmtList*                  val_StmtList;
-    FQL::ExprList*                  val_ExprList;
-    FQL::SelectExprList*            val_SelectExprList;
-    FQL::UpdateAssignList*          val_UpdateAssignList;
+    FQL::Statements*                val_StmtList;
+    FQL::Expressions*               val_ExprList;
+    FQL::SelectExpressions*         val_SelectExprList;
+    FQL::UpdateAssignments*         val_UpdateAssignList;
+    FQL::SortRules*                 val_SortRuleList;
 
     FQL::DirectoryNode*             val_DirNode;
-    FQL::SortRuleList*              val_SortRuleList;
     FQL::SortDirection              val_SortDirection;
 
     bool                            val_Bool;
