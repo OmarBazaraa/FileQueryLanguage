@@ -6,7 +6,7 @@
 
 extern int yyparse();
 
-extern Statements* rootNode;
+extern FQL::Statements* rootNode;
 
 namespace FQL
 {

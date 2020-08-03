@@ -13,7 +13,7 @@
 #include <Common/Enums.h>
 #include <Parsers/AST.h>
 
-#include "ParserGrammar.hpp"
+#include "Parser.hpp"
 
 //
 // Function Prototypes

@@ -5,7 +5,7 @@ This directory contains the tools used for building FQL.
 ### Flex & Bison
 
 Download Flex & Bison compiler generating packages into this directory  
-and make sure their paths match those in the `Makefile`.
+and make sure their paths match those in the `Makefile` and `CMakeLists.txt`.
 
 FQL is built on:
 

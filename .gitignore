@@ -1,6 +1,9 @@
+# Visual Studio
+.vs/* 
+CMakeSettings.json
+
 # Visual Studio Code
 .vscode/*
-!.vscode/tasks.json
 
 # Tools
 tools/*
@@ -9,4 +12,8 @@ tools/*
 # Build
 out/*
 *.o
+*.obj
+*.lib
 *.exe
+*.pdb
+*.ilk
