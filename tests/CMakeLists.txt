@@ -2,10 +2,10 @@ cmake_minimum_required (VERSION 3.8)
 
 file(GLOB_RECURSE FQL_TEST_FILES "*.cpp")
 
-add_executable(FQL_TEST ${FQL_TEST_FILES})
+add_executable(FqlTest ${FQL_TEST_FILES})
 
-target_include_directories(FQL_TEST PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(FqlTest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(FQL_TEST FQL_CORE_LIB)
+target_link_libraries(FqlTest FqlCoreLib)
 
-set_property(TARGET FQL_TEST PROPERTY CXX_STANDARD 17)
+set_property(TARGET FqlTest PROPERTY CXX_STANDARD 17)

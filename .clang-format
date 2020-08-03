@@ -34,7 +34,7 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 
 CompactNamespaces: false
 AllowShortBlocksOnASingleLine: true
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: Inline
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowAllArgumentsOnNextLine: true
 AllowShortLoopsOnASingleLine: true
@@ -63,7 +63,7 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeComma
 BreakInheritanceList: BeforeComma
 AlwaysBreakAfterReturnType: None
-AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakTemplateDeclarations: No
 AlwaysBreakBeforeMultilineStrings: false
 
 #

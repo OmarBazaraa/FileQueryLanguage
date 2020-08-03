@@ -42,18 +42,18 @@ add_custom_command(
 #
 
 # 1. Parser
-add_library(FQL_PARSER_LIB STATIC ${FQL_PARSER_FILE} ${FQL_PARSER_HEADER_FILE})
+add_library(FqlParserLib STATIC ${FQL_PARSER_FILE} ${FQL_PARSER_HEADER_FILE})
 
-target_include_directories(FQL_PARSER_LIB PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${TOOL_INCLUDE_DIR})
+target_include_directories(FqlParserLib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${TOOL_INCLUDE_DIR})
 
-set_property(TARGET FQL_PARSER_LIB PROPERTY CXX_STANDARD 11)
+set_property(TARGET FqlParserLib PROPERTY CXX_STANDARD 11)
 
 # 2. Lexer
-add_library(FQL_LEXER_LIB STATIC ${FQL_LEXER_FILE} ${FQL_PARSER_HEADER_FILE})
+add_library(FqlLexerLib STATIC ${FQL_LEXER_FILE} ${FQL_PARSER_HEADER_FILE})
 
-target_include_directories(FQL_LEXER_LIB PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${TOOL_INCLUDE_DIR})
+target_include_directories(FqlLexerLib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${TOOL_INCLUDE_DIR})
 
-set_property(TARGET FQL_LEXER_LIB PROPERTY CXX_STANDARD 11)
+set_property(TARGET FqlLexerLib PROPERTY CXX_STANDARD 11)
 
 #
 # Build FQL
@@ -62,20 +62,20 @@ set_property(TARGET FQL_LEXER_LIB PROPERTY CXX_STANDARD 11)
 # 1. FQL Core
 file(GLOB_RECURSE FQL_CORE_SRC_FILES "Common/*.cpp" "Parsers/*.cpp")
 
-add_library(FQL_CORE_LIB STATIC ${FQL_CORE_SRC_FILES})
+add_library(FqlCoreLib STATIC ${FQL_CORE_SRC_FILES})
 
-target_include_directories(FQL_CORE_LIB PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(FqlCoreLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(FQL_CORE_LIB FQL_LEXER_LIB FQL_PARSER_LIB)
+target_link_libraries(FqlCoreLib FqlLexerLib FqlParserLib)
 
-set_property(TARGET FQL_CORE_LIB PROPERTY CXX_STANDARD 17)
+set_property(TARGET FqlCoreLib PROPERTY CXX_STANDARD 17)
 
 # 2. FQL Client
 
 file(GLOB_RECURSE FQL_CLIENT_SRC_FILES "Client/*.cpp")
 
-add_executable(FQL_CLIENT ${FQL_CLIENT_SRC_FILES})
+add_executable(FqlClient ${FQL_CLIENT_SRC_FILES})
 
-target_link_libraries(FQL_CLIENT FQL_CORE_LIB)
+target_link_libraries(FqlClient FqlCoreLib)
 
-set_property(TARGET FQL_CLIENT PROPERTY CXX_STANDARD 17)
+set_property(TARGET FqlClient PROPERTY CXX_STANDARD 17)

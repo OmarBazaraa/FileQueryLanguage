@@ -1,18 +1,19 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 #include <Parsers/AST.h>
 
 extern int yyparse();
 
+extern FILE* yyin;
 extern FQL::Statements* rootNode;
 
 namespace FQL
 {
     struct Parser
     {
-        // TODO: pass files and/or streams to parse from.
-        static Statements Parse();
+        static Statements Parse(std::string filepath);
     };
 }
