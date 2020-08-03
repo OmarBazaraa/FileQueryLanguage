@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "FqlClient.exe (src\\FqlClient.exe)",
+      "name": "FqlClient.exe (src\\FqlClient.exe)",
+      "args": [
+        "${workspaceRoot}\\data\\input.txt"
+      ]
+    }
+  ]
+}

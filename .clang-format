@@ -34,7 +34,7 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 
 CompactNamespaces: false
 AllowShortBlocksOnASingleLine: true
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: Inline
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowAllArgumentsOnNextLine: true
 AllowShortLoopsOnASingleLine: true
@@ -63,7 +63,7 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeComma
 BreakInheritanceList: BeforeComma
 AlwaysBreakAfterReturnType: None
-AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakTemplateDeclarations: No
 AlwaysBreakBeforeMultilineStrings: false
 
 #
@@ -109,8 +109,8 @@ IncludeCategories:
   - Regex: '^<[a-z_]+>'
     Priority: 1
   - Regex: '^<[a-z_]+.h>'
-    Priority: 2
-  - Regex: '^<[a-z_/]+>'
+    Priority: 1
+  - Regex: '^"[a-z_/]+"'
     Priority: 100
   - Regex: '^".+"'
     Priority: 200

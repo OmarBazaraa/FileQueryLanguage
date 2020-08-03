@@ -5,8 +5,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include <Models/TableColumn.h>
-#include <Models/TableRow.h>
+#include "Models/TableColumn.h"
+#include "Models/TableRow.h"
 
 namespace FQL
 {

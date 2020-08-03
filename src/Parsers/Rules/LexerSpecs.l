@@ -10,10 +10,10 @@
 #include <string.h>
 
 // Must be before "Parser.hpp".
-#include <Common/Enums.h>
-#include <Parsers/AST.h>
+#include "Common/Enums.h"
+#include "Parsers/AST.h"
 
-#include "ParserGrammar.hpp"
+#include "Parser.hpp"
 
 //
 // Function Prototypes
@@ -28,6 +28,16 @@ void SaveIdentifier();
 // Global Variables
 //
 %}
+
+%{
+// -------------------------------------------------------------
+//
+// Options
+//
+%}
+
+%option never-interactive
+%option nounistd
 
 %{
 // -------------------------------------------------------------

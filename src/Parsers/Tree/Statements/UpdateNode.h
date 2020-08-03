@@ -3,15 +3,15 @@
 #include <string>
 #include <vector>
 
-#include <Parsers/Tree/Clauses/GroupByNode.h>
-#include <Parsers/Tree/Clauses/HavingNode.h>
-#include <Parsers/Tree/Clauses/LimitNode.h>
-#include <Parsers/Tree/Clauses/OrderByNode.h>
-#include <Parsers/Tree/Clauses/WhereNode.h>
-#include <Parsers/Tree/DirectoryNode.h>
-#include <Parsers/Tree/Expressions/ColumnNode.h>
-#include <Parsers/Tree/Expressions/ExpressionNode.h>
-#include <Parsers/Tree/Statements/StatementNode.h>
+#include "Parsers/Tree/Clauses/GroupByNode.h"
+#include "Parsers/Tree/Clauses/HavingNode.h"
+#include "Parsers/Tree/Clauses/LimitNode.h"
+#include "Parsers/Tree/Clauses/OrderByNode.h"
+#include "Parsers/Tree/Clauses/WhereNode.h"
+#include "Parsers/Tree/DirectoryNode.h"
+#include "Parsers/Tree/Expressions/ColumnNode.h"
+#include "Parsers/Tree/Expressions/ExpressionNode.h"
+#include "Parsers/Tree/Statements/StatementNode.h"
 
 namespace FQL
 {

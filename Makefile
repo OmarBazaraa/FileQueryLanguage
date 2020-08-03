@@ -1,3 +1,5 @@
+# Depricated. Use CMake instead.
+
 #
 # Definitions
 #

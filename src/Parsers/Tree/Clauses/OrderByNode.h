@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include <Parsers/Tree/Clauses/ClauseNode.h>
-#include <Parsers/Tree/SortRuleNode.h>
+#include "Parsers/Tree/Clauses/ClauseNode.h"
+#include "Parsers/Tree/SortRuleNode.h"
 
 namespace FQL
 {

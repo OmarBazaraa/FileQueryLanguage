@@ -1,9 +1,8 @@
 #include <iostream>
+#include <string.h>
 #include <string>
 
-#include <string.h>
-
-#include <Parsers/Parser.h>
+#include "Parsers/Parser.h"
 
 using namespace std;
 using namespace FQL;
@@ -11,9 +10,9 @@ using namespace FQL;
 //
 // Compiler Definitions
 //
-#define LANG_NAME    "File Explorer"
+#define LANG_NAME    "FQL Client"
 #define VERSION      "0.1.0"
-#define VERSION_DATE "July 29, 2020"
+#define VERSION_DATE "August 3, 2020"
 
 //
 // Functions prototypes
@@ -21,6 +20,11 @@ using namespace FQL;
 void printHelp();
 void printVersion();
 void parseArguments(int argc, char* argv[]);
+
+//
+// Global Variables
+//
+std::string inputFilename;
 
 /**
  * Main driver program.
@@ -30,11 +34,15 @@ void parseArguments(int argc, char* argv[]);
  */
 int main(int argc, char* argv[])
 {
-    auto statements = Parser::Parse();
+    parseArguments(argc, argv);
+
+    auto statements = Parser::Parse(inputFilename);
 
     for (auto p : statements)
     {
         p->DumpTree(cout, 0);
+
+        delete p;
 
         cout << endl;
         cout << "----------------------------------" << endl;
@@ -93,9 +101,19 @@ void parseArguments(int argc, char* argv[])
                 fprintf(stderr, "unknown argument '%s'\n", *argv);
             }
         }
+        else if (inputFilename.empty())
+        {
+            inputFilename = string(*argv);
+        }
         else
         {
             fprintf(stderr, "warning: too many arguments! '%s' ignored.\n", *argv);
+        }
+
+        if (inputFilename.empty())
+        {
+            fprintf(stderr, "error: missing input filename argument!\n\n");
+            printHelp();
         }
     }
 }

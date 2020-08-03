@@ -10,8 +10,8 @@
 #include <string>
 #include <vector>
 
-#include <Common/Enums.h>
-#include <Parsers/AST.h>
+#include "Common/Enums.h"
+#include "Parsers/AST.h"
 
 using namespace std;
 using namespace FQL;
@@ -26,7 +26,7 @@ void yyerror(const char* s);
 //
 // Global Variables
 //
-StmtList* rootNode = NULL;
+Statements* rootNode = NULL;
 %}
 
 // -------------------------------------------------------------
@@ -45,13 +45,13 @@ StmtList* rootNode = NULL;
     FQL::ValueNode*                 val_ValueNode;
     FQL::ColumnNode*                val_ColumnNode;
 
-    FQL::StmtList*                  val_StmtList;
-    FQL::ExprList*                  val_ExprList;
-    FQL::SelectExprList*            val_SelectExprList;
-    FQL::UpdateAssignList*          val_UpdateAssignList;
+    FQL::Statements*                val_StmtList;
+    FQL::Expressions*               val_ExprList;
+    FQL::SelectExpressions*         val_SelectExprList;
+    FQL::UpdateAssignments*         val_UpdateAssignList;
+    FQL::SortRules*                 val_SortRuleList;
 
     FQL::DirectoryNode*             val_DirNode;
-    FQL::SortRuleList*              val_SortRuleList;
     FQL::SortDirection              val_SortDirection;
 
     bool                            val_Bool;
@@ -142,11 +142,11 @@ StmtList* rootNode = NULL;
 // Rules Section
 // =============
 
-program:                /* epsilon */                                   { rootNode = new StmtList(); }
+program:                /* epsilon */                                   { rootNode = new Statements(); }
     |                   stmt_list                                       { rootNode = $1; }
     ;
 
-stmt_list:              stmt ';'                                        { $$ = new StmtList(); $$->push_back($1); }
+stmt_list:              stmt ';'                                        { $$ = new Statements(); $$->push_back($1); }
     |                   stmt_list stmt ';'                              { $$ = $1; $$->push_back($2); }
     ;
 
@@ -177,8 +177,8 @@ select_opts:            /* epsilon */                                   { $$ = S
     |                   DISTINCT                                        { $$ = SELECT_DISTINCT; }
     ;
 
-select_expr_list:       '*'                                             { $$ = new SelectExprList(); }
-    |                   select_expr                                     { $$ = new SelectExprList(); $$->push_back($1); }
+select_expr_list:       '*'                                             { $$ = new SelectExpressions(); }
+    |                   select_expr                                     { $$ = new SelectExpressions(); $$->push_back($1); }
     |                   select_expr_list ',' select_expr                { $$ = $1; $$->push_back($3); }
     ;
 
@@ -237,7 +237,7 @@ opt_order_by:           /* epsilon */                                   { $$ = N
     |                   ORDER BY order_by_list                          { $$ = new OrderByNode(*$3); }
     ;
 
-order_by_list:          expression opt_asc_desc                         { $$ = new SortRuleList(); $$->push_back(new SortRuleNode($1, $2)); }
+order_by_list:          expression opt_asc_desc                         { $$ = new SortRules(); $$->push_back(new SortRuleNode($1, $2)); }
     |                   order_by_list ',' expression opt_asc_desc       { $$ = $1; $$->push_back(new SortRuleNode($3, $4)); }
     ;
 
@@ -277,7 +277,7 @@ update_stmt:            UPDATE dir_ref
                         opt_limit                                       { $$ = new UpdateNode($2, *$4, { $5, $6, $7 }); delete $4; }
     ;
 
-update_assign_list:     column '=' expression                           { $$ = new UpdateAssignList(); $$->push_back(new UpdateAssignmentNode($1, $3)); }
+update_assign_list:     column '=' expression                           { $$ = new UpdateAssignments(); $$->push_back(new UpdateAssignmentNode($1, $3)); }
     |                   update_assign_list ',' column '=' expression    { $$ = $1; $$->push_back(new UpdateAssignmentNode($3, $5)); }
     ;
 
@@ -370,7 +370,7 @@ function_call:          TOKEN_IDENTIFIER '(' ')'                        { $$ = n
     |                   TOKEN_IDENTIFIER '(' arg_list ')'               { $$ = new FunctionNode($1, *$3); delete $1; delete $3; }
     ;
 
-arg_list:               expression                                      { $$ = new ExprList(); $$->push_back($1); }
+arg_list:               expression                                      { $$ = new Expressions(); $$->push_back($1); }
     |                   arg_list ',' expression                         { $$ = $1; $$->push_back($3); }
     ;
 
