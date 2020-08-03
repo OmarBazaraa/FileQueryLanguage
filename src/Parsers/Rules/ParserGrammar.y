@@ -10,8 +10,8 @@
 #include <string>
 #include <vector>
 
-#include <Common/Enums.h>
-#include <Parsers/AST.h>
+#include "Common/Enums.h"
+#include "Parsers/AST.h"
 
 using namespace std;
 using namespace FQL;

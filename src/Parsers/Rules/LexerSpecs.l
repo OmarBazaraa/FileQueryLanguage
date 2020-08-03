@@ -10,8 +10,8 @@
 #include <string.h>
 
 // Must be before "Parser.hpp".
-#include <Common/Enums.h>
-#include <Parsers/AST.h>
+#include "Common/Enums.h"
+#include "Parsers/AST.h"
 
 #include "Parser.hpp"
 

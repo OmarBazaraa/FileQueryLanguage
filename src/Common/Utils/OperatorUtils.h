@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include <Common/Enums/DataTypes.h>
-#include <Common/Enums/Operators.h>
+#include "Common/Enums/DataTypes.h"
+#include "Common/Enums/Operators.h"
 
 namespace FQL
 {

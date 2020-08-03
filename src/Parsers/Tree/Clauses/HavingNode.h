@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Parsers/Tree/Clauses/ClauseNode.h>
-#include <Parsers/Tree/Expressions/ExpressionNode.h>
+#include "Parsers/Tree/Clauses/ClauseNode.h"
+#include "Parsers/Tree/Expressions/ExpressionNode.h"
 
 namespace FQL
 {

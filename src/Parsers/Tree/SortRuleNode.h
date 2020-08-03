@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Common/Enums.h>
-#include <Parsers/Tree/Expressions/ExpressionNode.h>
+#include "Common/Enums.h"
+#include "Parsers/Tree/Expressions/ExpressionNode.h"
 
 namespace FQL
 {

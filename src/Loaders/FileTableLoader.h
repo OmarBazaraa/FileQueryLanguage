@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Loaders/Loader.h>
-#include <Models/Table.h>
+#include "Loaders/Loader.h"
+#include "Models/Table.h"
 
 namespace FQL
 {

@@ -1,9 +1,8 @@
 #include <iostream>
+#include <string.h>
 #include <string>
 
-#include <string.h>
-
-#include <Parsers/Parser.h>
+#include "Parsers/Parser.h"
 
 using namespace std;
 using namespace FQL;
